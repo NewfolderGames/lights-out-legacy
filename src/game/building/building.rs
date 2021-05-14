@@ -32,10 +32,6 @@ impl Building {
 
 	}
 
-}
-
-impl Building {
-
 	pub fn add(&mut self, amount: i32) {
 
 		self.is_dirty = true;
@@ -48,19 +44,6 @@ impl Building {
 
 	}
 
-	pub fn update_price(&mut self) {
-
-		self.is_dirty = true;
-		self.calculated_price = self.asset.price.clone();
-
-		for price in self.calculated_price.iter_mut() {
-
-			price.1 *= self.asset.price_multiplier.powi(self.count + 1);
-
-		}
-
-	}
-
 	pub fn update_modifiers(&mut self) {
 
 		self.is_dirty = true;
@@ -69,6 +52,19 @@ impl Building {
 		for modifier in self.calculated_modifiers.iter_mut() {
 
 			modifier.1 *= self.count as f64;
+
+		}
+
+	}
+
+	pub fn update_price(&mut self) {
+
+		self.is_dirty = true;
+		self.calculated_price = self.asset.price.clone();
+
+		for price in self.calculated_price.iter_mut() {
+
+			price.1 *= self.asset.price_multiplier.powi(self.count + 1);
 
 		}
 

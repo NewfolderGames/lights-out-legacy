@@ -37,13 +37,7 @@ impl Resource {
 		}
 
 	}
-
-}
-
-// Numbers.
-
-impl Resource {
-
+	
 	pub fn add(&mut self, amount: f64) {
 
 		self.count += amount;
@@ -56,7 +50,19 @@ impl Resource {
 		}
 
 	}
-	
+
+	pub fn get_asset(&self) -> Rc<ResourceAsset> {
+
+		self.asset.clone()
+
+	}
+
+	pub fn clear_dirty(&mut self) {
+
+		self.is_dirty = false;
+
+	}
+
 	pub fn get_capacity(&self) -> f64 {
 
 		self.capacity
@@ -72,6 +78,12 @@ impl Resource {
 	pub fn get_production(&self) -> f64 {
 
 		self.production
+
+	}
+
+	pub fn is_dirty(&self) -> bool {
+
+		self.is_dirty
 
 	}
 
@@ -96,27 +108,14 @@ impl Resource {
 
 	}
 
-}
+	pub fn try_subtract(&mut self, amount: f64) -> bool {
 
-// Other.
+		if self.count < amount { return false }
+		
+		self.count -= amount;
+		self.is_dirty = true;
 
-impl Resource {
-
-	pub fn asset(&self) -> Rc<ResourceAsset> {
-
-		self.asset.clone()
-
-	}
-
-	pub fn is_dirty(&self) -> bool {
-
-		self.is_dirty
-
-	}
-
-	pub fn clear_dirty(&mut self) {
-
-		self.is_dirty = false;
+		return true
 
 	}
 

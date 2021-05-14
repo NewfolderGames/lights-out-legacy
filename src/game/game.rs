@@ -39,17 +39,27 @@ impl Game {
 
 }
 
-// Game State.
-
 impl Game {
 
 	pub fn load_assets(&mut self) {
 
 		if self.is_loading_done { return }
 
+		// Asset loading.
+
 		load_building(&mut self.asset_manager);
 		load_modifier(&mut self.asset_manager);
 		load_resource(&mut self.asset_manager);
+
+		// Manager stuff.
+
+		for (_, asset) in self.asset_manager.iter_resource() {
+
+			self.resource_manager.add_resource(asset.clone());
+
+		}
+
+		// Done
 
 		self.is_loading_done = true;
 
@@ -60,12 +70,6 @@ impl Game {
 
 
 	}
-
-}
-
-// Managers.
-
-impl Game {
 
 	pub fn asset_manager(&self) -> &AssetManager {
 
@@ -93,7 +97,7 @@ impl Game {
 
 }
 
-// Debug information.
+// Debug.
 
 impl Game {
 
