@@ -1,19 +1,15 @@
 use std::collections::HashMap;
 use std::rc::Rc;
-use super::BuildingData;
+use super::BuildingAsset;
 
-/// A building manager.
 pub struct BuildingManager {
 
-	buildings: HashMap<String, Rc<BuildingData>>
+	buildings: HashMap<String, Rc<BuildingAsset>>
 
 }
 
-// Constructor.
-
 impl BuildingManager {
 
-	/// Creates a new building manager.
 	pub fn new() -> Self {
 
 		Self {
@@ -21,22 +17,6 @@ impl BuildingManager {
 			buildings: HashMap::new()
 
 		}
-
-	}
-
-}
-
-// Building handling.
-
-impl BuildingManager {
-
-	/// Loads a building into the manager.
-	pub fn load(&mut self, data: BuildingData) {
-
-		let name = String::from(data.name);
-		let building = Rc::new(data);
-
-		self.buildings.insert(name, building);
 
 	}
 

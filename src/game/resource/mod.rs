@@ -1,7 +1,7 @@
-mod data;
+mod asset;
 mod manager;
 mod resource;
 
-pub use data::ResourceData;
+pub use asset::ResourceAsset;
 pub use manager::ResourceManager;
 pub use resource::Resource;

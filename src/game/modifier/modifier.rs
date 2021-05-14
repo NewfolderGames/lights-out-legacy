@@ -1,9 +1,9 @@
 use std::rc::Rc;
-use super::ModifierData;
+use super::ModifierAsset;
 
 pub struct Modifier {
 
-	data: Rc<ModifierData>,
+	data: Rc<ModifierAsset>,
 
 	value: f64,
 
@@ -11,12 +11,9 @@ pub struct Modifier {
 
 }
 
-// Constructor.
-
 impl Modifier {
 
-	/// Creates a new modifier.
-	pub fn new(data: Rc<ModifierData>) -> Self {
+	pub fn new(data: Rc<ModifierAsset>) -> Self {
 
 		let value = data.default_value;
 
@@ -32,18 +29,14 @@ impl Modifier {
 
 }
 
-// Numbers.
-
 impl Modifier {
 
-	/// Resets value to default.
 	pub fn reset(&mut self) {
 
 		self.value = self.data.default_value;
 
 	}
 
-	/// Returns the value.
 	pub fn value(&self) -> f64 {
 
 		self.value
@@ -52,25 +45,20 @@ impl Modifier {
 
 }
 
-// Other.
-
 impl Modifier {
 
-	/// Returns modifier data.
-	pub fn data(&self) -> Rc<ModifierData> {
+	pub fn data(&self) -> Rc<ModifierAsset> {
 
 		self.data.clone()
 
 	}
 
-	/// Checks whether value changed or not.
 	pub fn is_dirty(&self) -> bool {
 
 		self.is_dirty
 
 	}
 
-	/// Clears dirty state.
 	pub fn clear_dirty(&mut self) {
 
 		self.is_dirty = false;

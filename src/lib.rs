@@ -1,2 +1,2 @@
 mod game;
-mod resources;
+mod assets;

@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
-use crate::resources::*;
+use crate::assets::*;
+use super::asset::AssetManager;
 use super::modifier::ModifierManager;
 use super::resource::ResourceManager;
 use super::building::BuildingManager;
@@ -7,6 +8,7 @@ use super::building::BuildingManager;
 #[wasm_bindgen]
 pub struct Game {
 
+	asset_manager: AssetManager,
 	building_manager: BuildingManager,
 	modifier_manager: ModifierManager,
 	resource_manager: ResourceManager,
@@ -20,12 +22,12 @@ pub struct Game {
 #[wasm_bindgen]
 impl Game {
 
-	/// Creates a new game.
 	#[wasm_bindgen(constructor)]
 	pub fn new() -> Self {
 
 		Self {
 
+			asset_manager: AssetManager::new(),
 			building_manager: BuildingManager::new(),
 			modifier_manager: ModifierManager::new(),
 			resource_manager: ResourceManager::new(),
@@ -41,20 +43,18 @@ impl Game {
 
 impl Game {
 
-	/// Loads resource into game.
-	pub fn load_resources(&mut self) {
+	pub fn load_assets(&mut self) {
 
 		if self.is_loading_done { return }
 
-		load_building(&mut self.building_manager);
-		load_modifier(&mut self.modifier_manager);
-		load_resource(&mut self.resource_manager);
+		load_building(&mut self.asset_manager);
+		load_modifier(&mut self.asset_manager);
+		load_resource(&mut self.asset_manager);
 
 		self.is_loading_done = true;
 
 	}
 
-	/// Loads save file.
 	pub fn load_save(&mut self) {
 
 
@@ -67,21 +67,24 @@ impl Game {
 
 impl Game {
 
-	/// Returns the building manager.
+	pub fn asset_manager(&self) -> &AssetManager {
+
+		&self.asset_manager
+
+	}
+
 	pub fn building_manager(&self) -> &BuildingManager {
 
 		&self.building_manager
 
 	}
 
-	/// Returns the modifier manager.
 	pub fn modifier_manager(&self) -> &ModifierManager {
 
 		&self.modifier_manager
 
 	}
 
-	/// Returns the resource manager.
 	pub fn resource_manager(&self) -> &ResourceManager {
 
 		&self.resource_manager

@@ -1,5 +1,4 @@
-/// A loadable resource data.
-pub struct ResourceData {
+pub struct ResourceAsset {
 
 	pub name: &'static str,
 	pub title: &'static str,
@@ -14,11 +13,8 @@ pub struct ResourceData {
 
 }
 
-// Constructor.
+impl ResourceAsset {
 
-impl ResourceData {
-
-	/// Creates a new resource data.
 	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, is_hidden: bool, is_unlocked: bool, default_capacity: f64) -> Self {
 
 		Self {

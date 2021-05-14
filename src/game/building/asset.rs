@@ -1,7 +1,4 @@
-use std::collections::HashMap;
-
-/// A loadable building data.
-pub struct BuildingData {
+pub struct BuildingAsset {
 
 	pub name: &'static str,
 	pub title: &'static str,
@@ -18,11 +15,8 @@ pub struct BuildingData {
 
 }
 
-// Constructor.
+impl BuildingAsset {
 
-impl BuildingData {
-
-	/// Creates a new building data.
 	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, is_hidden: bool, is_unlocked: bool, modifiers: Vec<(String, f64)>, price: Vec<(String, f64)>, price_multiplier: f64) -> Self {
 
 		Self {

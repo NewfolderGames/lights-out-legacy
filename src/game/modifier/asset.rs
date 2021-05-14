@@ -1,5 +1,4 @@
-/// A loadable modifier data.
-pub struct ModifierData {
+pub struct ModifierAsset {
 
 	pub name: &'static str,
 	pub title: &'static str,
@@ -8,11 +7,8 @@ pub struct ModifierData {
 
 }
 
-// Constructor.
+impl ModifierAsset {
 
-impl ModifierData {
-
-	/// Creates a new modifier data.
 	pub fn new(name: &'static str, title: &'static str, default_value: f64) -> Self {
 
 		Self {

@@ -1,10 +1,11 @@
-use crate::game::building::{ BuildingData, BuildingManager };
+use crate::game::asset::AssetManager;
+use crate::game::building::BuildingAsset;
 
-pub fn load(manager: &mut BuildingManager) {
+pub fn load(manager: &mut AssetManager) {
 
 	// Production.
 
-	manager.load(BuildingData::new(
+	manager.load_building(BuildingAsset::new(
 		"building_sawmill",
 		"building_sawmill_title",
 		"building_sawmill_description",
@@ -26,7 +27,7 @@ pub fn load(manager: &mut BuildingManager) {
 
 	// Storage.
 
-	manager.load(BuildingData::new(
+	manager.load_building(BuildingAsset::new(
 		"building_stockpile",
 		"building_stockpile_title",
 		"building_stockpile_description",
@@ -44,7 +45,7 @@ pub fn load(manager: &mut BuildingManager) {
 		1.15f64
 	));
 
-	manager.load(BuildingData::new(
+	manager.load_building(BuildingAsset::new(
 		"building_shed",
 		"building_shed_title",
 		"building_shed_description",
