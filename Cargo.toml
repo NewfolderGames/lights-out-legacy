@@ -1,0 +1,21 @@
+[package]
+name = "lights_out"
+version = "0.1.0"
+authors = ["이민용 <me@newfolder.games>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.74"
+
+[dependencies.web-sys]
+version = "0.3.51"
+features = [
+  'Document',
+  'Element',
+  'HtmlElement',
+  'Node',
+  'Window',
+]
