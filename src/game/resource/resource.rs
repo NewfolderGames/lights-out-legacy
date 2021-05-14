@@ -13,9 +13,7 @@ pub struct Resource {
 	capacity: f64,
 	production: f64,
 
-	is_count_dirty: bool,
-	is_capacity_dirty: bool,
-	is_production_dirty: bool,
+	is_dirty: bool,
 
 }
 
@@ -38,9 +36,7 @@ impl Resource {
 			count: 0f64,
 			capacity,
 			production: 0f64,
-			is_count_dirty: true,
-			is_capacity_dirty: true,
-			is_production_dirty: true,
+			is_dirty: true,
 
 		}
 
@@ -56,7 +52,7 @@ impl Resource {
 	pub fn add(&mut self, amount: f64) {
 
 		self.count += amount;
-		self.is_count_dirty = true;
+		self.is_dirty = true;
 
 		if self.count > self.capacity {
 
@@ -91,7 +87,7 @@ impl Resource {
 	pub fn set_count(&mut self, amount: f64) {
 
 		self.count = amount;
-		self.is_count_dirty = true;
+		self.is_dirty = true;
 
 	}
 
@@ -99,7 +95,7 @@ impl Resource {
 	pub fn set_capacity(&mut self, amount: f64) {
 
 		self.capacity = amount;
-		self.is_capacity_dirty = true;
+		self.is_dirty = true;
 
 	}
 
@@ -107,7 +103,7 @@ impl Resource {
 	pub fn set_production(&mut self, amount: f64) {
 
 		self.production = amount;
-		self.is_production_dirty = true;
+		self.is_dirty = true;
 
 	}
 
@@ -127,16 +123,14 @@ impl Resource {
 	/// Checks whether count or capacity changed or not.
 	pub fn is_dirty(&self) -> bool {
 
-		self.is_count_dirty || self.is_capacity_dirty || self.is_production_dirty
+		self.is_dirty
 
 	}
 
 	/// Clears dirty state.
 	pub fn clear_dirty(&mut self) {
 
-		self.is_count_dirty = false;
-		self.is_capacity_dirty = false;
-		self.is_production_dirty = false;
+		self.is_dirty = false;
 
 	}
 

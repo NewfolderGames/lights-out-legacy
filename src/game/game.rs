@@ -17,8 +17,11 @@ pub struct Game {
 
 // Constructor.
 
+#[wasm_bindgen]
 impl Game {
 
+	/// Creates a new game.
+	#[wasm_bindgen(constructor)]
 	pub fn new() -> Self {
 
 		Self {

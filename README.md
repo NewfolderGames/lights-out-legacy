@@ -1,15 +1,13 @@
 <h2 align="center">Lights out</h2>
-<p align="center">Idle game</p>
+<p align="center">Idle game inspired by 'Kittens Game'</p>
 
-### Building
+<br/>
+<br/>
+
+### Build and run
 
 ```
 $ ./build.sh
-```
-
-### Running
-
-```
 $ cd www
 $ npm run start
 ```
