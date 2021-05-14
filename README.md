@@ -1,0 +1,2 @@
+# lights-out
+Idle game
