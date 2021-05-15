@@ -1,5 +1,3 @@
-use crate::game::Game;
-
 pub struct BuildingAsset {
 
 	pub name: &'static str,

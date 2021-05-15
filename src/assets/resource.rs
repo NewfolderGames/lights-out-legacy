@@ -1,5 +1,4 @@
-use crate::game::asset::AssetManager;
-use crate::game::resource::ResourceAsset;
+use crate::game::asset::{ AssetManager, ResourceAsset };
 
 pub fn load(asset_manager: &mut AssetManager) {
 
@@ -33,6 +32,19 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_iron_description",
 		"resource_iron_image",
 		"raw_resource",
+		false,
+		false,
+		100f64
+	));
+
+	// Other.
+
+	asset_manager.load_resource(ResourceAsset::new(
+		"resource_energy",
+		"resource_energy_title",
+		"resource_energy_description",
+		"resource_energy_image",
+		"other",
 		false,
 		false,
 		100f64

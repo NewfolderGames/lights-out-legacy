@@ -1,5 +1,4 @@
-use crate::game::asset::AssetManager;
-use crate::game::modifier::ModifierAsset;
+use crate::game::asset::{ AssetManager, ModifierAsset };
 
 pub fn load(asset_manager: &mut AssetManager) {
 

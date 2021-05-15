@@ -1,9 +1,6 @@
-use crate::game::Game;
-use crate::game::asset::AssetManager;
-use crate::game::building::BuildingAsset;
-use crate::game::modifier::ModifierManager;
+use crate::game::asset::{ AssetManager, BuildingAsset };
 
-pub fn load(asset_manager: &mut AssetManager, modifier_manager: &ModifierManager) {
+pub fn load(asset_manager: &mut AssetManager) {
 
 	// Production.
 	

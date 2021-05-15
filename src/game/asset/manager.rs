@@ -1,9 +1,6 @@
-use std::collections::HashMap;
-use std::collections::hash_map::Iter;
+use std::collections::{ HashMap, hash_map::Iter };
 use std::rc::Rc;
-use crate::game::building::BuildingAsset;
-use crate::game::modifier::ModifierAsset;
-use crate::game::resource::ResourceAsset;
+use super::{ BuildingAsset, ModifierAsset, ResourceAsset };
 
 pub struct AssetManager {
 

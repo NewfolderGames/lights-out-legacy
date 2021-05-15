@@ -1,3 +1,11 @@
 import * as wasm from "lights_out";
 
-const game = new wasm.Game();
+let game;
+let gameInterval;
+
+window.addEventListener("load", (event) => {
+
+	game = new wasm.Game();
+	gameInterval = setInterval(() => game.tick(), 250);
+
+});
