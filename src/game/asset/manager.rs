@@ -26,10 +26,6 @@ impl AssetManager {
 		}
 
 	}
-
-}
-
-impl AssetManager {
 	
 	pub fn get_building(&self, name: &str) -> Option<Rc<BuildingAsset>> {
 	
@@ -72,10 +68,6 @@ impl AssetManager {
 		self.resources.iter()
 
 	}
-
-}
-
-impl AssetManager {
 
 	pub fn load_building(&mut self, asset: BuildingAsset) {
 

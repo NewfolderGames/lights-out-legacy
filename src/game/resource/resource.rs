@@ -87,6 +87,18 @@ impl Resource {
 
 	}
 
+	pub fn is_hidden(&self) -> bool {
+
+		self.is_hidden
+
+	}
+
+	pub fn is_unlocked(&self) -> bool {
+
+		self.is_unlocked
+
+	}
+
 	pub fn set_capacity(&mut self, amount: f64) {
 
 		self.capacity = amount;
@@ -105,6 +117,12 @@ impl Resource {
 
 		self.production = amount;
 		self.is_dirty = true;
+
+	}
+
+	pub fn set_unlocked(&mut self, unlocked: bool) {
+
+		self.is_unlocked = unlocked;
 
 	}
 

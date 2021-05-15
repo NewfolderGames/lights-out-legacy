@@ -39,8 +39,35 @@ impl Building {
 
 		if self.count < 0 { self.count = 0 }
 
-		self.update_price();
-		self.update_modifiers();
+	}
+
+	pub fn clear_dirty(&mut self) {
+
+		self.is_dirty = false;
+
+	}
+
+	pub fn get_asset(&self) -> Rc<BuildingAsset> {
+
+		self.asset.clone()
+
+	}
+
+	pub fn get_modifiers(&self) -> &Vec<(String, f64)> {
+
+		&self.calculated_modifiers
+
+	}
+
+	pub fn get_price(&self) -> &Vec<(String, f64)> {
+
+		&self.calculated_price
+
+	}
+
+	pub fn is_dirty(&self) -> bool {
+
+		self.is_dirty
 
 	}
 

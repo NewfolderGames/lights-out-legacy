@@ -3,13 +3,11 @@ use crate::assets::*;
 use super::asset::AssetManager;
 use super::modifier::ModifierManager;
 use super::resource::ResourceManager;
-use super::building::BuildingManager;
 
 #[wasm_bindgen]
 pub struct Game {
 
 	asset_manager: AssetManager,
-	building_manager: BuildingManager,
 	modifier_manager: ModifierManager,
 	resource_manager: ResourceManager,
 
@@ -28,12 +26,18 @@ impl Game {
 		Self {
 
 			asset_manager: AssetManager::new(),
-			building_manager: BuildingManager::new(),
 			modifier_manager: ModifierManager::new(),
 			resource_manager: ResourceManager::new(),
 			is_loading_done: false,
 
 		}
+
+	}
+
+	#[wasm_bindgen]
+	pub fn tick(&mut self) {
+
+		
 
 	}
 
@@ -52,6 +56,12 @@ impl Game {
 		load_resource(&mut self.asset_manager);
 
 		// Manager stuff.
+
+		for (_, asset) in self.asset_manager.iter_modifiers() {
+
+			self.modifier_manager.add_modifier(asset.clone());
+
+		}
 
 		for (_, asset) in self.asset_manager.iter_resource() {
 
@@ -74,12 +84,6 @@ impl Game {
 	pub fn asset_manager(&self) -> &AssetManager {
 
 		&self.asset_manager
-
-	}
-
-	pub fn building_manager(&self) -> &BuildingManager {
-
-		&self.building_manager
 
 	}
 
