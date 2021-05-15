@@ -51,7 +51,7 @@ impl Game {
 
 		// Asset loading.
 
-		load_building(&mut self.asset_manager);
+		load_building(&mut self.asset_manager, &self.modifier_manager);
 		load_modifier(&mut self.asset_manager);
 		load_resource(&mut self.asset_manager);
 

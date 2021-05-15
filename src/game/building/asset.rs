@@ -1,3 +1,5 @@
+use crate::game::Game;
+
 pub struct BuildingAsset {
 
 	pub name: &'static str,
@@ -9,7 +11,7 @@ pub struct BuildingAsset {
 	pub is_hidden: bool,
 	pub is_unlocked: bool,
 
-	pub modifiers: Vec<(String, f64)>,
+	pub modifiers: Box<dyn Fn() -> Vec<(String, f64)>>,
 	pub price: Vec<(String, f64)>,
 	pub price_multiplier: f64,
 
@@ -17,7 +19,7 @@ pub struct BuildingAsset {
 
 impl BuildingAsset {
 
-	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, is_hidden: bool, is_unlocked: bool, modifiers: Vec<(String, f64)>, price: Vec<(String, f64)>, price_multiplier: f64) -> Self {
+	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, is_hidden: bool, is_unlocked: bool, modifiers: Box<dyn Fn() -> Vec<(String, f64)>>, price: Vec<(String, f64)>, price_multiplier: f64) -> Self {
 
 		Self {
 
@@ -28,9 +30,9 @@ impl BuildingAsset {
 			category,
 			is_hidden,
 			is_unlocked,
+			modifiers,
 			price,
 			price_multiplier,
-			modifiers
 
 		}
 

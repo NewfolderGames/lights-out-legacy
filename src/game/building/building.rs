@@ -18,7 +18,7 @@ impl Building {
 	pub fn new(asset: Rc<BuildingAsset>) -> Self {
 
 		let price = asset.price.clone();
-		let modifiers = asset.modifiers.clone();
+		let modifiers = asset.modifiers.as_ref()();
 
 		Self {
 
@@ -74,7 +74,7 @@ impl Building {
 	pub fn update_modifiers(&mut self) {
 
 		self.is_dirty = true;
-		self.calculated_modifiers = self.asset.modifiers.clone();
+		self.calculated_modifiers = self.asset.modifiers.as_ref()();
 
 		for modifier in self.calculated_modifiers.iter_mut() {
 

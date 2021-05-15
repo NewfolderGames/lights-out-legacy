@@ -1,11 +1,13 @@
+use crate::game::Game;
 use crate::game::asset::AssetManager;
 use crate::game::building::BuildingAsset;
+use crate::game::modifier::ModifierManager;
 
-pub fn load(manager: &mut AssetManager) {
+pub fn load(asset_manager: &mut AssetManager, modifier_manager: &ModifierManager) {
 
 	// Production.
-
-	manager.load_building(BuildingAsset::new(
+	
+	asset_manager.load_building(BuildingAsset::new(
 		"building_sawmill",
 		"building_sawmill_title",
 		"building_sawmill_description",
@@ -13,10 +15,12 @@ pub fn load(manager: &mut AssetManager) {
 		"production",
 		false,
 		false,
-		vec![
-			(String::from("modifier_resource_wood_production_base"), 1f64),
-			(String::from("modifier_resource_wood_production_multiplier"), 0.01f64)
-		],
+		Box::new(|| {
+			vec![
+				(String::from("modifier_resource_wood_production_base"), 1f64),
+				(String::from("modifier_resource_wood_production_multiplier"), 0.01f64)
+			]
+		}),
 		vec![
 			(String::from("wood"), 10f64),
 			(String::from("stone"), 10f64),
@@ -27,7 +31,7 @@ pub fn load(manager: &mut AssetManager) {
 
 	// Storage.
 
-	manager.load_building(BuildingAsset::new(
+	asset_manager.load_building(BuildingAsset::new(
 		"building_stockpile",
 		"building_stockpile_title",
 		"building_stockpile_description",
@@ -35,17 +39,19 @@ pub fn load(manager: &mut AssetManager) {
 		"storage",
 		false,
 		true,
-		vec![
-			(String::from("modifier_resource_wood_storage_base"), 100f64),
-			(String::from("modifier_resource_stone_storage_base"), 100f64),
-		],
+		Box::new(|| {
+			vec![
+				(String::from("modifier_resource_wood_storage_base"), 100f64),
+				(String::from("modifier_resource_stone_storage_base"), 100f64),
+			]
+		}),
 		vec![
 			(String::from("wood"), 10f64)
 		],
 		1.15f64
 	));
 
-	manager.load_building(BuildingAsset::new(
+	asset_manager.load_building(BuildingAsset::new(
 		"building_shed",
 		"building_shed_title",
 		"building_shed_description",
@@ -53,11 +59,13 @@ pub fn load(manager: &mut AssetManager) {
 		"storage",
 		false,
 		true,
-		vec![
-			(String::from("modifier_resource_wood_storage_base"), 500f64),
-			(String::from("modifier_resource_stone_storage_base"), 500f64),
-			(String::from("modifier_resource_iron_storage_base"), 100f64),
-		],
+		Box::new(|| {
+			vec![
+				(String::from("modifier_resource_wood_storage_base"), 500f64),
+				(String::from("modifier_resource_stone_storage_base"), 500f64),
+				(String::from("modifier_resource_iron_storage_base"), 100f64),
+			]
+		}),
 		vec![
 			(String::from("wood"), 100f64),
 			(String::from("stone"), 100f64)
