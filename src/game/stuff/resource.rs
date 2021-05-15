@@ -1,5 +1,5 @@
 use std::rc::Rc;
-use super::ResourceAsset;
+use crate::game::asset::ResourceAsset;
 
 pub struct Resource {
 

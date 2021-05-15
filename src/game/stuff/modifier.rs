@@ -1,5 +1,5 @@
 use std::rc::Rc;
-use super::ModifierAsset;
+use crate::game::asset::ModifierAsset;
 
 pub struct Modifier {
 
@@ -54,6 +54,7 @@ impl Modifier {
 	pub fn reset(&mut self) {
 
 		self.value = self.asset.default_value;
+		self.is_dirty = true;
 
 	}
 
