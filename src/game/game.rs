@@ -1,11 +1,15 @@
 use wasm_bindgen::prelude::*;
 use crate::assets::*;
 use super::asset::AssetManager;
+use super::rendering::RenderingManager;
+use super::stuff::StuffManager;
 
 #[wasm_bindgen]
 pub struct Game {
 
 	asset_manager: AssetManager,
+	rendering_manager: RenderingManager,
+	stuff_manager: StuffManager,
 
 	is_running: bool,
 	is_loading_done: bool,
@@ -23,6 +27,8 @@ impl Game {
 		Self {
 
 			asset_manager: AssetManager::new(),
+			rendering_manager: RenderingManager::new(),
+			stuff_manager: StuffManager::new(),
 			is_running: false,
 			is_loading_done: false,
 
@@ -102,18 +108,6 @@ impl Game {
 	pub fn load_save(&mut self) {
 
 
-
-	}
-
-}
-
-// Managers.
-
-impl Game {
-
-	pub fn asset_manager(&self) -> &AssetManager {
-
-		&self.asset_manager
 
 	}
 
