@@ -1,6 +1,7 @@
 use crate::game::asset::{ AssetManager, ResourceAsset };
+use crate::game::stuff::StuffManager;
 
-pub fn load(asset_manager: &mut AssetManager) {
+pub fn load(asset_manager: &mut AssetManager, stuff_manager: &StuffManager) {
 
 	// Raw material.
 
@@ -10,7 +11,12 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_wood_description",
 		"resource_wood_image",
 		"raw_resource",
-		100f64
+		Box::new(|| {
+			100f64
+		}),
+		Box::new(|| {
+			0f64
+		}),
 	));
 
 	asset_manager.load_resource(ResourceAsset::new(
@@ -19,7 +25,12 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_stone_description",
 		"resource_stone_image",
 		"raw_resource",
-		100f64
+		Box::new(|| {
+			100f64
+		}),
+		Box::new(|| {
+			0f64
+		}),
 	));
 
 	asset_manager.load_resource(ResourceAsset::new(
@@ -28,7 +39,12 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_iron_description",
 		"resource_iron_image",
 		"raw_resource",
-		100f64
+		Box::new(|| {
+			100f64
+		}),
+		Box::new(|| {
+			0f64
+		}),
 	));
 
 	// Other.
@@ -39,7 +55,12 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_energy_description",
 		"resource_energy_image",
 		"other",
-		100f64
+		Box::new(|| {
+			100f64
+		}),
+		Box::new(|| {
+			0f64
+		}),
 	));
 
 }

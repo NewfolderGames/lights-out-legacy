@@ -6,7 +6,8 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"unlock_default",
 		vec![
 			UnlockStuff::Building("building_stockpile"),
-			UnlockStuff::Resource("resource_wood")
+			UnlockStuff::Resource("resource_wood"),
+			UnlockStuff::Resource("resource_stone"),
 		]
 	))
 

@@ -17,14 +17,15 @@ impl Resource {
 
 	pub fn new(asset: Rc<ResourceAsset>) -> Self {
 
-		let capacity = asset.default_capacity;
+		let capacity = asset.capacity.as_ref()();
+		let production = asset.production.as_ref()();
 
 		Self {
 
 			asset,
 			capacity,
 			count: 0f64,
-			production: 0f64,
+			production,
 			is_unlocked: false,
 
 		}
@@ -40,6 +41,18 @@ impl Resource {
 			self.count = self.capacity;
 
 		}
+
+	}
+
+	pub fn calculate_capacity(&mut self) {
+
+		self.capacity = self.asset.capacity.as_ref()();
+
+	}
+
+	pub fn calculate_production(&mut self) {
+
+		self.production = self.asset.production.as_ref()();
 
 	}
 
@@ -67,21 +80,9 @@ impl Resource {
 
 	}
 
-	pub fn set_capacity(&mut self, amount: f64) {
-
-		self.capacity = amount;
-
-	}
-
 	pub fn set_count(&mut self, amount: f64) {
 
 		self.count = amount;
-
-	}
-
-	pub fn set_production(&mut self, amount: f64) {
-
-		self.production = amount;
 
 	}
 

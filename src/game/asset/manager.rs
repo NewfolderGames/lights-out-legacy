@@ -38,7 +38,7 @@ impl AssetManager {
 
 		self.modifiers
 			.get(name)
-			.and_then(|a| Some(a.clone()))
+			.and_then(|m| Some(m.clone()))
 
 	}
 
@@ -46,7 +46,15 @@ impl AssetManager {
 
 		self.resources
 			.get(name)
-			.and_then(|a| Some(a.clone()))
+			.and_then(|r| Some(r.clone()))
+
+	}
+
+	pub fn get_unlock(&self, name: &str) -> Option<Rc<UnlockAsset>> {
+
+		self.unlocks
+			.get(name)
+			.and_then(|u| Some(u.clone()))
 
 	}
 
@@ -62,13 +70,13 @@ impl AssetManager {
 
 	}
 
-	pub fn iter_resource(&self) -> Iter<String, Rc<ResourceAsset>> {
+	pub fn iter_resources(&self) -> Iter<String, Rc<ResourceAsset>> {
 
 		self.resources.iter()
 
 	}
 
-	pub fn iter_unlock(&self) -> Iter<String, Rc<UnlockAsset>> {
+	pub fn iter_unlocks(&self) -> Iter<String, Rc<UnlockAsset>> {
 
 		self.unlocks.iter()
 

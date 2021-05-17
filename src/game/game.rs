@@ -43,10 +43,16 @@ impl Game {
 
 		// Asset loading.
 
-		load_building(&mut self.asset_manager);
+		load_building(&mut self.asset_manager, &self.stuff_manager);
 		load_modifier(&mut self.asset_manager);
-		load_resource(&mut self.asset_manager);
+		load_resource(&mut self.asset_manager, &self.stuff_manager);
 		load_unlock(&mut self.asset_manager);
+
+		// Add stuff.
+
+		for (_, building) in self.asset_manager.iter_buildings() { self.stuff_manager.load_building(building.clone()) }
+		for (_, modifier) in self.asset_manager.iter_modifiers() { self.stuff_manager.load_modifier(modifier.clone()) }
+		for (_, resource) in self.asset_manager.iter_resources() { self.stuff_manager.load_resource(resource.clone()) }
 
 		// Done
 

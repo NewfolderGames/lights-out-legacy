@@ -7,13 +7,14 @@ pub struct ResourceAsset {
 
 	pub category: &'static str,
 
-	pub default_capacity: f64,
+	pub capacity: Box<dyn Fn() -> f64>,
+	pub production: Box<dyn Fn() -> f64>,
 
 }
 
 impl ResourceAsset {
 
-	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, default_capacity: f64) -> Self {
+	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, capacity: Box<dyn Fn() -> f64>, production: Box<dyn Fn() -> f64>) -> Self {
 
 		Self {
 
@@ -22,7 +23,8 @@ impl ResourceAsset {
 			description,
 			image,
 			category,
-			default_capacity,
+			capacity,
+			production
 
 		}
 
