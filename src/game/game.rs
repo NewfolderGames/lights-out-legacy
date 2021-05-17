@@ -43,9 +43,9 @@ impl Game {
 
 		// Asset loading.
 
-		load_building(&mut self.asset_manager, &self.stuff_manager);
+		load_building(&mut self.asset_manager);
 		load_modifier(&mut self.asset_manager);
-		load_resource(&mut self.asset_manager, &self.stuff_manager);
+		load_resource(&mut self.asset_manager);
 		load_unlock(&mut self.asset_manager);
 
 		// Add stuff.
@@ -83,6 +83,34 @@ impl Game {
 	pub fn tick(&mut self) {
 
 		if !self.is_playing { return }
+
+	}
+
+}
+
+impl Game {
+
+	pub fn get_asset_manager(&self) -> &AssetManager {
+
+		&self.asset_manager
+
+	}
+
+	pub fn get_asset_manager_mut(&mut self) -> &mut AssetManager {
+
+		&mut self.asset_manager
+
+	}
+
+	pub fn get_stuff_manager(&self) -> &StuffManager {
+
+		&self.stuff_manager
+
+	}
+
+	pub fn get_stuff_manager_mut(&mut self) -> &mut StuffManager {
+
+		&mut self.stuff_manager
 
 	}
 

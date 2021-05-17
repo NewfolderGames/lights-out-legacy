@@ -1,5 +1,6 @@
 use std::rc::Rc;
 use crate::game::asset::BuildingAsset;
+use crate::game::stuff::StuffManager;
 
 pub struct Building {
 
@@ -17,15 +18,12 @@ impl Building {
 
 	pub fn new(asset: Rc<BuildingAsset>) -> Self {
 
-		let price = asset.price.clone();
-		let modifiers = asset.modifiers.as_ref()();
-
 		Self {
 
 			asset,
 			count: 0,
-			modifiers,
-			price,
+			modifiers: Vec::new(),
+			price: Vec::new(),
 			is_unlocked: false,
 
 		}
@@ -37,14 +35,11 @@ impl Building {
 		self.count += amount;
 		if self.count < 0 { self.count = 0 }
 
-		self.calculate_modifiers();
-		self.calculate_price();
-
 	}
 
-	pub fn calculate_modifiers(&mut self) {
+	pub fn calculate_modifiers(&mut self, stuff_manger: &StuffManager) {
 
-		self.modifiers = self.asset.modifiers.as_ref()();
+		self.modifiers = self.asset.modifiers.as_ref()(stuff_manger);
 
 		for modifier in self.modifiers.iter_mut() {
 
@@ -54,9 +49,9 @@ impl Building {
 
 	}
 
-	pub fn calculate_price(&mut self) {
+	pub fn calculate_price(&mut self, stuff_manger: &StuffManager) {
 
-		self.price = self.asset.price.clone();
+		self.price = self.asset.price.as_ref()(stuff_manger);
 
 		for price in self.price.iter_mut() {
 
@@ -87,6 +82,12 @@ impl Building {
 	pub fn get_price(&self) -> &Vec<(String, f64)> {
 
 		&self.price
+
+	}
+
+	pub fn is_unlocked(&self) -> bool {
+
+		self.is_unlocked
 
 	}
 

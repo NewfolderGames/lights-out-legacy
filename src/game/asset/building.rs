@@ -1,3 +1,5 @@
+use crate::game::stuff::StuffManager;
+
 pub struct BuildingAsset {
 
 	pub name: &'static str,
@@ -7,15 +9,15 @@ pub struct BuildingAsset {
 
 	pub category: &'static str,
 
-	pub modifiers: Box<dyn Fn() -> Vec<(String, f64)>>,
-	pub price: Vec<(String, f64)>,
+	pub modifiers: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>,
+	pub price: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>,
 	pub price_multiplier: f64,
 
 }
 
 impl BuildingAsset {
 
-	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, modifiers: Box<dyn Fn() -> Vec<(String, f64)>>, price: Vec<(String, f64)>, price_multiplier: f64) -> Self {
+	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, category: &'static str, modifiers: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>, price: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>, price_multiplier: f64) -> Self {
 
 		Self {
 

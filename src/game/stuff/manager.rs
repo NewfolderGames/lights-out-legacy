@@ -55,6 +55,24 @@ impl StuffManager {
 
 	}
 
+	pub fn get_building(&self, name: &str) -> Option<&Building> {
+
+		self.buildings.get(name)
+
+	}
+
+	pub fn get_modifier(&self, name: &str) -> Option<&Modifier> {
+
+		self.modifiers.get(name)
+
+	}
+
+	pub fn get_resource(&self, name: &str) -> Option<&Resource> {
+
+		self.resources.get(name)
+
+	}
+
 	pub fn unlock(&mut self, unlock: Rc<UnlockAsset>) {
 
 		for u in unlock.unlocks.iter() {

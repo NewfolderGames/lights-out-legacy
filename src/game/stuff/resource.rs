@@ -1,5 +1,6 @@
 use std::rc::Rc;
 use crate::game::asset::ResourceAsset;
+use super::StuffManager;
 
 pub struct Resource {
 
@@ -17,15 +18,12 @@ impl Resource {
 
 	pub fn new(asset: Rc<ResourceAsset>) -> Self {
 
-		let capacity = asset.capacity.as_ref()();
-		let production = asset.production.as_ref()();
-
 		Self {
 
 			asset,
-			capacity,
+			capacity: 0f64,
 			count: 0f64,
-			production,
+			production: 0f64,
 			is_unlocked: false,
 
 		}
@@ -44,15 +42,15 @@ impl Resource {
 
 	}
 
-	pub fn calculate_capacity(&mut self) {
+	pub fn calculate_capacity(&mut self, stuff_manager: &StuffManager) {
 
-		self.capacity = self.asset.capacity.as_ref()();
+		self.capacity = self.asset.capacity.as_ref()(stuff_manager);
 
 	}
 
-	pub fn calculate_production(&mut self) {
+	pub fn calculate_production(&mut self, stuff_manager: &StuffManager) {
 
-		self.production = self.asset.production.as_ref()();
+		self.production = self.asset.production.as_ref()(stuff_manager);
 
 	}
 
@@ -77,6 +75,12 @@ impl Resource {
 	pub fn get_production(&self) -> f64 {
 
 		self.production
+
+	}
+
+	pub fn is_unlocked(&self) -> bool {
+
+		self.is_unlocked
 
 	}
 
