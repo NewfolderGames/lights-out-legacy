@@ -10,8 +10,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"building_sawmill_description",
 		"building_sawmill_image",
 		"production",
-		false,
-		false,
 		Box::new(|| {
 			vec![
 				(String::from("modifier_resource_wood_production_base"), 1f64),
@@ -34,8 +32,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"building_stockpile_description",
 		"building_stockpile_image",
 		"storage",
-		false,
-		true,
 		Box::new(|| {
 			vec![
 				(String::from("modifier_resource_wood_storage_base"), 100f64),
@@ -54,8 +50,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"building_shed_description",
 		"building_shed_image",
 		"storage",
-		false,
-		true,
 		Box::new(|| {
 			vec![
 				(String::from("modifier_resource_wood_storage_base"), 500f64),

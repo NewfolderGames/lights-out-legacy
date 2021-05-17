@@ -11,8 +11,8 @@ pub struct Game {
 	rendering_manager: RenderingManager,
 	stuff_manager: StuffManager,
 
-	is_running: bool,
-	is_loading_done: bool,
+	is_loaded: bool,
+	is_playing: bool,
 
 }
 
@@ -29,85 +29,54 @@ impl Game {
 			asset_manager: AssetManager::new(),
 			rendering_manager: RenderingManager::new(),
 			stuff_manager: StuffManager::new(),
-			is_running: false,
-			is_loading_done: false,
+			is_loaded: false,
+			is_playing: false,
 
 		}
 
 	}
 
 	#[wasm_bindgen]
-	pub fn init(&mut self) {
-
-		self.load_assets();
-		self.load_save();
-
-		self.is_running = true;
-
-	}
-
-	#[wasm_bindgen]
-	pub fn is_running(&self) -> bool {
-
-		self.is_running
-
-	}
-
-	#[wasm_bindgen]
-	pub fn is_loading_done(&self) -> bool {
-
-		self.is_loading_done
-
-	}
-
-	#[wasm_bindgen]
-	pub fn pause(&mut self) {
-
-		self.is_running = false;
-
-	}
-
-	#[wasm_bindgen]
-	pub fn resume(&mut self) {
-
-		self.is_running = true;
-
-	}
-
-	#[wasm_bindgen]
-	pub fn tick(&mut self) {
-
-		if !self.is_running { return }
-
-	}
-
-}
-
-// Game state.
-
-impl Game {
-
 	pub fn load_assets(&mut self) {
 
-		if self.is_loading_done { return }
+		if self.is_playing || self.is_loaded { return }
 
 		// Asset loading.
 
 		load_building(&mut self.asset_manager);
 		load_modifier(&mut self.asset_manager);
 		load_resource(&mut self.asset_manager);
-
-		// Manager stuff.
+		load_unlock(&mut self.asset_manager);
 
 		// Done
 
-		self.is_loading_done = true;
+		self.is_loaded = true;
 
 	}
 
+	#[wasm_bindgen]
 	pub fn load_save(&mut self) {
 
+	}
 
+	#[wasm_bindgen]
+	pub fn pause(&mut self) {
+
+		self.is_playing = false;
+
+	}
+
+	#[wasm_bindgen]
+	pub fn resume(&mut self) {
+
+		self.is_playing = true;
+
+	}
+
+	#[wasm_bindgen]
+	pub fn tick(&mut self) {
+
+		if !self.is_playing { return }
 
 	}
 

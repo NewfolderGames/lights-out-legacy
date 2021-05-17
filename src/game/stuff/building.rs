@@ -9,7 +9,7 @@ pub struct Building {
 	calculated_price: Vec<(String, f64)>,
 	calculated_modifiers: Vec<(String, f64)>,
 
-	is_dirty: bool,
+	is_unlocked: bool
 
 }
 
@@ -18,26 +18,26 @@ impl Building {
 	pub fn new(asset: Rc<BuildingAsset>) -> Self {
 
 		let price = asset.price.clone();
-		let modifiers = asset.modifiers.as_ref()();
 
 		Self {
 
 			asset,
 			count: 0,
 			calculated_price: price,
-			calculated_modifiers: modifiers,
-			is_dirty: true,
+			calculated_modifiers: Vec::new(),
+			is_unlocked: false,
 
 		}
 
 	}
 
-	pub fn add(&mut self, amount: i32) {
+	pub fn build(&mut self, amount: i32) {
 
-		self.is_dirty = true;
 		self.count += amount;
-
 		if self.count < 0 { self.count = 0 }
+
+		self.calculate_modifiers();
+		self.calculate_price();
 
 	}
 
@@ -47,7 +47,7 @@ impl Building {
 
 		for modifier in self.calculated_modifiers.iter_mut() {
 
-			modifier.1 *= self.count as f64;
+			modifier.1 *= (self.count + 1) as f64;
 
 		}
 
@@ -65,15 +65,15 @@ impl Building {
 
 	}
 
-	pub fn clear_dirty(&mut self) {
-
-		self.is_dirty = false;
-
-	}
-
 	pub fn get_asset(&self) -> Rc<BuildingAsset> {
 
 		self.asset.clone()
+
+	}
+
+	pub fn get_count(&self) -> i32 {
+	
+		self.count
 
 	}
 
@@ -89,9 +89,9 @@ impl Building {
 
 	}
 
-	pub fn is_dirty(&self) -> bool {
+	pub fn unlock(&mut self) {
 
-		self.is_dirty
+		self.is_unlocked = true;
 
 	}
 

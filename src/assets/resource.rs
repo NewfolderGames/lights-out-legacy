@@ -10,8 +10,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_wood_description",
 		"resource_wood_image",
 		"raw_resource",
-		false,
-		true,
 		100f64
 	));
 
@@ -21,8 +19,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_stone_description",
 		"resource_stone_image",
 		"raw_resource",
-		false,
-		true,
 		100f64
 	));
 
@@ -32,8 +28,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_iron_description",
 		"resource_iron_image",
 		"raw_resource",
-		false,
-		false,
 		100f64
 	));
 
@@ -45,8 +39,6 @@ pub fn load(asset_manager: &mut AssetManager) {
 		"resource_energy_description",
 		"resource_energy_image",
 		"other",
-		false,
-		false,
 		100f64
 	));
 

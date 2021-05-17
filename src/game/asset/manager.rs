@@ -1,12 +1,13 @@
 use std::collections::{ HashMap, hash_map::Iter };
 use std::rc::Rc;
-use super::{ BuildingAsset, ModifierAsset, ResourceAsset };
+use super::{ BuildingAsset, ModifierAsset, ResourceAsset, UnlockAsset };
 
 pub struct AssetManager {
 
 	buildings: HashMap<String, Rc<BuildingAsset>>,
 	modifiers: HashMap<String, Rc<ModifierAsset>>,
 	resources: HashMap<String, Rc<ResourceAsset>>,
+	unlocks: HashMap<String, Rc<UnlockAsset>>,
 
 }
 
@@ -19,6 +20,7 @@ impl AssetManager {
 			buildings: HashMap::new(),
 			modifiers: HashMap::new(),
 			resources: HashMap::new(),
+			unlocks: HashMap::new(),
 
 		}
 
@@ -66,6 +68,12 @@ impl AssetManager {
 
 	}
 
+	pub fn iter_unlock(&self) -> Iter<String, Rc<UnlockAsset>> {
+
+		self.unlocks.iter()
+
+	}
+
 	pub fn load_building(&mut self, asset: BuildingAsset) {
 
 		self.buildings.insert(String::from(asset.name), Rc::new(asset));
@@ -81,6 +89,12 @@ impl AssetManager {
 	pub fn load_resource(&mut self, asset: ResourceAsset) {
 
 		self.resources.insert(String::from(asset.name), Rc::new(asset));
+
+	}
+
+	pub fn load_unlock(&mut self, asset: UnlockAsset) {
+
+		self.unlocks.insert(String::from(asset.name), Rc::new(asset));
 
 	}
 

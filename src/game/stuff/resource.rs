@@ -5,14 +5,11 @@ pub struct Resource {
 
 	asset: Rc<ResourceAsset>,
 
-	is_unlocked: bool,
-	is_hidden: bool,
-
 	capacity: f64,
 	count: f64,
 	production: f64,
 
-	is_dirty: bool,
+	is_unlocked: bool
 
 }
 
@@ -20,19 +17,15 @@ impl Resource {
 
 	pub fn new(asset: Rc<ResourceAsset>) -> Self {
 
-		let is_unlocked = asset.is_unlocked;
-		let is_hidden = asset.is_hidden;
 		let capacity = asset.default_capacity;
 
 		Self {
 
 			asset,
-			is_unlocked,
-			is_hidden,
 			capacity,
 			count: 0f64,
 			production: 0f64,
-			is_dirty: true,
+			is_unlocked: false,
 
 		}
 
@@ -41,7 +34,6 @@ impl Resource {
 	pub fn add(&mut self, amount: f64) {
 
 		self.count += amount;
-		self.is_dirty = true;
 
 		if self.count > self.capacity {
 
@@ -54,12 +46,6 @@ impl Resource {
 	pub fn get_asset(&self) -> Rc<ResourceAsset> {
 
 		self.asset.clone()
-
-	}
-
-	pub fn clear_dirty(&mut self) {
-
-		self.is_dirty = false;
 
 	}
 
@@ -81,59 +67,35 @@ impl Resource {
 
 	}
 
-	pub fn is_dirty(&self) -> bool {
-
-		self.is_dirty
-
-	}
-
-	pub fn is_hidden(&self) -> bool {
-
-		self.is_hidden
-
-	}
-
-	pub fn is_unlocked(&self) -> bool {
-
-		self.is_unlocked
-
-	}
-
 	pub fn set_capacity(&mut self, amount: f64) {
 
 		self.capacity = amount;
-		self.is_dirty = true;
 
 	}
 
 	pub fn set_count(&mut self, amount: f64) {
 
 		self.count = amount;
-		self.is_dirty = true;
 
 	}
 
 	pub fn set_production(&mut self, amount: f64) {
 
 		self.production = amount;
-		self.is_dirty = true;
 
 	}
 
-	pub fn set_unlocked(&mut self, unlocked: bool) {
-
-		self.is_unlocked = unlocked;
-
-	}
-
-	pub fn try_subtract(&mut self, amount: f64) -> bool {
+	pub fn try_spend(&mut self, amount: f64) -> bool {
 
 		if self.count < amount { return false }
-		
 		self.count -= amount;
-		self.is_dirty = true;
+		return true;
 
-		return true
+	}
+
+	pub fn unlock(&mut self) {
+
+		self.is_unlocked = true;
 
 	}
 

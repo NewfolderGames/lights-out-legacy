@@ -7,8 +7,6 @@ pub struct Modifier {
 
 	value: f64,
 
-	is_dirty: bool,
-
 }
 
 impl Modifier {
@@ -21,15 +19,8 @@ impl Modifier {
 
 			asset,
 			value,
-			is_dirty: true,
 
 		}
-
-	}
-
-	pub fn clear_dirty(&mut self) {
-
-		self.is_dirty = false;
 
 	}
 
@@ -45,16 +36,9 @@ impl Modifier {
 
 	}
 
-	pub fn is_dirty(&self) -> bool {
+	pub fn set_value(&mut self, value: f64) {
 
-		self.is_dirty
-
-	}
-
-	pub fn reset(&mut self) {
-
-		self.value = self.asset.default_value;
-		self.is_dirty = true;
+		self.value = value;
 
 	}
 
