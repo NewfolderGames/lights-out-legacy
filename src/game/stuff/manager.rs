@@ -67,6 +67,14 @@ impl StuffManager {
 
 	}
 
+	pub fn get_modifier_value(&self, name: &str) -> Option<f64> {
+
+		self.modifiers
+			.get(name)
+			.map(|m| m.get_value())
+
+	}
+
 	pub fn get_resource(&self, name: &str) -> Option<&Resource> {
 
 		self.resources.get(name)

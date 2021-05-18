@@ -13,12 +13,10 @@ impl Modifier {
 
 	pub fn new(asset: Rc<ModifierAsset>) -> Self {
 
-		let value = asset.default_value;
-
 		Self {
 
 			asset,
-			value,
+			value: 0f64,
 
 		}
 
