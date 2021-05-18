@@ -1,13 +1,11 @@
 use wasm_bindgen::prelude::*;
 use crate::assets::*;
-use super::asset::AssetManager;
 use super::rendering::RenderingManager;
 use super::stuff::StuffManager;
 
 #[wasm_bindgen]
 pub struct Game {
 
-	asset_manager: AssetManager,
 	rendering_manager: RenderingManager,
 	stuff_manager: StuffManager,
 
@@ -26,7 +24,6 @@ impl Game {
 
 		Self {
 
-			asset_manager: AssetManager::new(),
 			rendering_manager: RenderingManager::new(),
 			stuff_manager: StuffManager::new(),
 			is_loaded: false,
@@ -43,16 +40,10 @@ impl Game {
 
 		// Asset loading.
 
-		load_building(&mut self.asset_manager);
-		load_modifier(&mut self.asset_manager);
-		load_resource(&mut self.asset_manager);
-		load_unlock(&mut self.asset_manager);
-
-		// Add stuff.
-
-		for (_, building) in self.asset_manager.iter_buildings() { self.stuff_manager.load_building(building.clone()) }
-		for (_, modifier) in self.asset_manager.iter_modifiers() { self.stuff_manager.load_modifier(modifier.clone()) }
-		for (_, resource) in self.asset_manager.iter_resources() { self.stuff_manager.load_resource(resource.clone()) }
+		load_building(&mut self.stuff_manager);
+		load_modifier(&mut self.stuff_manager);
+		load_resource(&mut self.stuff_manager);
+		load_unlock(&mut self.stuff_manager);
 
 		// Done
 
@@ -83,34 +74,6 @@ impl Game {
 	pub fn tick(&mut self) {
 
 		if !self.is_playing { return }
-
-	}
-
-}
-
-impl Game {
-
-	pub fn get_asset_manager(&self) -> &AssetManager {
-
-		&self.asset_manager
-
-	}
-
-	pub fn get_asset_manager_mut(&mut self) -> &mut AssetManager {
-
-		&mut self.asset_manager
-
-	}
-
-	pub fn get_stuff_manager(&self) -> &StuffManager {
-
-		&self.stuff_manager
-
-	}
-
-	pub fn get_stuff_manager_mut(&mut self) -> &mut StuffManager {
-
-		&mut self.stuff_manager
 
 	}
 

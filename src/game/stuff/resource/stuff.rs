@@ -1,10 +1,9 @@
-use std::rc::Rc;
-use crate::game::asset::ResourceAsset;
-use super::StuffManager;
+use super::{ ResourceAsset, ResourceManager};
+use super::super::{ Stuff, StuffManager };
 
 pub struct Resource {
 
-	asset: Rc<ResourceAsset>,
+	asset: ResourceAsset,
 
 	capacity: f64,
 	count: f64,
@@ -16,7 +15,7 @@ pub struct Resource {
 
 impl Resource {
 
-	pub fn new(asset: Rc<ResourceAsset>) -> Self {
+	pub fn new(asset: ResourceAsset) -> Self {
 
 		Self {
 
@@ -51,12 +50,6 @@ impl Resource {
 	pub fn calculate_production(&mut self, stuff_manager: &StuffManager) {
 
 		self.production = self.asset.production.as_ref()(stuff_manager);
-
-	}
-
-	pub fn get_asset(&self) -> Rc<ResourceAsset> {
-
-		self.asset.clone()
 
 	}
 
@@ -101,6 +94,19 @@ impl Resource {
 	pub fn unlock(&mut self) {
 
 		self.is_unlocked = true;
+
+	}
+
+}
+
+impl Stuff for Resource {
+
+	type Asset = ResourceAsset;
+	type Manager = ResourceManager;
+
+	fn get_asset(&self) -> &Self::Asset {
+		
+		&self.asset
 
 	}
 

@@ -6,6 +6,9 @@ let gameInterval;
 window.addEventListener("load", (event) => {
 
 	game = new wasm.Game();
+	game.load_assets();
+	game.load_save();
+
 	gameInterval = setInterval(() => game.tick(), 250);
 
 });

@@ -1,13 +1,13 @@
-use crate::game::asset::{ AssetManager, UnlockAsset, UnlockStuff };
+use crate::game::stuff::{ StuffManager, UnlockAsset, Unlockable };
 
-pub fn load(asset_manager: &mut AssetManager) {
+pub fn load(stuff_manager: &mut StuffManager) {
 
-	asset_manager.load_unlock(UnlockAsset::new(
+	stuff_manager.load_unlock(UnlockAsset::new(
 		"unlock_default",
 		vec![
-			UnlockStuff::Building("building_stockpile"),
-			UnlockStuff::Resource("resource_wood"),
-			UnlockStuff::Resource("resource_stone"),
+			Unlockable::Building("building_stockpile"),
+			Unlockable::Resource("resource_wood"),
+			Unlockable::Resource("resource_stone"),
 		]
 	))
 

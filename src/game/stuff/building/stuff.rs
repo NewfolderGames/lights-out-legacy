@@ -1,10 +1,9 @@
-use std::rc::Rc;
-use crate::game::asset::BuildingAsset;
-use crate::game::stuff::StuffManager;
+use super::{ BuildingAsset, BuildingManager };
+use super::super::{ Stuff, StuffManager };
 
 pub struct Building {
 
-	asset: Rc<BuildingAsset>,
+	asset: BuildingAsset,
 
 	count: i32,
 	modifiers: Vec<(String, f64)>,
@@ -16,7 +15,7 @@ pub struct Building {
 
 impl Building {
 
-	pub fn new(asset: Rc<BuildingAsset>) -> Self {
+	pub fn new(asset: BuildingAsset) -> Self {
 
 		Self {
 
@@ -61,12 +60,6 @@ impl Building {
 
 	}
 
-	pub fn get_asset(&self) -> Rc<BuildingAsset> {
-
-		self.asset.clone()
-
-	}
-
 	pub fn get_count(&self) -> i32 {
 	
 		self.count
@@ -94,6 +87,19 @@ impl Building {
 	pub fn unlock(&mut self) {
 
 		self.is_unlocked = true;
+
+	}
+
+}
+
+impl Stuff for Building {
+
+	type Asset = BuildingAsset;
+	type Manager = BuildingManager;
+
+	fn get_asset(&self) -> &Self::Asset {
+		
+		&self.asset
 
 	}
 
