@@ -1,9 +1,14 @@
-use std::collections::HashMap;
+use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Building, BuildingAsset };
+use super::super::StuffManager;
 
 pub struct BuildingManager {
 
 	buildings: HashMap<String, Building>,
+
+	calculated_modifiers: Vec<(String, f64)>,
+
+	is_dirty: bool,
 
 }
 
@@ -13,10 +18,29 @@ impl BuildingManager {
 
 		Self {
 
-			buildings: HashMap::new()
+			buildings: HashMap::new(),
+			calculated_modifiers: Vec::new(),
+			is_dirty: false,
 
 		}
 		
+	}
+
+	pub fn calculate(&mut self, stuff_manager: &StuffManager) {
+
+		for (_, building) in self.buildings.iter_mut() {
+
+			if building.is_dirty() {
+
+				building.calculate_modifiers(stuff_manager);
+				building.calculate_price(stuff_manager);
+
+			}
+
+			
+
+		}
+
 	}
 
 	pub fn get(&self, name: &str) -> Option<&Building> {
@@ -34,7 +58,7 @@ impl BuildingManager {
 
 	}
 
-	pub fn iter(&self) -> std::collections::hash_map::Iter<String, Building> {
+	pub fn iter(&self) -> Iter<String, Building> {
 
 		self.buildings.iter()
 

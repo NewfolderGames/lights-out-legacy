@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Unlock, UnlockAsset };
 
 pub struct UnlockManager {
@@ -31,6 +31,12 @@ impl UnlockManager {
 		let unlock = Unlock::new(asset);
 
 		self.unlocks.insert(name, unlock);
+
+	}
+
+	pub fn iter(&self) -> Iter<String, Unlock> {
+
+		self.unlocks.iter()
 
 	}
 

@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Resource, ResourceAsset };
 
 pub struct ResourceManager {
@@ -31,6 +31,12 @@ impl ResourceManager {
 		let resource = Resource::new(asset);
 
 		self.resources.insert(name, resource);
+
+	}
+
+	pub fn iter(&self) -> Iter<String, Resource> {
+
+		self.resources.iter()
 
 	}
 

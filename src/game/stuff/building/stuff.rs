@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use super::BuildingAsset;
 use super::super::StuffManager;
 
@@ -6,9 +7,10 @@ pub struct Building {
 	asset: BuildingAsset,
 
 	count: i32,
-	modifiers: Vec<(String, f64)>,
-	price: Vec<(String, f64)>,
+	modifiers: HashMap<String, f64>,
+	price: HashMap<String, f64>,
 
+	is_dirty: bool,
 	is_unlocked: bool
 
 }
@@ -21,8 +23,9 @@ impl Building {
 
 			asset,
 			count: 0,
-			modifiers: Vec::new(),
-			price: Vec::new(),
+			modifiers: HashMap::new(),
+			price: HashMap::new(),
+			is_dirty: true,
 			is_unlocked: false,
 
 		}
@@ -31,6 +34,7 @@ impl Building {
 
 	pub fn build(&mut self, amount: i32) {
 
+		self.is_dirty = true;
 		self.count += amount;
 		if self.count < 0 { self.count = 0 }
 
@@ -42,7 +46,7 @@ impl Building {
 
 		for modifier in self.modifiers.iter_mut() {
 
-			modifier.1 *= (self.count + 1) as f64;
+			*modifier.1 *= (self.count + 1) as f64;
 
 		}
 
@@ -54,7 +58,7 @@ impl Building {
 
 		for price in self.price.iter_mut() {
 
-			price.1 *= self.asset.price_multiplier.powi(self.count + 1);
+			*price.1 *= self.asset.price_multiplier.powi(self.count + 1);
 
 		}
 
@@ -72,15 +76,21 @@ impl Building {
 
 	}
 
-	pub fn get_modifiers(&self) -> &Vec<(String, f64)> {
+	pub fn get_modifiers(&self) -> &HashMap<String, f64> {
 
 		&self.modifiers
 
 	}
 
-	pub fn get_price(&self) -> &Vec<(String, f64)> {
+	pub fn get_price(&self) -> &HashMap<String, f64> {
 
 		&self.price
+
+	}
+
+	pub fn is_dirty(&self) -> bool {
+
+		self.is_dirty
 
 	}
 

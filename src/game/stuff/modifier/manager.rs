@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Modifier, ModifierAsset };
 
 pub struct ModifierManager {
@@ -31,6 +31,12 @@ impl ModifierManager {
 		let modifier = Modifier::new(asset);
 
 		self.modifiers.insert(name, modifier);
+
+	}
+
+	pub fn iter(&self) -> Iter<String, Modifier> {
+
+		self.modifiers.iter()
 
 	}
 

@@ -8,13 +8,13 @@ pub struct TechnologyAsset {
 	pub image: &'static str,
 
 	pub price: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>,
-	pub unlock: Vec<&'static str>,
+	pub unlock: &'static str,
 
 }
 
 impl TechnologyAsset {
 
-	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, price: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>, unlock: Vec<&'static str>) -> Self {
+	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, price: Box<dyn Fn(&StuffManager) -> Vec<(String, f64)>>, unlock: &'static str) -> Self {
 
 		Self {
 

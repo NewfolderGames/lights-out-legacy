@@ -1,5 +1,4 @@
-use std::collections::{ HashMap, hash_map::Iter };
-use std::any::TypeId;
+use std::collections::hash_map::Iter;
 use super::*;
 
 pub struct StuffManager {
@@ -31,6 +30,30 @@ impl StuffManager {
 		self.modifier_manager
 			.get(name)
 			.map(|m| m.get_value())
+
+	}
+
+	pub fn iter_building(&self) -> Iter<String, Building> {
+
+		self.building_manager.iter()
+
+	}
+
+	pub fn iter_modifier(&self) -> Iter<String, Modifier> {
+
+		self.modifier_manager.iter()
+
+	}
+
+	pub fn iter_resource(&self) -> Iter<String, Resource> {
+
+		self.resource_manager.iter()
+
+	}
+
+	pub fn iter_unlock(&self) -> Iter<String, Unlock> {
+
+		self.unlock_manager.iter()
 
 	}
 
