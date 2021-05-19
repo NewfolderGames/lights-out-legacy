@@ -57,6 +57,12 @@ impl StuffManager {
 
 	}
 
+	pub fn is_unlocked(&self, name: &str) -> bool {
+
+		self.unlock_manager.is_unlocked(name)
+
+	}
+
 	pub fn load_building(&mut self, asset: BuildingAsset) {
 
 		self.building_manager.load(asset)
@@ -78,6 +84,28 @@ impl StuffManager {
 	pub fn load_unlock(&mut self, asset: UnlockAsset) {
 
 		self.unlock_manager.load(asset)
+
+	}
+
+	pub fn unlock(&mut self, name: &str) {
+
+		if let Some(unlock) = self.unlock_manager.get_mut(name) {
+
+			unlock.unlock();
+			
+			for u in unlock.get_asset().unlocks.iter() {
+
+				match *u {
+
+					Unlockable::Building(name) => self.building_manager.unlock(name),
+					Unlockable::Resource(name) => self.resource_manager.unlock(name),
+					_ => ()
+
+				}
+
+			}
+
+		}
 
 	}
 

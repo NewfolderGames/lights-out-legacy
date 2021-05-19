@@ -25,6 +25,12 @@ impl UnlockManager {
 
 	}
 
+	pub fn get_mut(&mut self, name: &str) -> Option<&mut Unlock> {
+
+		self.unlocks.get_mut(name)
+
+	}
+
 	pub fn load(&mut self, asset: UnlockAsset) {
 
 		let name = String::from(asset.name);
@@ -34,9 +40,25 @@ impl UnlockManager {
 
 	}
 
+	pub fn is_unlocked(&self, name: &str) -> bool {
+
+		self.unlocks
+			.get(name)
+			.map_or(false, |u| u.is_unlocked())
+
+	}
+
 	pub fn iter(&self) -> Iter<String, Unlock> {
 
 		self.unlocks.iter()
+
+	}
+
+	pub fn unlock(&mut self, name: &str) {
+
+		self.unlocks
+			.get_mut(name)
+			.map(|u| u.unlock());
 
 	}
 

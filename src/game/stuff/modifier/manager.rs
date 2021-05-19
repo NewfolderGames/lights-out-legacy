@@ -25,6 +25,12 @@ impl ModifierManager {
 
 	}
 
+	pub fn get_mut(&mut self, name: &str) -> Option<&mut Modifier> {
+
+		self.modifiers.get_mut(name)
+
+	}
+
 	pub fn load(&mut self, asset: ModifierAsset) {
 
 		let name = String::from(asset.name);

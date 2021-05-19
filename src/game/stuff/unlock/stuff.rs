@@ -27,4 +27,16 @@ impl Unlock {
 
 	}
 
+	pub fn is_unlocked(&self) -> bool {
+
+		self.is_unlocked
+
+	}
+
+	pub fn unlock(&mut self) {
+
+		self.is_unlocked = true;
+
+	}
+
 }

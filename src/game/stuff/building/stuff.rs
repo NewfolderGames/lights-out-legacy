@@ -64,6 +64,12 @@ impl Building {
 
 	}
 
+	pub fn clear_dirty(&mut self) {
+
+		self.is_dirty = false;
+
+	}
+
 	pub fn get_asset(&self) -> &BuildingAsset {
 
 		&self.asset
