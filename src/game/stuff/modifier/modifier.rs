@@ -1,5 +1,4 @@
-use super::{ ModifierAsset, ModifierManager };
-use super::super::Stuff;
+use super::ModifierAsset;
 
 pub struct Modifier {
 
@@ -22,6 +21,12 @@ impl Modifier {
 
 	}
 
+	pub fn get_asset(&self) -> &ModifierAsset {
+
+		&self.asset
+
+	}
+
 	pub fn get_value(&self) -> f64 {
 
 		self.value
@@ -31,19 +36,6 @@ impl Modifier {
 	pub fn set_value(&mut self, value: f64) {
 
 		self.value = value;
-
-	}
-
-}
-
-impl Stuff for Modifier {
-
-	type Asset = ModifierAsset;
-	type Manager = ModifierManager;
-
-	fn get_asset(&self) -> &Self::Asset {
-		
-		&self.asset
 
 	}
 

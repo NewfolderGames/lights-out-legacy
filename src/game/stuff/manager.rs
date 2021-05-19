@@ -1,3 +1,5 @@
+use std::collections::{ HashMap, hash_map::Iter };
+use std::any::TypeId;
 use super::*;
 
 pub struct StuffManager {

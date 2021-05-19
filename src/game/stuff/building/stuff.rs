@@ -1,5 +1,5 @@
-use super::{ BuildingAsset, BuildingManager };
-use super::super::{ Stuff, StuffManager };
+use super::BuildingAsset;
+use super::super::StuffManager;
 
 pub struct Building {
 
@@ -60,6 +60,12 @@ impl Building {
 
 	}
 
+	pub fn get_asset(&self) -> &BuildingAsset {
+
+		&self.asset
+
+	}
+
 	pub fn get_count(&self) -> i32 {
 	
 		self.count
@@ -87,19 +93,6 @@ impl Building {
 	pub fn unlock(&mut self) {
 
 		self.is_unlocked = true;
-
-	}
-
-}
-
-impl Stuff for Building {
-
-	type Asset = BuildingAsset;
-	type Manager = BuildingManager;
-
-	fn get_asset(&self) -> &Self::Asset {
-		
-		&self.asset
 
 	}
 

@@ -1,5 +1,5 @@
-use super::{ ResourceAsset, ResourceManager};
-use super::super::{ Stuff, StuffManager };
+use super::ResourceAsset;
+use super::super::StuffManager;
 
 pub struct Resource {
 
@@ -53,6 +53,12 @@ impl Resource {
 
 	}
 
+	pub fn get_asset(&self) -> &ResourceAsset {
+
+		&self.asset
+
+	}
+
 	pub fn get_capacity(&self) -> f64 {
 
 		self.capacity
@@ -94,19 +100,6 @@ impl Resource {
 	pub fn unlock(&mut self) {
 
 		self.is_unlocked = true;
-
-	}
-
-}
-
-impl Stuff for Resource {
-
-	type Asset = ResourceAsset;
-	type Manager = ResourceManager;
-
-	fn get_asset(&self) -> &Self::Asset {
-		
-		&self.asset
 
 	}
 

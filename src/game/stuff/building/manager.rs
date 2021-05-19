@@ -34,4 +34,10 @@ impl BuildingManager {
 
 	}
 
+	pub fn iter(&self) -> std::collections::hash_map::Iter<String, Building> {
+
+		self.buildings.iter()
+
+	}
+
 }

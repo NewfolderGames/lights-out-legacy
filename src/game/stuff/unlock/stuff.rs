@@ -1,5 +1,4 @@
-use super::{ UnlockAsset, UnlockManager };
-use super::super::Stuff;
+use super::UnlockAsset;
 
 pub struct Unlock {
 
@@ -22,15 +21,8 @@ impl Unlock {
 
 	}
 
-}
+	pub fn get_asset(&self) -> &UnlockAsset {
 
-impl Stuff for Unlock {
-
-	type Asset = UnlockAsset;
-	type Manager = UnlockManager;
-
-	fn get_asset(&self) -> &Self::Asset {
-		
 		&self.asset
 
 	}
