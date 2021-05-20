@@ -3,7 +3,7 @@ use super::{ Technology, TechnologyAsset };
 
 pub struct TechnologyManager {
 
-	technologies: HashMap<String, Technology>,
+	technologies: HashMap<&'static str, Technology>,
 
 }
 
@@ -33,14 +33,14 @@ impl TechnologyManager {
 
 	pub fn load(&mut self, asset: TechnologyAsset) {
 
-		let name = String::from(asset.name);
+		let name = asset.name;
 		let techonology = Technology::new(asset);
 
 		self.technologies.insert(name, techonology);
 
 	}
 
-	pub fn iter(&self) -> Iter<String, Technology> {
+	pub fn iter(&self) -> Iter<&'static str, Technology> {
 
 		self.technologies.iter()
 

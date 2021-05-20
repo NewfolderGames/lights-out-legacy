@@ -1,5 +1,5 @@
 use super::ResourceAsset;
-use super::super::StuffManager;
+use super::super::ModifierManager;
 
 pub struct Resource {
 
@@ -41,27 +41,27 @@ impl Resource {
 
 	}
 
-	pub fn calculate_capacity(&mut self, stuff_manager: &StuffManager) {
+	pub fn calculate_capacity(&mut self, modifier_manager: &ModifierManager) {
 
 		self.capacity = self.asset.capacity;
 		self.capacity +=
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.name, "_storage_base"].join("")).unwrap_or(0f64) +
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.category, "_storage_base"].join("")).unwrap_or(0f64);
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_storage_base"].join("")).unwrap_or(0f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_storage_base"].join("")).unwrap_or(0f64);
 		self.capacity *=
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.name, "_storage_multiplier"].join("")).unwrap_or(1f64) +
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.category, "_storage_multiplier"].join("")).unwrap_or(1f64);
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_storage_multiplier"].join("")).unwrap_or(1f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_storage_multiplier"].join("")).unwrap_or(1f64);
 
 	}
 
-	pub fn calculate_production(&mut self, stuff_manager: &StuffManager) {
+	pub fn calculate_production(&mut self, modifier_manager: &ModifierManager) {
 
 		self.production = 0f64;
 		self.production +=
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.name, "_production_base"].join("")).unwrap_or(0f64) +
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.category, "_production_base"].join("")).unwrap_or(0f64);
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_production_base"].join("")).unwrap_or(0f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_production_base"].join("")).unwrap_or(0f64);
 		self.production *=
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.name, "_production_multiplier"].join("")).unwrap_or(1f64) +
-			stuff_manager.get_modifier_value(&["modifier_resource_", self.asset.category, "_production_multiplier"].join("")).unwrap_or(1f64);
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_production_multiplier"].join("")).unwrap_or(1f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_production_multiplier"].join("")).unwrap_or(1f64);
 
 	}
 

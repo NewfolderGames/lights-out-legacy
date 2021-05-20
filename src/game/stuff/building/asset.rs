@@ -1,6 +1,3 @@
-use std::collections::HashMap;
-use crate::game::stuff::StuffManager;
-
 pub struct BuildingAsset {
 
 	pub name: &'static str,

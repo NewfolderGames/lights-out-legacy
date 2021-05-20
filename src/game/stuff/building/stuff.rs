@@ -1,6 +1,5 @@
-use std::collections::HashMap;
 use super::BuildingAsset;
-use super::super::StuffManager;
+use super::super::ModifierManager;
 
 pub struct Building {
 
@@ -40,7 +39,7 @@ impl Building {
 
 	}
 
-	pub fn calculate_modifiers(&mut self, stuff_manger: &StuffManager) {
+	pub fn calculate_modifiers(&mut self, stuff_manger: &ModifierManager) {
 
 		self.modifiers = self.asset.modifiers.clone();
 
@@ -52,7 +51,7 @@ impl Building {
 
 	}
 
-	pub fn calculate_price(&mut self, stuff_manger: &StuffManager) {
+	pub fn calculate_price(&mut self, stuff_manger: &ModifierManager) {
 
 		self.price = self.asset.price.clone();
 

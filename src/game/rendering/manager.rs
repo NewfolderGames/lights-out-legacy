@@ -16,4 +16,10 @@ impl RenderingManager {
 
 	}
 
+	pub fn tick(&mut self) {
+
+
+
+	}
+
 }

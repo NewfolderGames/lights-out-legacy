@@ -3,7 +3,7 @@ use super::{ Resource, ResourceAsset };
 
 pub struct ResourceManager {
 
-	resources: HashMap<String, Resource>,
+	resources: HashMap<&'static str, Resource>,
 
 }
 
@@ -33,14 +33,14 @@ impl ResourceManager {
 
 	pub fn load(&mut self, asset: ResourceAsset) {
 
-		let name = String::from(asset.name);
+		let name = asset.name;
 		let resource = Resource::new(asset);
 
 		self.resources.insert(name, resource);
 
 	}
 
-	pub fn iter(&self) -> Iter<String, Resource> {
+	pub fn iter(&self) -> Iter<&'static str, Resource> {
 
 		self.resources.iter()
 

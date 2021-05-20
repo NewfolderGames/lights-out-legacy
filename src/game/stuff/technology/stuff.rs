@@ -1,11 +1,9 @@
-use std::collections::HashMap;
 use super::TechnologyAsset;
 
 pub struct Technology {
 
 	asset: TechnologyAsset,
 
-	price: HashMap<String, f64>,
 	is_researched: bool,
 
 	is_unlocked: bool,
@@ -19,7 +17,6 @@ impl Technology {
 		Self {
 
 			asset,
-			price: HashMap::new(),
 			is_researched: false,
 			is_unlocked: false
 

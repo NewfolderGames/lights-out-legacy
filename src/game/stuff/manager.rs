@@ -1,4 +1,4 @@
-use std::collections::hash_map::Iter;
+use std::collections::{ HashMap, hash_map::Iter };
 use super::*;
 
 pub struct StuffManager {
@@ -8,6 +8,7 @@ pub struct StuffManager {
 	resource_manager: ResourceManager,
 	technology_manager: TechnologyManager,
 	unlock_manager: UnlockManager,
+	upgrade_manager: UpgradeManager,
 
 }
 
@@ -22,19 +23,12 @@ impl StuffManager {
 			resource_manager: ResourceManager::new(),
 			technology_manager: TechnologyManager::new(),
 			unlock_manager: UnlockManager::new(),
+			upgrade_manager: UpgradeManager::new(),
 			
 		}
 
 	}
-
-	pub fn get_modifier_value(&self, name: &str) -> Option<f64> {
-
-		self.modifier_manager
-			.get(name)
-			.map(|m| m.get_value())
-
-	}
-
+	
 	pub fn iter_building(&self) -> Iter<&'static str, Building> {
 
 		self.building_manager.iter()
@@ -47,19 +41,19 @@ impl StuffManager {
 
 	}
 
-	pub fn iter_resource(&self) -> Iter<String, Resource> {
+	pub fn iter_resource(&self) -> Iter<&'static str, Resource> {
 
 		self.resource_manager.iter()
 
 	}
 
-	pub fn iter_technology(&self) -> Iter<String, Technology> {
+	pub fn iter_technology(&self) -> Iter<&'static str, Technology> {
 
 		self.technology_manager.iter()
 
 	}
 
-	pub fn iter_unlock(&self) -> Iter<String, Unlock> {
+	pub fn iter_unlock(&self) -> Iter<&'static str, Unlock> {
 
 		self.unlock_manager.iter()
 
@@ -98,6 +92,43 @@ impl StuffManager {
 	pub fn load_unlock(&mut self, asset: UnlockAsset) {
 
 		self.unlock_manager.load(asset)
+
+	}
+
+	pub fn load_upgrade(&mut self, asset: UpgradeAsset) {
+
+		self.upgrade_manager.load(asset)
+
+	}
+
+	pub fn tick(&mut self) {
+
+		// Calculate modifiers.
+
+		let mut modifiers = HashMap::new();
+
+		self.upgrade_manager.calculate();
+		self.building_manager.calculate(&self.modifier_manager);
+
+		for (name, value) in self.upgrade_manager.get_modifiers().iter() {
+
+			modifiers.insert(name, *value);
+
+		}
+
+		for (name, value) in self.building_manager.get_modifiers().iter() {
+
+			if let Some(modifier) = modifiers.get_mut(name) {
+
+				*modifier += value;
+
+			} else {
+
+				modifiers.insert(name, *value);
+
+			}
+
+		}
 
 	}
 

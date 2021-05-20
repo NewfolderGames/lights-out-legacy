@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use crate::game::stuff::{ BuildingAsset, StuffManager };
 
 pub fn load(stuff_manager: &mut StuffManager) {
@@ -9,7 +8,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"building_researchBench",
 		"mana",
 		vec![
-			("modifier_resource_science_production_base", 0.25f64)
+			("modifier_resource_science_production_base", 0.2f64)
 		],
 		vec![
 			("resource_wood", 10f64),
@@ -24,7 +23,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"building_garden",
 		"production",
 		vec![
-			("modifier_resource_food_production_base", 0.25f64),
+			("modifier_resource_food_production_base", 0.2f64),
 		],
 		vec![
 			("resource_wood", 10f64),

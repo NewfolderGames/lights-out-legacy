@@ -45,6 +45,7 @@ impl Game {
 		load_resource(&mut self.stuff_manager);
 		load_technology(&mut self.stuff_manager);
 		load_unlock(&mut self.stuff_manager);
+		load_upgrade(&mut self.stuff_manager);
 
 		// Done
 
@@ -75,6 +76,9 @@ impl Game {
 	pub fn tick(&mut self) {
 
 		if !self.is_playing { return }
+
+		self.stuff_manager.tick();
+		self.rendering_manager.tick();
 
 	}
 

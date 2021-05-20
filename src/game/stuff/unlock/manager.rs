@@ -3,7 +3,7 @@ use super::{ Unlock, UnlockAsset };
 
 pub struct UnlockManager {
 
-	unlocks: HashMap<String, Unlock>,
+	unlocks: HashMap<&'static str, Unlock>,
 
 }
 
@@ -33,7 +33,7 @@ impl UnlockManager {
 
 	pub fn load(&mut self, asset: UnlockAsset) {
 
-		let name = String::from(asset.name);
+		let name = asset.name;
 		let unlock = Unlock::new(asset);
 
 		self.unlocks.insert(name, unlock);
@@ -48,7 +48,7 @@ impl UnlockManager {
 
 	}
 
-	pub fn iter(&self) -> Iter<String, Unlock> {
+	pub fn iter(&self) -> Iter<&'static str, Unlock> {
 
 		self.unlocks.iter()
 

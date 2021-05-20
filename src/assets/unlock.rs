@@ -35,7 +35,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		vec![
 			Unlockable::Building("building_garden"),
 			Unlockable::Resource("resource_food"),
-			Unlockable::Technology("technology_woodCutting"),
+			Unlockable::Technology("technology_woodworking"),
 			Unlockable::Technology("technology_mining"),
 		]
 	));
@@ -43,7 +43,17 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_unlock(UnlockAsset::new(
 		"unlock_technology_mining",
 		vec![
-			
+			Unlockable::Technology("technology_copper"),
+			Unlockable::Technology("technology_stoneCutting"),
+		]
+	));
+
+	stuff_manager.load_unlock(UnlockAsset::new(
+		"unlock_technology_woodworking",
+		vec![
+			Unlockable::Technology("technology_carpentry"),
+			Unlockable::Upgrade("unlock_tool_pickaxe_wood"),
+			Unlockable::Upgrade("unlock_tool_axe_wood"),
 		]
 	));
 

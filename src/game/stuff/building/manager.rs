@@ -1,12 +1,12 @@
 use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Building, BuildingAsset };
-use super::super::StuffManager;
+use super::super::ModifierManager;
 
 pub struct BuildingManager {
 
 	buildings: HashMap<&'static str, Building>,
 
-	calculated_modifiers: HashMap<String, f64>,
+	calculated_modifiers: HashMap<&'static str, f64>,
 
 	is_dirty: bool,
 
@@ -26,29 +26,31 @@ impl BuildingManager {
 		
 	}
 
-	pub fn calculate(&mut self, stuff_manager: &StuffManager) {
+	pub fn calculate(&mut self, modifier_manager: &ModifierManager) {
 
-		let mut modifiers: HashMap<&'static str, f64> = HashMap::new();
+		self.calculated_modifiers.clear();
 
 		for (_, building) in self.buildings.iter_mut() {
 
+			if !building.is_unlocked() || building.get_count() == 0 { continue; }
+
 			if building.is_dirty() {
 
-				building.calculate_modifiers(stuff_manager);
-				building.calculate_price(stuff_manager);
+				building.calculate_modifiers(modifier_manager);
+				building.calculate_price(modifier_manager);
 				building.clear_dirty();
 
 			}
 
 			for (name, value) in building.get_modifiers() {
 
-				if let Some(modifiers) = modifiers.get_mut(name) {
+				if let Some(modifiers) = self.calculated_modifiers.get_mut(name) {
 
 					*modifiers += value;
 
 				} else {
 
-					modifiers.insert(*name, *value);
+					self.calculated_modifiers.insert(*name, *value);
 
 				}
 
@@ -70,6 +72,12 @@ impl BuildingManager {
 
 	}
 
+	pub fn get_modifiers(&self) -> &HashMap<&'static str, f64> {
+
+		&self.calculated_modifiers
+
+	}
+
 	pub fn get_mut(&mut self, name: &str) -> Option<&mut Building> {
 
 		self.buildings.get_mut(name)
@@ -82,18 +90,18 @@ impl BuildingManager {
 
 	}
 
+	pub fn iter(&self) -> Iter<&'static str, Building> {
+
+		self.buildings.iter()
+
+	}
+
 	pub fn load(&mut self, asset: BuildingAsset) {
 
 		let name = asset.name;
 		let building = Building::new(asset);
 
 		self.buildings.insert(name, building);
-
-	}
-
-	pub fn iter(&self) -> Iter<&'static str, Building> {
-
-		self.buildings.iter()
 
 	}
 
