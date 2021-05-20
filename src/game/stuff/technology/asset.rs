@@ -4,9 +4,6 @@ use crate::game::stuff::StuffManager;
 pub struct TechnologyAsset {
 
 	pub name: &'static str,
-	pub title: &'static str,
-	pub description: &'static str,
-	pub image: &'static str,
 
 	pub price: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>,
 	pub unlock: &'static str,
@@ -15,14 +12,11 @@ pub struct TechnologyAsset {
 
 impl TechnologyAsset {
 
-	pub fn new(name: &'static str, title: &'static str, description: &'static str, image: &'static str, price: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>, unlock: &'static str) -> Self {
+	pub fn new(name: &'static str, price: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>, unlock: &'static str) -> Self {
 
 		Self {
 
 			name,
-			title,
-			description,
-			image,
 			price,
 			unlock
 

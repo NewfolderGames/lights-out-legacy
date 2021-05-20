@@ -6,9 +6,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_resource(ResourceAsset::new(
 		"resource_wood",
-		"resource_wood_title",
-		"resource_wood_description",
-		"resource_wood_image",
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
@@ -33,9 +30,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_resource(ResourceAsset::new(
 		"resource_stone",
-		"resource_stone_title",
-		"resource_stone_description",
-		"resource_stone_image",
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
@@ -60,9 +54,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_resource(ResourceAsset::new(
 		"resource_copper",
-		"resource_copper_title",
-		"resource_copper_description",
-		"resource_copper_image",
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
@@ -87,9 +78,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_resource(ResourceAsset::new(
 		"resource_iron",
-		"resource_iron_title",
-		"resource_iron_description",
-		"resource_iron_image",
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
@@ -116,9 +104,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_resource(ResourceAsset::new(
 		"resource_science",
-		"resource_science_title",
-		"resource_science_description",
-		"resource_science_image",
 		"mana",
 		Box::new(|stuff_manager| {
 			(
@@ -140,6 +125,5 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			)
 		}),
 	));
-
 
 }
