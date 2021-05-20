@@ -6,6 +6,7 @@ pub struct StuffManager {
 	building_manager: BuildingManager,
 	modifier_manager: ModifierManager,
 	resource_manager: ResourceManager,
+	technology_manager: TechnologyManager,
 	unlock_manager: UnlockManager,
 
 }
@@ -19,6 +20,7 @@ impl StuffManager {
 			building_manager: BuildingManager::new(),
 			modifier_manager: ModifierManager::new(),
 			resource_manager: ResourceManager::new(),
+			technology_manager: TechnologyManager::new(),
 			unlock_manager: UnlockManager::new(),
 			
 		}
@@ -51,6 +53,12 @@ impl StuffManager {
 
 	}
 
+	pub fn iter_technology(&self) -> Iter<String, Technology> {
+
+		self.technology_manager.iter()
+
+	}
+
 	pub fn iter_unlock(&self) -> Iter<String, Unlock> {
 
 		self.unlock_manager.iter()
@@ -78,6 +86,12 @@ impl StuffManager {
 	pub fn load_resource(&mut self, asset: ResourceAsset) {
 
 		self.resource_manager.load(asset)
+
+	}
+
+	pub fn load_technology(&mut self, asset: TechnologyAsset) {
+
+		self.technology_manager.load(asset)
 
 	}
 

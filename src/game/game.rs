@@ -43,6 +43,7 @@ impl Game {
 		load_building(&mut self.stuff_manager);
 		load_modifier(&mut self.stuff_manager);
 		load_resource(&mut self.stuff_manager);
+		load_technology(&mut self.stuff_manager);
 		load_unlock(&mut self.stuff_manager);
 
 		// Done

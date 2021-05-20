@@ -12,7 +12,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
-				100f64 + 
+				10f64 + 
 				stuff_manager.get_modifier_value("modifier_resource_wood_storage_base").unwrap_or(0f64) + 
 				stuff_manager.get_modifier_value("modifier_resource_rawMaterial_storage_base").unwrap_or(0f64)
 			) * (
@@ -39,7 +39,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
-				100f64 + 
+				10f64 + 
 				stuff_manager.get_modifier_value("modifier_resource_stone_storage_base").unwrap_or(0f64) + 
 				stuff_manager.get_modifier_value("modifier_resource_rawMaterial_storage_base").unwrap_or(0f64)
 			) * (
@@ -66,7 +66,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
-				100f64 + 
+				10f64 + 
 				stuff_manager.get_modifier_value("modifier_resource_copper_storage_base").unwrap_or(0f64) + 
 				stuff_manager.get_modifier_value("modifier_resource_rawMaterial_storage_base").unwrap_or(0f64)
 			) * (
@@ -93,7 +93,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"rawMateiral",
 		Box::new(|stuff_manager| {
 			(
-				100f64 + 
+				10f64 + 
 				stuff_manager.get_modifier_value("modifier_resource_iron_storage_base").unwrap_or(0f64) + 
 				stuff_manager.get_modifier_value("modifier_resource_rawMaterial_storage_base").unwrap_or(0f64)
 			) * (
@@ -111,5 +111,35 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			)
 		}),
 	));
+
+	// Mana.
+
+	stuff_manager.load_resource(ResourceAsset::new(
+		"resource_science",
+		"resource_science_title",
+		"resource_science_description",
+		"resource_science_image",
+		"mana",
+		Box::new(|stuff_manager| {
+			(
+				25f64 + 
+				stuff_manager.get_modifier_value("modifier_resource_science_storage_base").unwrap_or(0f64) + 
+				stuff_manager.get_modifier_value("modifier_resource_mana_storage_base").unwrap_or(0f64)
+			) * (
+				1f64 + 
+				stuff_manager.get_modifier_value("modifier_resource_science_storage_multiplier").unwrap_or(0f64) +
+				stuff_manager.get_modifier_value("modifier_resource_mana_storage_multiplier").unwrap_or(0f64)
+			)
+		}),
+		Box::new(|stuff_manager| {
+			(
+				stuff_manager.get_modifier_value("modifier_resource_science_production_base").unwrap_or(0f64)
+			) * (
+				1f64 + 
+				stuff_manager.get_modifier_value("modifier_resource_science_production_multiplier").unwrap_or(0f64)
+			)
+		}),
+	));
+
 
 }
