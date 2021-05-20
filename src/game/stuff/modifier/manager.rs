@@ -3,7 +3,7 @@ use super::{ Modifier, ModifierAsset };
 
 pub struct ModifierManager {
 
-	modifiers: HashMap<String, Modifier>,
+	modifiers: HashMap<&'static str, Modifier>,
 
 }
 
@@ -33,14 +33,14 @@ impl ModifierManager {
 
 	pub fn load(&mut self, asset: ModifierAsset) {
 
-		let name = String::from(asset.name);
+		let name = asset.name;
 		let modifier = Modifier::new(asset);
 
 		self.modifiers.insert(name, modifier);
 
 	}
 
-	pub fn iter(&self) -> Iter<String, Modifier> {
+	pub fn iter(&self) -> Iter<&'static str, Modifier> {
 
 		self.modifiers.iter()
 

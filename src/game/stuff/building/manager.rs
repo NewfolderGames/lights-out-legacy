@@ -4,9 +4,9 @@ use super::super::StuffManager;
 
 pub struct BuildingManager {
 
-	buildings: HashMap<String, Building>,
+	buildings: HashMap<&'static str, Building>,
 
-	calculated_modifiers: Vec<(String, f64)>,
+	calculated_modifiers: HashMap<String, f64>,
 
 	is_dirty: bool,
 
@@ -19,7 +19,7 @@ impl BuildingManager {
 		Self {
 
 			buildings: HashMap::new(),
-			calculated_modifiers: Vec::new(),
+			calculated_modifiers: HashMap::new(),
 			is_dirty: false,
 
 		}
@@ -28,7 +28,7 @@ impl BuildingManager {
 
 	pub fn calculate(&mut self, stuff_manager: &StuffManager) {
 
-		let mut modifiers: HashMap<String, f64> = HashMap::new();
+		let mut modifiers: HashMap<&'static str, f64> = HashMap::new();
 
 		for (_, building) in self.buildings.iter_mut() {
 
@@ -48,7 +48,7 @@ impl BuildingManager {
 
 				} else {
 
-					modifiers.insert(String::from(name), *value);
+					modifiers.insert(*name, *value);
 
 				}
 
@@ -84,14 +84,14 @@ impl BuildingManager {
 
 	pub fn load(&mut self, asset: BuildingAsset) {
 
-		let name = String::from(asset.name);
+		let name = asset.name;
 		let building = Building::new(asset);
 
 		self.buildings.insert(name, building);
 
 	}
 
-	pub fn iter(&self) -> Iter<String, Building> {
+	pub fn iter(&self) -> Iter<&'static str, Building> {
 
 		self.buildings.iter()
 

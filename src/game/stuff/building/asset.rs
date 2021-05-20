@@ -6,15 +6,15 @@ pub struct BuildingAsset {
 	pub name: &'static str,
 
 	pub category: &'static str,
-	pub modifiers: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>,
-	pub price: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>,
+	pub modifiers: Vec<(&'static str, f64)>,
+	pub price: Vec<(&'static str, f64)>,
 	pub price_multiplier: f64,
 
 }
 
 impl BuildingAsset {
 
-	pub fn new(name: &'static str, category: &'static str, modifiers: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>, price: Box<dyn Fn(&StuffManager) -> HashMap<String, f64>>, price_multiplier: f64) -> Self {
+	pub fn new(name: &'static str, category: &'static str, modifiers: Vec<(&'static str, f64)>, price: Vec<(&'static str, f64)>, price_multiplier: f64) -> Self {
 
 		Self {
 

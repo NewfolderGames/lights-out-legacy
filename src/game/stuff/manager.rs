@@ -35,13 +35,13 @@ impl StuffManager {
 
 	}
 
-	pub fn iter_building(&self) -> Iter<String, Building> {
+	pub fn iter_building(&self) -> Iter<&'static str, Building> {
 
 		self.building_manager.iter()
 
 	}
 
-	pub fn iter_modifier(&self) -> Iter<String, Modifier> {
+	pub fn iter_modifier(&self) -> Iter<&'static str, Modifier> {
 
 		self.modifier_manager.iter()
 
