@@ -8,6 +8,10 @@ pub struct Resource {
 	capacity: f64,
 	count: f64,
 	production: f64,
+	consumption: f64,
+
+	is_depleted: bool,
+	is_full: bool,
 
 	is_unlocked: bool
 
@@ -23,6 +27,9 @@ impl Resource {
 			capacity: 0f64,
 			count: 0f64,
 			production: 0f64,
+			consumption: 0f64,
+			is_depleted: false,
+			is_full: false,
 			is_unlocked: false,
 
 		}
@@ -62,7 +69,19 @@ impl Resource {
 		self.production *=
 			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_production_multiplier"].join("")).unwrap_or(1f64) +
 			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_production_multiplier"].join("")).unwrap_or(1f64);
+		
+	}
 
+	pub fn calculate_consumption(&mut self, modifier_manager: &ModifierManager) {
+
+		self.consumption = 0f64;
+		self.consumption +=
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_consumption_base"].join("")).unwrap_or(0f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_consumption_base"].join("")).unwrap_or(0f64);
+		self.consumption *=
+			modifier_manager.get_value(&["modifier_resource_", self.asset.name, "_consumption_multiplier"].join("")).unwrap_or(1f64) +
+			modifier_manager.get_value(&["modifier_resource_", self.asset.category, "_consumption_multiplier"].join("")).unwrap_or(1f64);
+		
 	}
 
 	pub fn get_asset(&self) -> &ResourceAsset {
@@ -95,26 +114,33 @@ impl Resource {
 
 	}
 
-	pub fn produce(&mut self) {
-
-		self.count += self.production;
-
-		if self.count < 0f64 { self.count = 0f64 }
-		if self.count > self.capacity { self.count = self.capacity }
-
-	}
-
 	pub fn set_count(&mut self, amount: f64) {
 
 		self.count = amount;
 
 	}
 
-	pub fn try_spend(&mut self, amount: f64) -> bool {
+	pub fn tick(&mut self) {
 
-		if self.count < amount { return false }
-		self.count -= amount;
-		return true;
+		self.count += self.production;
+		self.count -= self.consumption;
+
+		if self.count <= 0f64 {
+
+			self.count = 0f64;
+			self.is_depleted = true;
+
+		} else if self.count > self.capacity {
+			
+			self.count = self.capacity;
+			self.is_full = false;
+	
+		} else {
+
+			self.is_depleted = false;
+			self.is_full = false;
+
+		}
 
 	}
 

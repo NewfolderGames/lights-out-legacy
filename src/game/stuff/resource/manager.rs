@@ -26,7 +26,7 @@ impl ResourceManager {
 
 			resource.calculate_capacity(modifier_manager);
 			resource.calculate_production(modifier_manager);
-			resource.produce();
+			resource.tick();
 
 		}
 

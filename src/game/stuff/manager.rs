@@ -9,8 +9,8 @@ pub struct StuffManager {
 	technology_manager: TechnologyManager,
 	unlock_manager: UnlockManager,
 	upgrade_manager: UpgradeManager,
-
-	textAssets: HashMap<&'static str, TextAsset>,
+	feature_manager: FeatureManager,
+	text_assets: HashMap<&'static str, TextAsset>,
 
 }
 
@@ -26,7 +26,8 @@ impl StuffManager {
 			technology_manager: TechnologyManager::new(),
 			unlock_manager: UnlockManager::new(),
 			upgrade_manager: UpgradeManager::new(),
-			textAssets: HashMap::new(),
+			feature_manager: FeatureManager::new(),
+			text_assets: HashMap::new(),
 			
 		}
 
@@ -34,7 +35,7 @@ impl StuffManager {
 
 	pub fn get_text(&self, name: &str) -> Option<&str> {
 
-		self.textAssets
+		self.text_assets
 			.get(name)
 			.map(|t| t.text)
 
@@ -70,6 +71,14 @@ impl StuffManager {
 
 	}
 
+	pub fn is_feature_unlocked(&self, name: &str) -> bool {
+
+		self.feature_manager
+			.get(name)
+			.map_or(false, |f| f.is_unlocked())
+
+	}
+
 	pub fn is_unlocked(&self, name: &str) -> bool {
 
 		self.unlock_manager.is_unlocked(name)
@@ -79,6 +88,12 @@ impl StuffManager {
 	pub fn load_building(&mut self, asset: BuildingAsset) {
 
 		self.building_manager.load(asset);
+
+	}
+
+	pub fn load_feature(&mut self, asset: FeatureAsset) {
+
+		self.feature_manager.load(asset);
 
 	}
 
@@ -102,7 +117,7 @@ impl StuffManager {
 
 	pub fn load_text(&mut self, asset: TextAsset) {
 
-		self.textAssets.insert(asset.name, asset);
+		self.text_assets.insert(asset.name, asset);
 
 	}
 
@@ -164,7 +179,10 @@ impl StuffManager {
 				match *u {
 
 					Unlockable::Building(name) => self.building_manager.unlock(name),
+					Unlockable::Feature(name) => self.feature_manager.unlock(name),
 					Unlockable::Resource(name) => self.resource_manager.unlock(name),
+					Unlockable::Technology(name) => self.technology_manager.unlock(name),
+					Unlockable::Upgrade(name) => self.upgrade_manager.unlock(name),
 					_ => ()
 
 				}

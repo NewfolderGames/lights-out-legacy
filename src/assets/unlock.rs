@@ -6,7 +6,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"unlock_default",
 		vec![
 			Unlockable::Feature("feature_tab_lighthouse"),
-			Unlockable::Feature("feature_tab_lighthouse_examineLightHouse"),
+			Unlockable::Feature("feature_lighthouse_examine"),
 		]
 	));
 
@@ -25,6 +25,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"unlock_quest_gatherDebris",
 		vec![
 			Unlockable::Building("building_researchBench"),
+			Unlockable::Feature("feature_tab_technology"),
 			Unlockable::Resource("resource_science"),
 			Unlockable::Technology("technology_agriculture"),
 		]

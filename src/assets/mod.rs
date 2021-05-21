@@ -1,4 +1,5 @@
 mod building;
+mod feature;
 mod modifier;
 mod resource;
 mod technology;
@@ -7,6 +8,7 @@ mod unlock;
 mod upgrade;
 
 pub use building::load as load_building;
+pub use feature::load as load_feature;
 pub use modifier::load as load_modifier;
 pub use resource::load as load_resource;
 pub use technology::load as load_technology;
