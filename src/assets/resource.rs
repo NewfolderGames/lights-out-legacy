@@ -4,10 +4,10 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Raw material.
 
-	stuff_manager.load_resource(ResourceAsset::new("resource_copper", "rawMateiral", 10f64));
-	stuff_manager.load_resource(ResourceAsset::new("resource_iron", "rawMateiral", 10f64));
-	stuff_manager.load_resource(ResourceAsset::new("resource_stone", "rawMateiral", 10f64));
-	stuff_manager.load_resource(ResourceAsset::new("resource_wood", "rawMateiral", 10f64));
+	stuff_manager.load_resource(ResourceAsset::new("resource_copper", "rawMaterial", 10f64));
+	stuff_manager.load_resource(ResourceAsset::new("resource_iron", "rawMaterial", 10f64));
+	stuff_manager.load_resource(ResourceAsset::new("resource_stone", "rawMaterial", 10f64));
+	stuff_manager.load_resource(ResourceAsset::new("resource_wood", "rawMaterial", 10f64));
 
 	// Mana.
 

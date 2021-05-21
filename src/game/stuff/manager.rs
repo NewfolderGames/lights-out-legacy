@@ -10,6 +10,8 @@ pub struct StuffManager {
 	unlock_manager: UnlockManager,
 	upgrade_manager: UpgradeManager,
 
+	textAssets: HashMap<&'static str, TextAsset>,
+
 }
 
 impl StuffManager {
@@ -24,11 +26,20 @@ impl StuffManager {
 			technology_manager: TechnologyManager::new(),
 			unlock_manager: UnlockManager::new(),
 			upgrade_manager: UpgradeManager::new(),
+			textAssets: HashMap::new(),
 			
 		}
 
 	}
-	
+
+	pub fn get_text(&self, name: &str) -> Option<&str> {
+
+		self.textAssets
+			.get(name)
+			.map(|t| t.text)
+
+	}
+
 	pub fn iter_building(&self) -> Iter<&'static str, Building> {
 
 		self.building_manager.iter()
@@ -67,31 +78,37 @@ impl StuffManager {
 
 	pub fn load_building(&mut self, asset: BuildingAsset) {
 
-		self.building_manager.load(asset)
+		self.building_manager.load(asset);
 
 	}
 
 	pub fn load_modifier(&mut self, asset: ModifierAsset) {
 
-		self.modifier_manager.load(asset)
+		self.modifier_manager.load(asset);
 
 	}
 
 	pub fn load_resource(&mut self, asset: ResourceAsset) {
 
-		self.resource_manager.load(asset)
+		self.resource_manager.load(asset);
 
 	}
 
 	pub fn load_technology(&mut self, asset: TechnologyAsset) {
 
-		self.technology_manager.load(asset)
+		self.technology_manager.load(asset);
+
+	}
+
+	pub fn load_text(&mut self, asset: TextAsset) {
+
+		self.textAssets.insert(asset.name, asset);
 
 	}
 
 	pub fn load_unlock(&mut self, asset: UnlockAsset) {
 
-		self.unlock_manager.load(asset)
+		self.unlock_manager.load(asset);
 
 	}
 
@@ -129,6 +146,10 @@ impl StuffManager {
 			}
 
 		}
+
+		// Calculate resource.
+
+		self.resource_manager.calculate(&self.modifier_manager);
 
 	}
 

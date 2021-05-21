@@ -1,5 +1,6 @@
 use std::collections::{ HashMap, hash_map::Iter };
 use super::{ Resource, ResourceAsset };
+use super::super::ModifierManager;
 
 pub struct ResourceManager {
 
@@ -17,6 +18,18 @@ impl ResourceManager {
 
 		}
 		
+	}
+
+	pub fn calculate(&mut self, modifier_manager: &ModifierManager) {
+
+		for (_, resource) in self.resources.iter_mut() {
+
+			resource.calculate_capacity(modifier_manager);
+			resource.calculate_production(modifier_manager);
+			resource.produce();
+
+		}
+
 	}
 
 	pub fn get(&self, name: &str) -> Option<&Resource> {

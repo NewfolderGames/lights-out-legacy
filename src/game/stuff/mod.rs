@@ -5,6 +5,7 @@ mod resource;
 mod technology;
 mod unlock;
 mod upgrade;
+mod text;
 
 pub use building::*;
 pub use manager::*;
@@ -13,3 +14,4 @@ pub use resource::*;
 pub use technology::*;
 pub use unlock::*;
 pub use upgrade::*;
+pub use text::*;

@@ -95,6 +95,15 @@ impl Resource {
 
 	}
 
+	pub fn produce(&mut self) {
+
+		self.count += self.production;
+
+		if self.count < 0f64 { self.count = 0f64 }
+		if self.count > self.capacity { self.count = self.capacity }
+
+	}
+
 	pub fn set_count(&mut self, amount: f64) {
 
 		self.count = amount;

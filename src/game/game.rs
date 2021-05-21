@@ -43,11 +43,16 @@ impl Game {
 		load_building(&mut self.stuff_manager);
 		load_modifier(&mut self.stuff_manager);
 		load_resource(&mut self.stuff_manager);
+		load_text(&mut self.stuff_manager);
 		load_technology(&mut self.stuff_manager);
 		load_unlock(&mut self.stuff_manager);
 		load_upgrade(&mut self.stuff_manager);
 
-		// Done
+		// Rendering.
+
+		self.rendering_manager.init(&self.stuff_manager);
+
+		// Done.
 
 		self.is_loaded = true;
 
@@ -78,7 +83,7 @@ impl Game {
 		if !self.is_playing { return }
 
 		self.stuff_manager.tick();
-		self.rendering_manager.tick();
+		self.rendering_manager.tick(&self.stuff_manager);
 
 	}
 
