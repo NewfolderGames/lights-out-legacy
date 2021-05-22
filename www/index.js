@@ -1,11 +1,9 @@
 import * as wasm from "lights_out";
 
-let game;
-let gameInterval;
+window.game = new wasm.Game();
+window.game.load();
+window.game.load_save();
+window.game.resume();
+window.game.tick();
 
-game = new wasm.Game();
-game.load_assets();
-game.load_save();
-game.resume();
-
-gameInterval = setInterval(() => game.tick(), 200);
+window.gameInterval = setInterval(() => game.tick(), 200);

@@ -34,7 +34,7 @@ impl Game {
 	}
 
 	#[wasm_bindgen]
-	pub fn load_assets(&mut self) {
+	pub fn load(&mut self) {
 
 		if self.is_playing || self.is_loaded { return }
 
@@ -79,12 +79,19 @@ impl Game {
 	}
 
 	#[wasm_bindgen]
+	pub fn change_tab(&mut self, name: &str) {
+
+		self.rendering_manager.change_tab(name, &self.stuff_manager)
+
+	}
+
+	#[wasm_bindgen]
 	pub fn tick(&mut self) {
 
 		if !self.is_playing { return }
 
 		self.stuff_manager.tick();
-		self.rendering_manager.tick(&self.stuff_manager);
+		self.rendering_manager.render(&self.stuff_manager);
 
 	}
 

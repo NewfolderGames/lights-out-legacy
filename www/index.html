@@ -4,6 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./bootstrap.js"></script>
+	<link rel="stylesheet" href="./index.css">
 	<title>Lights out</title>
 </head>
 <body>
@@ -11,13 +12,10 @@
 	<div id="loading">
 		
 	</div>
+	<header id="header">
+
+	</header>
 	<main id="game-container">
-		<nav id="tab-list">
-			<button class="tab-button">Lighthouse</button>
-			<button class="tab-button">Technology</button>
-			<button class="tab-button">Engineering</button>
-			<button class="tab-button">Society</button>
-		</nav>
 		<aside id="resource-container">
 			<!--
 				<div class="resource-category">
@@ -34,11 +32,22 @@
 			-->
 		</aside>
 		<article id="tab-wrapper">
-			
+			<div id="tab-lighthouse">
+				<div class="lighthouse-image">
+
+				</div>
+				<div>
+					<button id="tab-lighthouse-examine">Examine the tower</button>
+					<button id="tab-lighthouse-gather">Gather scraps</button>
+					<button id="tab-lighthouse-lightsOut">Lights out</button>
+				</div>
+			</div>
 		</article>
 		<aside id="log-container">
-
+			
 		</aside>
 	</main>
+	<nav id="tab-list">
+	</nav>
 </body>
 </html>

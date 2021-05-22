@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use web_sys::{ Document, Element, Window };
-use crate::game::stuff::{ StuffManager};
+use crate::game::StuffManager;
 
 struct ResourceElement {
 
@@ -93,6 +93,7 @@ impl ResourceRenderer {
 
 			};
 
+			resource_element.root_element.set_class_name("resource");
 			resource_element.title_element.set_class_name("resource-title");
 			resource_element.count_element.set_class_name("resource-count");
 			resource_element.capacity_element.set_class_name("resource-capacity");
@@ -120,9 +121,11 @@ impl ResourceRenderer {
 
 			if !resource.is_unlocked() {
 
-				resource_element.root_element.set_class_name("resource-locked");
+				resource_element.root_element.set_class_name("resource locked");
 
 			} else {
+
+				resource_element.root_element.set_class_name("resource unlocked");
 
 				resource_element.count_element.set_inner_html(&resource.get_count().to_string());
 				resource_element.capacity_element.set_inner_html(&resource.get_capacity().to_string());

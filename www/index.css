@@ -1,3 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
+
 body {
-	background-color: #fff;
+	background-color: #000;
+	color: #999999;
+	font-family: 'Nanum Gothic Coding', monospace;
+	font-size: 14px;
+	margin: 0px;
+}
+
+#header {
+	height: 32px;
+}
+
+#game-container {
+	display: flex;
+	height: calc(100vh - 64px);
+}
+
+#resource-container {
+	box-sizing: border-box;
+	flex-basis: 300px;
+	overflow-y: auto;
+	padding: 16px;
+}
+
+#tab-wrapper {
+	box-sizing: border-box;
+	flex: 1;
+	padding: 16px;
+}
+
+#log-container {
+	box-sizing: border-box;
+	flex-basis: 300px;
+	padding: 16px;
+}
+
+#tab-list {
+	height: 32px;
+	text-align: center;
+}
+#tab-list .tab-button {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	line-height: 1.5;
+}
+#tab-list .tab-button:hover {
+	text-decoration: underline;
+}
+#tab-list .tab-button.active {
+	color: #ffffff;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#tab-list .tab-button.locked {
+	display: none
 }
