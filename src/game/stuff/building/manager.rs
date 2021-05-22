@@ -4,9 +4,9 @@ use super::super::ModifierManager;
 
 pub struct BuildingManager {
 
-	buildings: HashMap<&'static str, Building>,
+	buildings: HashMap<String, Building>,
 
-	calculated_modifiers: HashMap<&'static str, f64>,
+	calculated_modifiers: HashMap<String, f64>,
 
 	is_dirty: bool,
 
@@ -50,7 +50,7 @@ impl BuildingManager {
 
 				} else {
 
-					self.calculated_modifiers.insert(*name, *value);
+					self.calculated_modifiers.insert(String::from(name), *value);
 
 				}
 
@@ -72,7 +72,7 @@ impl BuildingManager {
 
 	}
 
-	pub fn get_modifiers(&self) -> &HashMap<&'static str, f64> {
+	pub fn get_modifiers(&self) -> &HashMap<String, f64> {
 
 		&self.calculated_modifiers
 
@@ -90,7 +90,7 @@ impl BuildingManager {
 
 	}
 
-	pub fn iter(&self) -> Iter<&'static str, Building> {
+	pub fn iter(&self) -> Iter<String, Building> {
 
 		self.buildings.iter()
 
@@ -98,7 +98,7 @@ impl BuildingManager {
 
 	pub fn load(&mut self, asset: BuildingAsset) {
 
-		let name = asset.name;
+		let name = String::from(asset.name);
 		let building = Building::new(asset);
 
 		self.buildings.insert(name, building);

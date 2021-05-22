@@ -10,7 +10,7 @@ pub struct StuffManager {
 	unlock_manager: UnlockManager,
 	upgrade_manager: UpgradeManager,
 	feature_manager: FeatureManager,
-	text_assets: HashMap<&'static str, TextAsset>,
+	text_assets: HashMap<String, TextAsset>,
 
 }
 
@@ -41,31 +41,31 @@ impl StuffManager {
 
 	}
 
-	pub fn iter_building(&self) -> Iter<&'static str, Building> {
+	pub fn iter_building(&self) -> Iter<String, Building> {
 
 		self.building_manager.iter()
 
 	}
 
-	pub fn iter_modifier(&self) -> Iter<&'static str, Modifier> {
+	pub fn iter_modifier(&self) -> Iter<String, Modifier> {
 
 		self.modifier_manager.iter()
 
 	}
 
-	pub fn iter_resource(&self) -> Iter<&'static str, Resource> {
+	pub fn iter_resource(&self) -> Iter<String, Resource> {
 
 		self.resource_manager.iter()
 
 	}
 
-	pub fn iter_technology(&self) -> Iter<&'static str, Technology> {
+	pub fn iter_technology(&self) -> Iter<String, Technology> {
 
 		self.technology_manager.iter()
 
 	}
 
-	pub fn iter_unlock(&self) -> Iter<&'static str, Unlock> {
+	pub fn iter_unlock(&self) -> Iter<String, Unlock> {
 
 		self.unlock_manager.iter()
 
@@ -117,7 +117,7 @@ impl StuffManager {
 
 	pub fn load_text(&mut self, asset: TextAsset) {
 
-		self.text_assets.insert(asset.name, asset);
+		self.text_assets.insert(String::from(asset.name), asset);
 
 	}
 
@@ -137,14 +137,14 @@ impl StuffManager {
 
 		// Calculate modifiers.
 
-		let mut modifiers = HashMap::new();
+		let mut modifiers: HashMap<String, f64> = HashMap::new();
 
 		self.upgrade_manager.calculate();
 		self.building_manager.calculate(&self.modifier_manager);
 
 		for (name, value) in self.upgrade_manager.get_modifiers().iter() {
 
-			modifiers.insert(name, *value);
+			modifiers.insert(String::from(name), *value);
 
 		}
 
@@ -156,7 +156,7 @@ impl StuffManager {
 
 			} else {
 
-				modifiers.insert(name, *value);
+				modifiers.insert(String::from(name), *value);
 
 			}
 

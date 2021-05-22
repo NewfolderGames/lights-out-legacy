@@ -3,9 +3,9 @@ use super::{ Upgrade, UpgradeAsset };
 
 pub struct UpgradeManager {
 
-	upgrades: HashMap<&'static str, Upgrade>,
+	upgrades: HashMap<String, Upgrade>,
 
-	calculated_modifiers: HashMap<&'static str, f64>,
+	calculated_modifiers: HashMap<String, f64>,
 
 }
 
@@ -32,13 +32,13 @@ impl UpgradeManager {
 
 			for (name, value) in upgrade.get_asset().price.iter() {
 
-				if let Some(modifier) = self.calculated_modifiers.get_mut(name) {
+				if let Some(modifier) = self.calculated_modifiers.get_mut(*name) {
 
 					*modifier += value;
 
 				} else {
 
-					self.calculated_modifiers.insert(*name, *value);
+					self.calculated_modifiers.insert(String::from(*name), *value);
 
 				}
 
@@ -54,7 +54,7 @@ impl UpgradeManager {
 
 	}
 
-	pub fn get_modifiers(&self) -> &HashMap<&'static str, f64> {
+	pub fn get_modifiers(&self) -> &HashMap<String, f64> {
 
 		&self.calculated_modifiers
 
@@ -68,14 +68,14 @@ impl UpgradeManager {
 
 	pub fn load(&mut self, asset: UpgradeAsset) {
 
-		let name = asset.name;
+		let name = String::from(asset.name);
 		let techonology = Upgrade::new(asset);
 
 		self.upgrades.insert(name, techonology);
 
 	}
 
-	pub fn iter(&self) -> Iter<&'static str, Upgrade> {
+	pub fn iter(&self) -> Iter<String, Upgrade> {
 
 		self.upgrades.iter()
 

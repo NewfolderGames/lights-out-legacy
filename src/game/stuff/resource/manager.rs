@@ -4,7 +4,7 @@ use super::super::ModifierManager;
 
 pub struct ResourceManager {
 
-	resources: HashMap<&'static str, Resource>,
+	resources: HashMap<String, Resource>,
 
 }
 
@@ -46,14 +46,14 @@ impl ResourceManager {
 
 	pub fn load(&mut self, asset: ResourceAsset) {
 
-		let name = asset.name;
+		let name = String::from(asset.name);
 		let resource = Resource::new(asset);
 
 		self.resources.insert(name, resource);
 
 	}
 
-	pub fn iter(&self) -> Iter<&'static str, Resource> {
+	pub fn iter(&self) -> Iter<String, Resource> {
 
 		self.resources.iter()
 

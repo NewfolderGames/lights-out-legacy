@@ -3,7 +3,7 @@ use super::{ Feature, FeatureAsset };
 
 pub struct FeatureManager {
 
-	features: HashMap<&'static str, Feature>,
+	features: HashMap<String, Feature>,
 
 }
 
@@ -33,14 +33,14 @@ impl FeatureManager {
 
 	pub fn load(&mut self, asset: FeatureAsset) {
 
-		let name = asset.name;
+		let name = String::from(asset.name);
 		let techonology = Feature::new(asset);
 
 		self.features.insert(name, techonology);
 
 	}
 
-	pub fn iter(&self) -> Iter<&'static str, Feature> {
+	pub fn iter(&self) -> Iter<String, Feature> {
 
 		self.features.iter()
 

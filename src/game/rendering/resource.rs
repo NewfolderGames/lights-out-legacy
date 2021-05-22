@@ -24,9 +24,9 @@ struct ResourceCategoryElement {
 
 pub struct ResourceRenderer {
 
-	resource_category_elements: HashMap<&'static str, ResourceCategoryElement>,
+	resource_category_elements: HashMap<String, ResourceCategoryElement>,
 	resource_container_element: Element,
-	resource_elements: HashMap<&'static str, ResourceElement>,
+	resource_elements: HashMap<String, ResourceElement>,
 
 }
 
@@ -56,7 +56,7 @@ impl ResourceRenderer {
 
 			// Create category.
 
-			if !self.resource_category_elements.contains_key(&resource.get_asset().category) {
+			if !self.resource_category_elements.contains_key(resource.get_asset().category) {
 
 				let category_element = ResourceCategoryElement {
 
@@ -76,13 +76,13 @@ impl ResourceRenderer {
 
 				category_element.title_element.set_inner_html(stuff_manager.get_text(&["resource_category_", resource.get_asset().category].join("")).unwrap_or("RESOURCE_CATEGORY"));
 
-				self.resource_category_elements.insert(resource.get_asset().category, category_element);
+				self.resource_category_elements.insert(String::from(resource.get_asset().category), category_element);
 
 			}
 
 			// Get category.
 			
-			let category_element = self.resource_category_elements.get(&resource.get_asset().category).unwrap();
+			let category_element = self.resource_category_elements.get(resource.get_asset().category).unwrap();
 			let resource_element = ResourceElement {
 
 				root_element: document.create_element("li").unwrap(),
@@ -107,7 +107,7 @@ impl ResourceRenderer {
 
 			resource_element.title_element.set_inner_html(stuff_manager.get_text(&[resource.get_asset().name, "_title"].join("")).unwrap_or("RESOURCE_TITLE"));
 
-			self.resource_elements.insert(*name, resource_element);
+			self.resource_elements.insert(String::from(name), resource_element);
 
 		}
 
@@ -117,7 +117,7 @@ impl ResourceRenderer {
 
 		for (name, resource) in stuff_manager.iter_resource() {
 
-			let resource_element = self.resource_elements.get(*name).unwrap();
+			let resource_element = self.resource_elements.get(name).unwrap();
 
 			if !resource.is_unlocked() {
 
