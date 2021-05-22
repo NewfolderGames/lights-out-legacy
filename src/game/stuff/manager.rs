@@ -33,6 +33,12 @@ impl StuffManager {
 
 	}
 
+	pub fn add_resource(&mut self, name: &str, amount: f64) {
+
+		self.resource_manager.add(name, amount);
+
+	}
+
 	pub fn get_text(&self, name: &str) -> Option<&str> {
 
 		self.text_assets

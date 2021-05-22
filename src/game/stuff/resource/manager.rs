@@ -20,12 +20,21 @@ impl ResourceManager {
 		
 	}
 
+	pub fn add(&mut self, name: &str, amount: f64) {
+
+		self.resources
+			.get_mut(name)
+			.map(|r| r.add(amount));
+
+	}
+
 	pub fn calculate(&mut self, modifier_manager: &ModifierManager) {
 
 		for (_, resource) in self.resources.iter_mut() {
 
 			resource.calculate_capacity(modifier_manager);
 			resource.calculate_production(modifier_manager);
+			resource.calculate_consumption(modifier_manager);
 			resource.tick();
 
 		}

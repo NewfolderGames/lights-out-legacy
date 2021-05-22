@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use web_sys::{ Document, Element, Window };
 use crate::game::StuffManager;
+use crate::utils::format_number_scientific;
 
 struct ResourceElement {
 
@@ -66,8 +67,8 @@ impl ResourceRenderer {
 
 				};
 
+				category_element.root_element.set_class_name("resource-category locked");
 				category_element.list_element.set_class_name("resource-category-list");
-				category_element.root_element.set_class_name("resource-category");
 				category_element.title_element.set_class_name("resource-category-title");
 
 				self.resource_container_element.append_with_node_1(&category_element.root_element).unwrap();
@@ -127,9 +128,13 @@ impl ResourceRenderer {
 
 				resource_element.root_element.set_class_name("resource unlocked");
 
-				resource_element.count_element.set_inner_html(&resource.get_count().to_string());
-				resource_element.capacity_element.set_inner_html(&resource.get_capacity().to_string());
-				resource_element.production_element.set_inner_html(&resource.get_production().to_string());
+				self.resource_category_elements
+					.get(resource.get_asset().category)
+					.map(|c| c.root_element.set_class_name("resource-category unlocked"));
+
+				resource_element.count_element.set_inner_html(&format_number_scientific(resource.get_count()));
+				resource_element.capacity_element.set_inner_html(&format_number_scientific(resource.get_capacity()));
+				resource_element.production_element.set_inner_html(&format_number_scientific(resource.get_production() - resource.get_consumption()));
 
 			}
 

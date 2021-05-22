@@ -105,9 +105,18 @@ impl Game {
 impl Game {
 
 	#[wasm_bindgen]
+	pub fn debug_add_resource(&mut self, name: &str, amount: f64) {
+
+		self.stuff_manager.add_resource(name, amount);
+		self.rendering_manager.render(&self.stuff_manager);
+
+	}
+
+	#[wasm_bindgen]
 	pub fn debug_unlock(&mut self, name: &str) {
 
-		
+		self.stuff_manager.unlock(name);
+		self.rendering_manager.render(&self.stuff_manager);
 
 	}
 

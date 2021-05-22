@@ -1,2 +1,3 @@
-mod game;
 mod assets;
+mod game;
+mod utils;

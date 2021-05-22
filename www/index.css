@@ -8,14 +8,20 @@ body {
 	margin: 0px;
 }
 
+/* Header */
+
 #header {
 	height: 32px;
 }
+
+/* Game container */
 
 #game-container {
 	display: flex;
 	height: calc(100vh - 64px);
 }
+
+/* Game container - Resource container */
 
 #resource-container {
 	box-sizing: border-box;
@@ -24,11 +30,49 @@ body {
 	padding: 16px;
 }
 
+#resource-container .resource-category.locked {
+	display: none;
+}
+
+#resource-container .resource-category-title {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#resource-container .resource-category-list {
+	list-style: none;
+	padding: 0;
+}
+
+#resource-container .resource {
+	display: flex;
+}
+#resource-container .resource.locked {
+	display: none;
+}
+
+#resource-container .resource-title {
+	flex-basis: 100px;
+}
+
+#resource-container .resource-count {
+	flex-basis: 60px;
+}
+
+#resource-container .resource-capacity {
+	color: #444444;
+	flex-basis: 60px;
+}
+
+/* Game container - Tabs */
+
 #tab-wrapper {
 	box-sizing: border-box;
 	flex: 1;
 	padding: 16px;
 }
+
+/* Game container - Log container */
 
 #log-container {
 	box-sizing: border-box;
@@ -36,16 +80,20 @@ body {
 	padding: 16px;
 }
 
+/* Tab list */
+
 #tab-list {
 	height: 32px;
 	text-align: center;
 }
+
 #tab-list .tab-button {
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
 	line-height: 1.5;
 }
+
 #tab-list .tab-button:hover {
 	text-decoration: underline;
 }
