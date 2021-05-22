@@ -34,6 +34,13 @@ impl Game {
 	}
 
 	#[wasm_bindgen]
+	pub fn change_tab(&mut self, name: &str) {
+
+		self.rendering_manager.change_tab(name, &self.stuff_manager);
+
+	}
+
+	#[wasm_bindgen]
 	pub fn load(&mut self) {
 
 		if self.is_playing || self.is_loaded { return }
@@ -77,13 +84,6 @@ impl Game {
 	pub fn resume(&mut self) {
 
 		self.is_playing = true;
-
-	}
-
-	#[wasm_bindgen]
-	pub fn change_tab(&mut self, name: &str) {
-
-		self.rendering_manager.change_tab(name, &self.stuff_manager)
 
 	}
 

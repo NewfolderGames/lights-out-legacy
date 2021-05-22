@@ -53,8 +53,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"unlock_technology_woodworking",
 		vec![
 			Unlockable::Technology("technology_carpentry"),
-			Unlockable::Upgrade("unlock_tool_pickaxe_wood"),
-			Unlockable::Upgrade("unlock_tool_axe_wood"),
+			Unlockable::Upgrade("upgrade_tool_pickaxe_wood"),
+			Unlockable::Upgrade("upgrade_tool_axe_wood"),
 		]
 	));
 
