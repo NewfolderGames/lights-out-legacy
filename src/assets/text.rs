@@ -2,6 +2,8 @@ use crate::game::stuff::{ StuffManager, TextAsset };
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
+	// Resource.
+
 	stuff_manager.load_text(TextAsset::new("resource_category_rawMaterial", "Raw Material"));
 	stuff_manager.load_text(TextAsset::new("resource_category_mana", "Mana"));
 
@@ -12,5 +14,12 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("resource_science_title", "Science"));
 	stuff_manager.load_text(TextAsset::new("resource_stone_title", "Stone"));
 	stuff_manager.load_text(TextAsset::new("resource_wood_title", "Wood"));
+
+	// UI.
+
+	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse", "Lighthouse"));
+	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse_button_examine", "Examine the lighthouse"));
+	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse_button_gather", "Gather scraps"));
+	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse_button_lightsout", "Lights out"));
 
 }

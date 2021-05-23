@@ -8,6 +8,10 @@ body {
 	margin: 0px;
 }
 
+button {
+	font-family: inherit;
+}
+
 /* Header */
 
 #header {
@@ -84,13 +88,15 @@ body {
 	position: relative;
 }
 
-#tab-wrapper #tab-lighthouse-buttons {
+/* Game container - Tabs - Lighthouse */
+
+#tab-lighthouse #tab-lighthouse-buttons {
 	bottom: 64px;
 	position: absolute;
 	width: 100%;
 }
 
-#tab-wrapper #tab-lighthouse-buttons button {
+#tab-lighthouse #tab-lighthouse-buttons .button {
 	color: #999999;
 	background: transparent;
 	border: none;
@@ -100,11 +106,14 @@ body {
 	margin: 8px auto;
 	width: 256px;
 }
-#tab-wrapper #tab-lighthouse-buttons button:hover {
+#tab-lighthouse #tab-lighthouse-buttons .button:hover {
 	background: rgba(255, 255, 255, 0.1);
 	color: #ffffff;
 	cursor: pointer;
 	text-decoration: underline;
+}
+#tab-lighthouse #tab-lighthouse-buttons .button.locked {
+	display: none;
 }
 
 /* Game container - Log container */
@@ -127,21 +136,21 @@ body {
 	text-align: center;
 }
 
-#tab-list .tab-button {
+#tab-list .button {
 	cursor: pointer;
 	display: inline-block;
 	position: relative;
 	line-height: 1.5;
 }
 
-#tab-list .tab-button:hover {
+#tab-list .button:hover {
 	text-decoration: underline;
 }
-#tab-list .tab-button.active {
+#tab-list .button.active {
 	color: #ffffff;
 	font-weight: bold;
 	text-decoration: underline;
 }
-#tab-list .tab-button.locked {
+#tab-list .button.locked {
 	display: none
 }

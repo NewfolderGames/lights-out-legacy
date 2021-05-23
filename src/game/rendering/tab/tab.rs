@@ -33,7 +33,7 @@ impl TabRenderer {
 
 	pub fn init(&mut self, stuff_manager: &StuffManager) {
 
-		let mut lighthouse = Box::new(LighthouseTab::new());
+		let mut lighthouse = Box::new(LighthouseTab::new(stuff_manager));
 		lighthouse.set_selected(true);
 
 		self.tabs.insert("Lighthouse", lighthouse);

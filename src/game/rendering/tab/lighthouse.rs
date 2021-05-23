@@ -5,7 +5,11 @@ use super::Tab;
 pub struct LighthouseTab {
 
 	tab_element: Element,
-	button_element: Element,
+	tab_button_element: Element,
+
+	button_examine_element: Element,
+	button_gather_element: Element,
+	button_ligtsout_element: Element,
 
 	is_selected: bool,
 
@@ -13,30 +17,54 @@ pub struct LighthouseTab {
 
 impl LighthouseTab {
 
-	pub fn new() -> Self {
+	pub fn new(stuff_manager: &StuffManager) -> Self {
 
 		let window: Window = web_sys::window().expect("Window not found.");
 		let document: Document = window.document().expect("Document not found.");
 		let tab_list_element = document.get_element_by_id("tab-list").expect("Element id 'tab-list' not found.");
 
-		// Tab list button.
-
-		let button_element = document.create_element("div").unwrap();
-
-		button_element.set_attribute("onclick", "window.game.change_tab('Lighthouse')").unwrap();
-		button_element.set_inner_html("Lighthouse");
-		button_element.set_class_name("tab-button");
-
-		tab_list_element.append_with_node_1(&button_element).unwrap();
-
 		// Tab.
 
 		let tab_element = document.get_element_by_id("tab-lighthouse").unwrap();
+		let tab_button_element = document.create_element("div").unwrap();
+
+		tab_button_element.set_attribute("onclick", "window.game.change_tab('Lighthouse')").unwrap();
+		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse").unwrap_or("TAB_LIGHTHOUSE"));
+		tab_button_element.set_class_name("button");
+
+		tab_list_element.append_with_node_1(&tab_button_element).unwrap();
+
+		// Buttons.
+
+		let buttons_element = document.get_element_by_id("tab-lighthouse-buttons").expect("Element id 'tab-lighthouse-buttons' not found.");
+
+		let button_examine_element = document.create_element("button").unwrap();
+		let button_gather_element = document.create_element("button").unwrap();
+		let button_ligtsout_element = document.create_element("button").unwrap();
+
+		button_examine_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_examine").unwrap_or("TAB_LIGHTHOUSE_BUTTON_EXAMINE"));
+		button_gather_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_gather").unwrap_or("TAB_LIGHTHOUSE_BUTTON_GATHER"));
+		button_ligtsout_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_lightsout").unwrap_or("TAB_LIGHTHOUSE_BUTTON_LIGHTSOUT"));
+
+		button_examine_element.set_class_name("button");
+		button_gather_element.set_class_name("button");
+		button_ligtsout_element.set_class_name("button");
+
+		button_examine_element.set_attribute("onclick", "window.game.lighthouse_examine()").unwrap();
+		button_gather_element.set_attribute("onclick", "window.game.lighthouse_gather()").unwrap();
+		button_ligtsout_element.set_attribute("onclick", "window.game.lighthouse_lightsout()").unwrap();
+
+		buttons_element.append_with_node_1(&button_examine_element).unwrap();
+		buttons_element.append_with_node_1(&button_gather_element).unwrap();
+		buttons_element.append_with_node_1(&button_ligtsout_element).unwrap();
 
 		Self {
 
 			tab_element,
-			button_element,
+			tab_button_element,
+			button_examine_element,
+			button_gather_element,
+			button_ligtsout_element,
 			is_selected: false,
 
 		}
@@ -57,23 +85,22 @@ impl Tab for LighthouseTab {
 
 		if !stuff_manager.is_feature_unlocked("feature_tab_lighthouse") {
 
-			self.tab_element.set_class_name("tab-button locked");
-			self.button_element.set_class_name("tab-button locked");
+			self.tab_element.set_class_name("tab locked");
+			self.tab_button_element.set_class_name("button locked");
 			return;
 
 		}
 
-		if !self.is_selected {
+		// Tab.
 
-			self.tab_element.set_class_name("tab-button inactive");
-			self.button_element.set_class_name("tab-button inactive");
+		self.tab_element.set_class_name(if self.is_selected { "tab active" } else { "tab inactive" });
+		self.tab_button_element.set_class_name(if self.is_selected { "button active" } else { "button inactive" });
 
-		} else {
+		// Buttons.
 
-			self.tab_element.set_class_name("tab-button active");
-			self.button_element.set_class_name("tab-button active");
-
-		}
+		self.button_examine_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_examine") { "button" } else { "button locked" });
+		self.button_gather_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_gather") { "button" } else { "button locked" });
+		self.button_ligtsout_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_lightsout") { "button" } else { "button locked" });
 
 	}
 

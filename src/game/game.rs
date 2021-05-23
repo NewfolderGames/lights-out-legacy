@@ -33,12 +33,12 @@ impl Game {
 
 	}
 
-	#[wasm_bindgen]
-	pub fn change_tab(&mut self, name: &str) {
+}
 
-		self.rendering_manager.change_tab(name, &self.stuff_manager);
+// Game state.
 
-	}
+#[wasm_bindgen]
+impl Game {
 
 	#[wasm_bindgen]
 	pub fn load(&mut self) {
@@ -70,6 +70,7 @@ impl Game {
 	pub fn load_save(&mut self) {
 
 		self.stuff_manager.set_unlock("unlock_default", true);
+		self.rendering_manager.render(&self.stuff_manager);
 
 	}
 
@@ -94,6 +95,42 @@ impl Game {
 
 		self.stuff_manager.tick();
 		self.rendering_manager.render(&self.stuff_manager);
+
+	}
+
+}
+
+// UI.
+
+#[wasm_bindgen] 
+impl Game {
+
+	#[wasm_bindgen]
+	pub fn change_tab(&mut self, name: &str) {
+
+		self.rendering_manager.change_tab(name, &self.stuff_manager);
+
+	}
+
+}
+
+// Special.
+
+#[wasm_bindgen] 
+impl Game {
+
+	#[wasm_bindgen]
+	pub fn lighthouse_examine(&mut self) {
+
+	}
+
+	pub fn lighthouse_gather(&mut self) {
+
+
+	}
+
+	pub fn lighthouse_lightsout(&mut self) {
+
 
 	}
 

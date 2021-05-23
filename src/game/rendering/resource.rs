@@ -126,11 +126,11 @@ impl ResourceRenderer {
 
 			} else {
 
-				resource_element.root_element.set_class_name("resource unlocked");
+				resource_element.root_element.set_class_name("resource");
 
 				self.resource_category_elements
 					.get(resource.get_asset().category)
-					.map(|c| c.root_element.set_class_name("resource-category unlocked"));
+					.map(|c| c.root_element.set_class_name("resource-category"));
 
 				resource_element.count_element.set_inner_html(&format_number_scientific(resource.get_count()));
 				resource_element.capacity_element.set_inner_html(&format_number_scientific(resource.get_capacity()));
