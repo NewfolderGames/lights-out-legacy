@@ -42,9 +42,9 @@ impl Technology {
 
 	}
 
-	pub fn unlock(&mut self) {
+	pub fn set_unlock(&mut self, unlock: bool) {
 
-		self.is_unlocked = true;
+		self.is_unlocked = unlock;
 
 	}
 

@@ -69,7 +69,7 @@ impl Game {
 	#[wasm_bindgen]
 	pub fn load_save(&mut self) {
 
-		self.stuff_manager.unlock("unlock_default");
+		self.stuff_manager.set_unlock("unlock_default", true);
 
 	}
 
@@ -115,7 +115,7 @@ impl Game {
 	#[wasm_bindgen]
 	pub fn debug_unlock(&mut self, name: &str) {
 
-		self.stuff_manager.unlock(name);
+		self.stuff_manager.set_unlock(name, true);
 		self.rendering_manager.render(&self.stuff_manager);
 
 	}

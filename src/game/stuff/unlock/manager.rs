@@ -54,11 +54,11 @@ impl UnlockManager {
 
 	}
 
-	pub fn unlock(&mut self, name: &str) {
+	pub fn set_unlock(&mut self, name: &str, unlock: bool) {
 
 		self.unlocks
 			.get_mut(name)
-			.map(|u| u.unlock());
+			.map(|u| u.set_unlock(unlock));
 
 	}
 

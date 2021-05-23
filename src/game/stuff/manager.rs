@@ -174,21 +174,21 @@ impl StuffManager {
 
 	}
 
-	pub fn unlock(&mut self, name: &str) {
+	pub fn set_unlock(&mut self, name: &str, unlock_state: bool) {
 
 		if let Some(unlock) = self.unlock_manager.get_mut(name) {
 
-			unlock.unlock();
+			unlock.set_unlock(unlock_state);
 			
 			for u in unlock.get_asset().unlocks.iter() {
 
 				match *u {
 
-					Unlockable::Building(name) => self.building_manager.unlock(name),
-					Unlockable::Feature(name) => self.feature_manager.unlock(name),
-					Unlockable::Resource(name) => self.resource_manager.unlock(name),
-					Unlockable::Technology(name) => self.technology_manager.unlock(name),
-					Unlockable::Upgrade(name) => self.upgrade_manager.unlock(name),
+					Unlockable::Building(name) => self.building_manager.set_unlock(name, unlock_state),
+					Unlockable::Feature(name) => self.feature_manager.set_unlock(name, unlock_state),
+					Unlockable::Resource(name) => self.resource_manager.set_unlock(name, unlock_state),
+					Unlockable::Technology(name) => self.technology_manager.set_unlock(name, unlock_state),
+					Unlockable::Upgrade(name) => self.upgrade_manager.set_unlock(name, unlock_state),
 					_ => ()
 
 				}
