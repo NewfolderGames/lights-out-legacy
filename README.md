@@ -3,6 +3,8 @@
 
 ### Build
 
+`wasm-pack` and `npm` must be installed before building.
+
 ```
 $ ./build.sh
 ```

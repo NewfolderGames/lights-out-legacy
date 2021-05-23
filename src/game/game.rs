@@ -145,6 +145,7 @@ impl Game {
 	pub fn debug_add_resource(&mut self, name: &str, amount: f64) {
 
 		self.stuff_manager.add_resource(name, amount);
+		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
 
 	}
@@ -153,6 +154,7 @@ impl Game {
 	pub fn debug_unlock(&mut self, name: &str) {
 
 		self.stuff_manager.set_unlock(name, true);
+		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
 
 	}

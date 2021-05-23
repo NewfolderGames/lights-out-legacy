@@ -6,6 +6,7 @@ pub struct StuffManager {
 	building_manager: BuildingManager,
 	modifier_manager: ModifierManager,
 	resource_manager: ResourceManager,
+	stat_manager: StatManager,
 	technology_manager: TechnologyManager,
 	text_manager: TextManager,
 	unlock_manager: UnlockManager,
@@ -23,6 +24,7 @@ impl StuffManager {
 			building_manager: BuildingManager::new(),
 			modifier_manager: ModifierManager::new(),
 			resource_manager: ResourceManager::new(),
+			stat_manager: StatManager::new(),
 			technology_manager: TechnologyManager::new(),
 			text_manager: TextManager::new(),
 			unlock_manager: UnlockManager::new(),
@@ -36,6 +38,18 @@ impl StuffManager {
 	pub fn add_resource(&mut self, name: &str, amount: f64) {
 
 		self.resource_manager.add(name, amount);
+
+	}
+
+	pub fn add_stat(&mut self, name: &str, amount: f64) {
+
+		self.stat_manager.add(name, amount);
+
+	}
+
+	pub fn get_stat(&self, name: &str) -> Option<&Stat> {
+
+		self.stat_manager.get(name)
 
 	}
 
@@ -60,6 +74,12 @@ impl StuffManager {
 	pub fn iter_resource(&self) -> Iter<String, Resource> {
 
 		self.resource_manager.iter()
+
+	}
+
+	pub fn iter_stat(&self) -> Iter<String, Stat> {
+
+		self.stat_manager.iter()
 
 	}
 
@@ -104,6 +124,12 @@ impl StuffManager {
 	pub fn load_modifier(&mut self, asset: ModifierAsset) {
 
 		self.modifier_manager.load(asset);
+
+	}
+
+	pub fn load_stat(&mut self, asset: StatAsset) {
+
+		self.stat_manager.load(asset);
 
 	}
 
@@ -169,6 +195,11 @@ impl StuffManager {
 		// Calculate resource.
 
 		self.resource_manager.calculate(&self.modifier_manager);
+
+		// Stat.
+
+		self.add_stat("stat_ticks_current", 1f64);
+		self.add_stat("stat_ticks_total", 1f64);
 
 	}
 
