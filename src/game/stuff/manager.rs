@@ -7,10 +7,10 @@ pub struct StuffManager {
 	modifier_manager: ModifierManager,
 	resource_manager: ResourceManager,
 	technology_manager: TechnologyManager,
+	text_manager: TextManager,
 	unlock_manager: UnlockManager,
 	upgrade_manager: UpgradeManager,
 	feature_manager: FeatureManager,
-	text_assets: HashMap<String, TextAsset>,
 
 }
 
@@ -24,10 +24,10 @@ impl StuffManager {
 			modifier_manager: ModifierManager::new(),
 			resource_manager: ResourceManager::new(),
 			technology_manager: TechnologyManager::new(),
+			text_manager: TextManager::new(),
 			unlock_manager: UnlockManager::new(),
 			upgrade_manager: UpgradeManager::new(),
 			feature_manager: FeatureManager::new(),
-			text_assets: HashMap::new(),
 			
 		}
 
@@ -41,9 +41,7 @@ impl StuffManager {
 
 	pub fn get_text(&self, name: &str) -> Option<&str> {
 
-		self.text_assets
-			.get(name)
-			.map(|t| t.text)
+		self.text_manager.get(name)
 
 	}
 
@@ -123,7 +121,7 @@ impl StuffManager {
 
 	pub fn load_text(&mut self, asset: TextAsset) {
 
-		self.text_assets.insert(String::from(asset.name), asset);
+		self.text_manager.load(asset);
 
 	}
 
