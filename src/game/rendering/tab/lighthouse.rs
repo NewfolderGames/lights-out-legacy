@@ -89,12 +89,12 @@ impl Tab for LighthouseTab {
 			self.tab_button_element.set_class_name("button locked");
 			return;
 
+		} else {
+
+			self.tab_element.set_class_name(if self.is_selected { "tab active" } else { "tab" });
+			self.tab_button_element.set_class_name(if self.is_selected { "button active" } else { "button" });
+
 		}
-
-		// Tab.
-
-		self.tab_element.set_class_name(if self.is_selected { "tab active" } else { "tab inactive" });
-		self.tab_button_element.set_class_name(if self.is_selected { "button active" } else { "button inactive" });
 
 		// Buttons.
 

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use web_sys::{ Document, Element, Window };
 use crate::game::StuffManager;
-use super::LighthouseTab;
+use super::*;
 
 pub trait Tab {
 
@@ -37,6 +37,7 @@ impl TabRenderer {
 		lighthouse.set_selected(true);
 
 		self.tabs.insert("Lighthouse", lighthouse);
+		self.tabs.insert("Stats", Box::new(StatTab::new(stuff_manager)));
 
 	}
 

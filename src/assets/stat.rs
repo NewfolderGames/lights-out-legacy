@@ -10,9 +10,9 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Misc.
 
-	stuff_manager.load_stat(StatAsset::new("stat_boot_total", "misc"));
+	stuff_manager.load_stat(StatAsset::new("stat_booted_total", "misc"));
+	stuff_manager.load_stat(StatAsset::new("stat_debug", "misc"));
 	stuff_manager.load_stat(StatAsset::new("stat_ticks_current", "misc"));
 	stuff_manager.load_stat(StatAsset::new("stat_ticks_total", "misc"));
-	stuff_manager.load_stat(StatAsset::new("stat_debug", "misc"));
 
 }

@@ -51,10 +51,13 @@ impl Game {
 		load_feature(&mut self.stuff_manager);
 		load_modifier(&mut self.stuff_manager);
 		load_resource(&mut self.stuff_manager);
+		load_stat(&mut self.stuff_manager);
 		load_text(&mut self.stuff_manager);
 		load_technology(&mut self.stuff_manager);
 		load_unlock(&mut self.stuff_manager);
 		load_upgrade(&mut self.stuff_manager);
+
+		self.stuff_manager.add_stat("stat_booted_total", 1f64);
 
 		// Rendering.
 

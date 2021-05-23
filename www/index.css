@@ -83,9 +83,13 @@ button {
 	padding: 16px;
 }
 
-#tab-wrapper > div {
+#tab-wrapper .tab {
+	display: none;
 	height: 100%;
 	position: relative;
+}
+#tab-wrapper .tab.active {
+	display: block;
 }
 
 /* Game container - Tabs - Lighthouse */
@@ -116,6 +120,34 @@ button {
 	display: none;
 }
 
+/* Game container - Tabs - Stats */
+
+#tab-stats .stat {
+	display: flex;
+}
+
+#tab-stats .stat-category.locked {
+	display: none;
+}
+
+#tab-stats .stat-category-title {
+	color: #ffffff
+}
+
+#tab-stats .stat-category-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+#tab-stats .stat-title {
+	flex-basis: 256px;
+}
+
+#tab-stats .stat-value {
+	flex-basis: 256px;
+	text-align: right;
+}
+
 /* Game container - Log container */
 
 #log-container {
@@ -139,8 +171,9 @@ button {
 #tab-list .button {
 	cursor: pointer;
 	display: inline-block;
-	position: relative;
 	line-height: 1.5;
+	margin: 0 8px;
+	position: relative;
 }
 
 #tab-list .button:hover {

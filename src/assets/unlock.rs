@@ -11,10 +11,11 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_quest_exmaineLighthouse",
+		"unlock_quest_exmaine",
 		vec![
 			Unlockable::Building("building_stockpile"),
 			Unlockable::Feature("feature_lighthouse_gather"),
+			Unlockable::Feature("feature_tab_stats"),
 			Unlockable::Feature("feature_tab_building"),
 			Unlockable::Resource("resource_wood"),
 			Unlockable::Resource("resource_stone"),
