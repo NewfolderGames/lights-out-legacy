@@ -78,6 +78,7 @@ impl Game {
 		// Done.
 
 		self.is_loaded = true;
+		self.is_playing = true;
 
 		self.rendering_manager.set_loading(false);
 		self.rendering_manager.set_loading_description("");
@@ -89,6 +90,7 @@ impl Game {
 	pub fn pause(&mut self) {
 
 		self.is_playing = false;
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_pause").unwrap_or("LOG_GAME_PAUSE"), Some("#ffffff"));
 
 	}
 
@@ -96,6 +98,7 @@ impl Game {
 	pub fn resume(&mut self) {
 
 		self.is_playing = true;
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_resume").unwrap_or("LOG_GAME_RESUME"), Some("#ffffff"));
 
 	}
 
@@ -103,7 +106,7 @@ impl Game {
 	pub fn save(&mut self) {
 
 		self.save_manager.save(&self.stuff_manager);
-		self.rendering_manager.push_log("Game saved.", Some("#ffffff"));
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save").unwrap_or("LOG_GAME_SAVE"), Some("#ffffff"));
 
 	}
 
