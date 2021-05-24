@@ -58,7 +58,45 @@ button {
 /* Header */
 
 #header {
+	display: flex;
 	height: 32px;
+}
+#header > div {
+	box-sizing: border-box;
+	padding: 0 8px;
+	line-height: 32px;
+}
+
+#header .left {
+	flex-basis: 360px;
+}
+
+#header .left .game {
+	color: #ffffff;
+}
+
+#header .left .version {
+	color: #ffffff;
+	font-size: 0.75em;
+}
+
+#header .left .creator {
+	font-size: 0.75em;
+}
+
+#header .center {
+	flex: 1;
+}
+
+#header .right {
+	flex-basis: 360px;
+	text-align: right;
+}
+
+#header .right .save:hover,
+#header .right .options:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 /* Game container */
@@ -132,6 +170,9 @@ button {
 /* Game container - Tabs */
 
 #tab-wrapper {
+	border: #444444 solid 1px;
+	border-bottom: none;
+	border-top: none;
 	box-sizing: border-box;
 	flex: 1;
 	padding: 16px;
@@ -219,12 +260,16 @@ button {
 	padding: 16px;
 }
 
-#log-container #log-list {
+#log-list {
 	height: 100%;
 	list-style: none;
 	margin: 0;
 	overflow-y: hidden;
 	padding: 0;
+}
+
+#log-list .log {
+	margin: 4px 0;
 }
 
 /* Tab list */

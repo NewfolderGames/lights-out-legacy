@@ -106,6 +106,13 @@ impl Game {
 	}
 
 	#[wasm_bindgen]
+	pub fn save(&mut self) {
+
+		
+
+	}
+
+	#[wasm_bindgen]
 	pub fn tick(&mut self) {
 
 		if !self.is_playing { return }
@@ -144,14 +151,22 @@ impl Game {
 		if !self.stuff_manager.is_unlocked("unlock_quest_exmaine") {
 
 			self.stuff_manager.set_unlock("unlock_quest_exmaine", true);
+			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_0").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_0"), None);
 			
-		} else if self.stuff_manager.is_unlocked("unlock_quest_gather") {
+		} else {
+		
+			if self.stuff_manager.is_unlocked("unlock_quest_gather") {
 
-			self.stuff_manager.add_resource("resource_science", 1f64);
+				self.stuff_manager.add_resource("resource_science", 1f64);
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_2").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_2"), None);
+			
+			} else {
+
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
+
+			}
 
 		}
-
-		self.rendering_manager.push_log("You have examined the lighthouse.", None);
 
 	}
 
@@ -168,7 +183,7 @@ impl Game {
 		self.stuff_manager.add_resource("resource_stone", 1f64);
 		self.stuff_manager.add_resource("resource_wood", 1f64);
 
-		self.rendering_manager.push_log("You have gathered scraps lying around.", None);
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None);
 
 	}
 

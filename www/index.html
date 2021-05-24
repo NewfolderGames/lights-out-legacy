@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="./bootstrap.js"></script>
 	<link rel="stylesheet" href="./index.css">
-	<title>Lights out</title>
+	<title>Lights Out</title>
 </head>
 <body>
 	<noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
@@ -16,7 +16,16 @@
 		</div>
 	</div>
 	<header id="header">
-
+		<div class="left">
+			<span class="game">Lights Out</span>
+			<span class="version">v0.1.0</span>
+			<span class="creator">by NewfolderGames</span>
+		</div>
+		<div class="center"></div>
+		<div class="right">
+			<span class="save" onclick="window.game.save()">Save</span>
+			<span class="options">Options</span>
+		</div>
 	</header>
 	<main id="game-container">
 		<aside id="resource-container"></aside>
