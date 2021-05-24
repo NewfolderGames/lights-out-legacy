@@ -4,6 +4,10 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Log.
 
+	stuff_manager.load_text(TextAsset::new("log_game_pause", "Game paused."));
+	stuff_manager.load_text(TextAsset::new("log_game_resume", "Game resumed."));
+	stuff_manager.load_text(TextAsset::new("log_game_save", "Game saved."));
+
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_0", "You have examined the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_1", "Nothing happened."));
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_2", "You have studied the lighthouse."));

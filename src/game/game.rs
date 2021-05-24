@@ -1,12 +1,12 @@
 use wasm_bindgen::prelude::*;
 use crate::assets::*;
-use super::rendering::RenderingManager;
-use super::stuff::StuffManager;
+use super::{ RenderingManager, SaveManager, StuffManager };
 
 #[wasm_bindgen]
 pub struct Game {
 
 	rendering_manager: RenderingManager,
+	save_manager: SaveManager,
 	stuff_manager: StuffManager,
 
 	is_loaded: bool,
@@ -25,6 +25,7 @@ impl Game {
 		Self {
 
 			rendering_manager: RenderingManager::new(),
+			save_manager: SaveManager::new(),
 			stuff_manager: StuffManager::new(),
 			is_loaded: false,
 			is_playing: false,
@@ -65,29 +66,22 @@ impl Game {
 
 		self.rendering_manager.init(&self.stuff_manager);
 
+		// Load Save.
+
+		self.rendering_manager.set_loading_description("Loading save file.");
+
+		self.save_manager.load_from_storage(&mut self.stuff_manager);
+
+		self.stuff_manager.unlock("unlock_default");
+		self.stuff_manager.add_stat("stat_game_booted", 1f64);
+
 		// Done.
 
 		self.is_loaded = true;
 
 		self.rendering_manager.set_loading(false);
 		self.rendering_manager.set_loading_description("");
-
-	}
-
-	#[wasm_bindgen]
-	pub fn load_save(&mut self) {
-
-		if !self.is_loaded { return }
-
-		self.rendering_manager.set_loading(false);
-		self.rendering_manager.set_loading_description("Loading save file.");
-
-		self.stuff_manager.set_unlock("unlock_default", true);
-		self.stuff_manager.add_stat("stat_game_booted", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
-
-		self.rendering_manager.set_loading(false);
-		self.rendering_manager.set_loading_description("");
 
 	}
 
@@ -108,7 +102,8 @@ impl Game {
 	#[wasm_bindgen]
 	pub fn save(&mut self) {
 
-		
+		self.save_manager.save(&self.stuff_manager);
+		self.rendering_manager.push_log("Game saved.", Some("#ffffff"));
 
 	}
 
@@ -150,7 +145,7 @@ impl Game {
 
 		if !self.stuff_manager.is_unlocked("unlock_quest_exmaine") {
 
-			self.stuff_manager.set_unlock("unlock_quest_exmaine", true);
+			self.stuff_manager.unlock("unlock_quest_exmaine");
 			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_0").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_0"), None);
 			
 		} else {
@@ -176,7 +171,7 @@ impl Game {
 
 		if !self.stuff_manager.is_unlocked("unlock_quest_gather") {
 
-			self.stuff_manager.set_unlock("unlock_quest_gather", true);
+			self.stuff_manager.unlock("unlock_quest_gather");
 			
 		}
 
@@ -205,15 +200,27 @@ impl Game {
 		self.stuff_manager.add_resource(name, amount);
 		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
+		self.rendering_manager.push_log("DEBUG_ADD_RESOURCE", Some("#00FF00"));
+
+	}
+
+	#[wasm_bindgen]
+	pub fn debug_set_resource(&mut self, name: &str, amount: f64) {
+
+		self.stuff_manager.set_resource(name, amount);
+		self.stuff_manager.add_stat("stat_debug", 1f64);
+		self.rendering_manager.render(&self.stuff_manager);
+		self.rendering_manager.push_log("DEBUG_SET_RESOURCE", Some("#00FF00"));
 
 	}
 
 	#[wasm_bindgen]
 	pub fn debug_unlock(&mut self, name: &str) {
 
-		self.stuff_manager.set_unlock(name, true);
+		self.stuff_manager.unlock(name);
 		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
+		self.rendering_manager.push_log("DEBUG_UNLOCK", Some("#00FF00"));
 
 	}
 

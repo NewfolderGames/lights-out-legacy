@@ -95,6 +95,12 @@ impl StuffManager {
 
 	}
 
+	pub fn iter_upgrades(&self) -> Iter<String, Upgrade> {
+
+		self.upgrade_manager.iter()
+
+	}
+
 	pub fn iter_unlock(&self) -> Iter<String, Unlock> {
 
 		self.unlock_manager.iter()
@@ -169,14 +175,49 @@ impl StuffManager {
 
 	}
 
+	pub fn research(&mut self, name: &str) {
+
+		self.technology_manager.research(name);
+
+	}
+
+	pub fn set_building(&mut self, name: &str, amount: i32) {
+
+		self.building_manager.set_count(name, amount);
+
+	}
+
+	pub fn set_resource(&mut self, name: &str, amount: f64) {
+
+		self.resource_manager.set_count(name, amount);
+
+	}
+
+	pub fn set_stat(&mut self, name: &str, amount: f64) {
+
+		self.stat_manager.set_value(name, amount);
+
+	}
+
 	pub fn tick(&mut self) {
 
 		// Calculate modifiers.
 
 		let mut modifiers: HashMap<String, f64> = HashMap::new();
 
-		self.upgrade_manager.calculate();
-		self.building_manager.calculate(&self.modifier_manager);
+		if self.upgrade_manager.is_dirty() {
+
+			self.upgrade_manager.calculate();
+			self.upgrade_manager.clear_dirty();
+		
+		}
+
+		if self.building_manager.is_dirty() {
+			
+			self.building_manager.calculate(&self.modifier_manager);
+			self.building_manager.clear_dirty();
+		
+		}
 
 		for (name, value) in self.upgrade_manager.get_modifiers().iter() {
 
@@ -209,21 +250,21 @@ impl StuffManager {
 
 	}
 
-	pub fn set_unlock(&mut self, name: &str, unlock_state: bool) {
+	pub fn unlock(&mut self, name: &str) {
 
 		if let Some(unlock) = self.unlock_manager.get_mut(name) {
 
-			unlock.set_unlock(unlock_state);
+			unlock.unlock();
 			
 			for u in unlock.get_asset().unlocks.iter() {
 
 				match *u {
 
-					Unlockable::Building(name) => self.building_manager.set_unlock(name, unlock_state),
-					Unlockable::Feature(name) => self.feature_manager.set_unlock(name, unlock_state),
-					Unlockable::Resource(name) => self.resource_manager.set_unlock(name, unlock_state),
-					Unlockable::Technology(name) => self.technology_manager.set_unlock(name, unlock_state),
-					Unlockable::Upgrade(name) => self.upgrade_manager.set_unlock(name, unlock_state),
+					Unlockable::Building(name) => self.building_manager.unlock(name),
+					Unlockable::Feature(name) => self.feature_manager.unlock(name),
+					Unlockable::Resource(name) => self.resource_manager.unlock(name),
+					Unlockable::Technology(name) => self.technology_manager.unlock(name),
+					Unlockable::Upgrade(name) => self.upgrade_manager.unlock(name),
 					_ => ()
 
 				}
@@ -231,6 +272,12 @@ impl StuffManager {
 			}
 
 		}
+
+	}
+
+	pub fn upgrade(&mut self, name: &str) {
+
+		self.upgrade_manager.upgrade(name);
 
 	}
 

@@ -31,7 +31,7 @@ impl Building {
 
 	}
 
-	pub fn build(&mut self, amount: i32) {
+	pub fn add(&mut self, amount: i32) {
 
 		self.is_dirty = true;
 		self.count += amount;
@@ -105,9 +105,17 @@ impl Building {
 
 	}
 
-	pub fn set_unlock(&mut self, unlock: bool) {
+	pub fn set_count(&mut self, amount: i32) {
 
-		self.is_unlocked = unlock;
+		self.is_dirty = true;
+		self.count = amount;
+		if self.count < 0 { self.count = 0 }
+
+	}
+
+	pub fn unlock(&mut self) {
+
+		self.is_unlocked = true;
 
 	}
 

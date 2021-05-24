@@ -46,11 +46,11 @@ impl FeatureManager {
 
 	}
 
-	pub fn set_unlock(&mut self, name: &str, unlock: bool) {
+	pub fn unlock(&mut self, name: &str) {
 
 		self.features
 			.get_mut(name)
-			.map(|u| u.set_unlock(unlock));
+			.map(|u| u.unlock());
 
 	}
 

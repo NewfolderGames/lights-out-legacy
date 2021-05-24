@@ -105,11 +105,20 @@ impl BuildingManager {
 
 	}
 
-	pub fn set_unlock(&mut self, name: &str, unlock: bool) {
+	pub fn set_count(&mut self, name: &str, amount: i32) {
+
+		self.is_dirty = true;
+		self.buildings
+			.get_mut(name)
+			.map(|b| b.set_count(amount));
+
+	}
+
+	pub fn unlock(&mut self, name: &str) {
 
 		self.buildings
 			.get_mut(name)
-			.map(|u| u.set_unlock(unlock));
+			.map(|u| u.unlock());
 
 	}
 

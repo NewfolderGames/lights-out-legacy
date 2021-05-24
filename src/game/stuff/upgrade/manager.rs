@@ -7,6 +7,8 @@ pub struct UpgradeManager {
 
 	calculated_modifiers: HashMap<String, f64>,
 
+	is_dirty: bool,
+
 }
 
 impl UpgradeManager {
@@ -17,6 +19,7 @@ impl UpgradeManager {
 
 			upgrades: HashMap::new(),
 			calculated_modifiers: HashMap::new(),
+			is_dirty: false,
 
 		}
 
@@ -48,6 +51,12 @@ impl UpgradeManager {
 
 	}
 
+	pub fn clear_dirty(&mut self) {
+
+		self.is_dirty = false;
+
+	}
+
 	pub fn get(&self, name: &str) -> Option<&Upgrade> {
 
 		self.upgrades.get(name)
@@ -75,17 +84,32 @@ impl UpgradeManager {
 
 	}
 
+	pub fn is_dirty(&self) -> bool {
+
+		self.is_dirty
+
+	}
+
 	pub fn iter(&self) -> Iter<String, Upgrade> {
 
 		self.upgrades.iter()
 
 	}
 
-	pub fn set_unlock(&mut self, name: &str, unlock: bool) {
+	pub fn unlock(&mut self, name: &str) {
 
 		self.upgrades
 			.get_mut(name)
-			.map(|u| u.set_unlock(unlock));
+			.map(|u| u.unlock());
+
+	}
+
+	pub fn upgrade(&mut self, name: &str) {
+
+		self.is_dirty = true;
+		self.upgrades
+			.get_mut(name)
+			.map(|u| u.upgrade());
 
 	}
 

@@ -68,11 +68,19 @@ impl ResourceManager {
 
 	}
 
-	pub fn set_unlock(&mut self, name: &str, unlock: bool) {
+	pub fn set_count(&mut self, name: &str, amount: f64) {
 
 		self.resources
 			.get_mut(name)
-			.map(|u| u.set_unlock(unlock));
+			.map(|r| r.set_count(amount));
+
+	}
+
+	pub fn unlock(&mut self, name: &str) {
+
+		self.resources
+			.get_mut(name)
+			.map(|u| u.unlock());
 
 	}
 

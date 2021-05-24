@@ -48,9 +48,9 @@ impl Upgrade {
 
 	}
 
-	pub fn set_unlock(&mut self, unlock: bool) {
+	pub fn unlock(&mut self) {
 
-		self.is_unlocked = unlock;
+		self.is_unlocked = true;
 
 	}
 

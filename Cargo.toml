@@ -9,6 +9,8 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2.74"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 
 [dependencies.web-sys]
 version = "0.3.51"
@@ -17,5 +19,6 @@ features = [
   "Element",
   "HtmlElement",
   "Node",
+  "Storage",
   "Window",
 ]
