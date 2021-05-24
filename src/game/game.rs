@@ -151,6 +151,8 @@ impl Game {
 
 		}
 
+		self.rendering_manager.push_log("You have examined the lighthouse.", None);
+
 	}
 
 	pub fn lighthouse_gather(&mut self) {
@@ -165,6 +167,8 @@ impl Game {
 
 		self.stuff_manager.add_resource("resource_stone", 1f64);
 		self.stuff_manager.add_resource("resource_wood", 1f64);
+
+		self.rendering_manager.push_log("You have gathered scraps lying around.", None);
 
 	}
 

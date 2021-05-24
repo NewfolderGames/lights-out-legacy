@@ -3,7 +3,8 @@ use super::*;
 
 pub struct RenderingManager {
 
-	loading_manager: LoadingRenderer,
+	loading_renderer: LoadingRenderer,
+	log_renderer: LogRenderer,
 	resource_renderer: ResourceRenderer,
 	tab_renderer: TabRenderer,
 
@@ -15,7 +16,8 @@ impl RenderingManager {
 
 		Self {
 
-			loading_manager: LoadingRenderer::new(),
+			loading_renderer: LoadingRenderer::new(),
+			log_renderer: LogRenderer::new(),
 			resource_renderer: ResourceRenderer::new(),
 			tab_renderer: TabRenderer::new(),
 			
@@ -36,6 +38,12 @@ impl RenderingManager {
 		self.tab_renderer.init(stuff_manager);
 
 	}
+	
+	pub fn push_log(&self, log: &str, color: Option<&str>) {
+
+		self.log_renderer.push(log, color);
+
+	}
 
 	pub fn render(&mut self, stuff_manager: &StuffManager) {
 
@@ -46,13 +54,13 @@ impl RenderingManager {
 
 	pub fn set_loading(&self, loading: bool) {
 
-		self.loading_manager.set_loading(loading);
+		self.loading_renderer.set_loading(loading);
 
 	}
 
 	pub fn set_loading_description(&self, description: &str) {
 
-		self.loading_manager.set_loading_description(description);
+		self.loading_renderer.set_loading_description(description);
 
 	}
 

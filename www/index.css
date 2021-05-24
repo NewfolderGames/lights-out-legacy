@@ -220,8 +220,11 @@ button {
 }
 
 #log-container #log-list {
-	padding: 0;
+	height: 100%;
 	list-style: none;
+	margin: 0;
+	overflow-y: hidden;
+	padding: 0;
 }
 
 /* Tab list */
