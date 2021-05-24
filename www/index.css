@@ -30,6 +30,31 @@ button {
 	font-family: inherit;
 }
 
+/* Loading */
+
+#loading {
+	background: #000;
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
+#loading.active {
+	display: block;
+}
+
+#loading .text-container {
+	color: #fff;
+	font-weight: bold;
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
 /* Header */
 
 #header {

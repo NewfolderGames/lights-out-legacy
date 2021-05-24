@@ -45,7 +45,11 @@ impl Game {
 
 		if self.is_playing || self.is_loaded { return }
 
+		self.rendering_manager.set_loading(true);
+
 		// Asset loading.
+
+		self.rendering_manager.set_loading_description("Loading assets.");
 
 		load_building(&mut self.stuff_manager);
 		load_feature(&mut self.stuff_manager);
@@ -65,14 +69,25 @@ impl Game {
 
 		self.is_loaded = true;
 
+		self.rendering_manager.set_loading(false);
+		self.rendering_manager.set_loading_description("");
+
 	}
 
 	#[wasm_bindgen]
 	pub fn load_save(&mut self) {
 
+		if !self.is_loaded { return }
+
+		self.rendering_manager.set_loading(false);
+		self.rendering_manager.set_loading_description("Loading save file.");
+
 		self.stuff_manager.set_unlock("unlock_default", true);
 		self.stuff_manager.add_stat("stat_game_booted", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
+
+		self.rendering_manager.set_loading(false);
+		self.rendering_manager.set_loading_description("");
 
 	}
 

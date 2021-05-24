@@ -1,8 +1,9 @@
 use crate::game::StuffManager;
-use super::{ ResourceRenderer, TabRenderer };
+use super::*;
 
 pub struct RenderingManager {
 
+	loading_manager: LoadingRenderer,
 	resource_renderer: ResourceRenderer,
 	tab_renderer: TabRenderer,
 
@@ -14,6 +15,7 @@ impl RenderingManager {
 
 		Self {
 
+			loading_manager: LoadingRenderer::new(),
 			resource_renderer: ResourceRenderer::new(),
 			tab_renderer: TabRenderer::new(),
 			
@@ -39,6 +41,18 @@ impl RenderingManager {
 
 		self.resource_renderer.render(stuff_manager);
 		self.tab_renderer.render(stuff_manager);
+
+	}
+
+	pub fn set_loading(&self, loading: bool) {
+
+		self.loading_manager.set_loading(loading);
+
+	}
+
+	pub fn set_loading_description(&self, description: &str) {
+
+		self.loading_manager.set_loading_description(description);
 
 	}
 
