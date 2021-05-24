@@ -84,7 +84,6 @@ impl ResourceRenderer {
 
 			// Create resource.
 			
-			// let category_element = self.resource_category_elements.get(resource.get_asset().category).unwrap();
 			let resource_element = ResourceElement {
 
 				root_element: document.create_element("li").unwrap(),
@@ -101,7 +100,6 @@ impl ResourceRenderer {
 			resource_element.capacity_element.set_class_name("resource-capacity");
 			resource_element.production_element.set_class_name("resource-production");
 
-			// category_element.list_element.append_with_node_1(&resource_element.root_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.title_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.count_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.capacity_element).unwrap();

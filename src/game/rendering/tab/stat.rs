@@ -76,7 +76,6 @@ impl StatTab {
 				category_element.list_element.set_class_name("stat-category-list");
 				category_element.title_element.set_class_name("stat-category-title");
 
-				tab_element.append_with_node_1(&category_element.root_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.title_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.list_element).unwrap();
 
@@ -86,7 +85,8 @@ impl StatTab {
 
 			}
 
-			let category_element = stat_category_elements.get(stat.get_asset().category).unwrap();
+			// Create stat.
+
 			let stat_element = StatElement {
 				
 				root_element: document.create_element("li").unwrap(),
@@ -99,13 +99,35 @@ impl StatTab {
 			stat_element.title_element.set_class_name("stat-title");
 			stat_element.value_element.set_class_name("stat-value");
 
-			category_element.list_element.append_with_node_1(&stat_element.root_element).unwrap();
 			stat_element.root_element.append_with_node_1(&stat_element.title_element).unwrap();
 			stat_element.root_element.append_with_node_1(&stat_element.value_element).unwrap();
 
 			stat_element.title_element.set_inner_html(stuff_manager.get_text(&[stat.get_asset().name, "_title"].join("")).unwrap_or("STAT_TITLE"));
 
 			stat_elements.insert(String::from(name), stat_element);
+
+		}
+
+		// Append stats.
+
+		let mut sorted_stat_elements: Vec<(&String, &StatElement)> = stat_elements.iter().collect();
+		let mut sorted_stat_category_elements: Vec<(&String, &StatCategoryElement)> = stat_category_elements.iter().collect();
+
+		sorted_stat_elements.sort_by(|(a_name, _), (b_name, _)| a_name.cmp(b_name));
+		sorted_stat_category_elements.sort_by(|(a_name, _), (b_name, _)| a_name.cmp(b_name));
+
+		for (name, element) in sorted_stat_elements.iter() {
+
+			let stat = stuff_manager.get_stat(name).unwrap();
+			let category_element = stat_category_elements.get(stat.get_asset().category).unwrap();
+
+			category_element.list_element.append_with_node_1(&element.root_element).unwrap();
+
+		}
+
+		for (_, element) in sorted_stat_category_elements.iter() {
+
+			tab_element.append_with_node_1(&element.root_element).unwrap();
 
 		}
 

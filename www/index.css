@@ -126,6 +126,10 @@ button {
 	display: flex;
 }
 
+#tab-stats .stat-category {
+	margin: 0 auto;
+	width: 256px;
+}
 #tab-stats .stat-category.locked {
 	display: none;
 }
@@ -141,11 +145,11 @@ button {
 }
 
 #tab-stats .stat-title {
-	flex-basis: 256px;
+	flex-basis: 192px;
 }
 
 #tab-stats .stat-value {
-	flex-basis: 256px;
+	flex-basis: 64px;
 	text-align: right;
 }
 
