@@ -204,8 +204,8 @@ impl StuffManager {
 
 		// Stat.
 
-		self.add_stat("stat_ticks_current", 1f64);
-		self.add_stat("stat_ticks_total", 1f64);
+		self.add_stat("stat_game_ticks_current", 1f64);
+		self.add_stat("stat_game_ticks_total", 1f64);
 
 	}
 

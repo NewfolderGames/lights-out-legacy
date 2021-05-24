@@ -57,8 +57,6 @@ impl Game {
 		load_unlock(&mut self.stuff_manager);
 		load_upgrade(&mut self.stuff_manager);
 
-		self.stuff_manager.add_stat("stat_booted_total", 1f64);
-
 		// Rendering.
 
 		self.rendering_manager.init(&self.stuff_manager);
@@ -73,6 +71,7 @@ impl Game {
 	pub fn load_save(&mut self) {
 
 		self.stuff_manager.set_unlock("unlock_default", true);
+		self.stuff_manager.add_stat("stat_game_booted", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
 
 	}
