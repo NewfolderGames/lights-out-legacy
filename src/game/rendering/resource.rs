@@ -71,7 +71,8 @@ impl ResourceRenderer {
 				category_element.list_element.set_class_name("resource-category-list");
 				category_element.title_element.set_class_name("resource-category-title");
 
-				self.resource_container_element.append_with_node_1(&category_element.root_element).unwrap();
+				
+				// self.resource_container_element.append_with_node_1(&category_element.root_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.title_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.list_element).unwrap();
 
@@ -81,9 +82,9 @@ impl ResourceRenderer {
 
 			}
 
-			// Get category.
+			// Create resource.
 			
-			let category_element = self.resource_category_elements.get(resource.get_asset().category).unwrap();
+			// let category_element = self.resource_category_elements.get(resource.get_asset().category).unwrap();
 			let resource_element = ResourceElement {
 
 				root_element: document.create_element("li").unwrap(),
@@ -100,7 +101,7 @@ impl ResourceRenderer {
 			resource_element.capacity_element.set_class_name("resource-capacity");
 			resource_element.production_element.set_class_name("resource-production");
 
-			category_element.list_element.append_with_node_1(&resource_element.root_element).unwrap();
+			// category_element.list_element.append_with_node_1(&resource_element.root_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.title_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.count_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.capacity_element).unwrap();
@@ -112,6 +113,29 @@ impl ResourceRenderer {
 
 		}
 
+		// Append.
+
+		let mut sorted_resource_elements: Vec<(&String, &ResourceElement)> = self.resource_elements.iter().collect();
+		let mut sorted_resource_category_elements: Vec<(&String, &ResourceCategoryElement)> = self.resource_category_elements.iter().collect();
+
+		sorted_resource_elements.sort_by(|(a_name, _), (b_name, _)| a_name.cmp(b_name));
+		sorted_resource_category_elements.sort_by(|(a_name, _), (b_name, _)| a_name.cmp(b_name));
+
+		for (name, element) in sorted_resource_elements.iter() {
+
+			let resource = stuff_manager.get_resource(name).unwrap();
+			let category_element = self.resource_category_elements.get(resource.get_asset().category).unwrap();
+
+			category_element.list_element.append_with_node_1(&element.root_element).unwrap();
+
+		}
+
+		for (_, element) in sorted_resource_category_elements.iter() {
+
+			self.resource_container_element.append_with_node_1(&element.root_element).unwrap();
+
+		}
+		
 	}
 
 	pub fn render(&self, stuff_manager: &StuffManager) {

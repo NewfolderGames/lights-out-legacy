@@ -47,6 +47,12 @@ impl StuffManager {
 
 	}
 
+	pub fn get_resource(&self, name: &str) -> Option<&Resource> {
+
+		self.resource_manager.get(name)
+
+	}
+
 	pub fn get_stat(&self, name: &str) -> Option<&Stat> {
 
 		self.stat_manager.get(name)

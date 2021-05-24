@@ -131,7 +131,8 @@ button {
 }
 
 #tab-stats .stat-category-title {
-	color: #ffffff
+	color: #ffffff;
+	font-weight: bold;
 }
 
 #tab-stats .stat-category-list {
