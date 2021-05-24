@@ -124,10 +124,32 @@ impl Game {
 	#[wasm_bindgen]
 	pub fn lighthouse_examine(&mut self) {
 
+		self.stuff_manager.add_stat("stat_lighthouse_examined", 1f64);
+
+		if !self.stuff_manager.is_unlocked("unlock_quest_exmaine") {
+
+			self.stuff_manager.set_unlock("unlock_quest_exmaine", true);
+			
+		} else if self.stuff_manager.is_unlocked("unlock_quest_gather") {
+
+			self.stuff_manager.add_resource("resource_science", 1f64);
+
+		}
+
 	}
 
 	pub fn lighthouse_gather(&mut self) {
 
+		self.stuff_manager.add_stat("stat_lighthouse_gathered", 1f64);
+
+		if !self.stuff_manager.is_unlocked("unlock_quest_gather") {
+
+			self.stuff_manager.set_unlock("unlock_quest_gather", true);
+			
+		}
+
+		self.stuff_manager.add_resource("resource_stone", 1f64);
+		self.stuff_manager.add_resource("resource_wood", 1f64);
 
 	}
 

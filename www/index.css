@@ -1,5 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
 
+/* Animations */
+
+@keyframes fadeInBlock {
+	0% {
+		display: none;
+		opacity: 0;
+	}
+	1% {
+		display: block;
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* Global */
+
 body {
 	background-color: #000;
 	color: #999999;
@@ -34,8 +52,14 @@ button {
 	padding: 16px;
 }
 
+#resource-container .resource-category {
+	animation: fadeInBlock 1s;
+	display: block;
+	opacity: 1;
+}
 #resource-container .resource-category.locked {
 	display: none;
+	opacity: 0;
 }
 
 #resource-container .resource-category-title {
@@ -49,10 +73,15 @@ button {
 }
 
 #resource-container .resource {
+	animation: fadeInBlock 1s;
 	display: flex;
+}
+#resource-container .resource:hover {
+	background: rgba(255, 255, 255, 0.1);
 }
 #resource-container .resource.locked {
 	display: none;
+	opacity: 0;
 }
 
 #resource-container .resource-title {
@@ -144,6 +173,10 @@ button {
 	list-style-type: none;
 }
 
+#tab-stats .stat:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
 #tab-stats .stat-title {
 	flex-basis: 192px;
 }
@@ -174,13 +207,13 @@ button {
 }
 
 #tab-list .button {
+	animation: fadeInBlock 1s;
 	cursor: pointer;
 	display: inline-block;
 	line-height: 1.5;
 	margin: 0 8px;
 	position: relative;
 }
-
 #tab-list .button:hover {
 	text-decoration: underline;
 }
@@ -190,5 +223,6 @@ button {
 	text-decoration: underline;
 }
 #tab-list .button.locked {
-	display: none
+	display: none;
+	opacity: 0;
 }
