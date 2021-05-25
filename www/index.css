@@ -16,6 +16,34 @@
 	}
 }
 
+@keyframes fadeInInlineBlock {
+	0% {
+		display: none;
+		opacity: 0;
+	}
+	1% {
+		display: inline-block;
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInFlex {
+	0% {
+		display: none;
+		opacity: 0;
+	}
+	1% {
+		display: flex;
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 /* Global */
 
 body {
@@ -117,6 +145,7 @@ button {
 
 #resource-container .resource-category {
 	animation: fadeInBlock 1s;
+	animation-fill-mode: forwards;
 	display: block;
 	opacity: 1;
 }
@@ -136,7 +165,8 @@ button {
 }
 
 #resource-container .resource {
-	animation: fadeInBlock 1s;
+	animation: fadeInFlex 1s;
+	animation-fill-mode: forwards;
 	display: flex;
 }
 #resource-container .resource:hover {
@@ -269,7 +299,10 @@ button {
 }
 
 #log-list .log {
+	animation: fadeInBlock 1s;
+	animation-fill-mode: forwards;
 	margin: 4px 0;
+	opacity: 0;
 }
 
 /* Tab list */
@@ -280,7 +313,8 @@ button {
 }
 
 #tab-list .button {
-	animation: fadeInBlock 1s;
+	animation: fadeInInlineBlock 1s;
+	animation-fill-mode: forwards;
 	cursor: pointer;
 	display: inline-block;
 	line-height: 1.5;
