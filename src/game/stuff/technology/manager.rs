@@ -54,6 +54,14 @@ impl TechnologyManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.technologies
+			.iter_mut()
+			.for_each(|(_, t)| t.reset());
+
+	}
+
 	pub fn unlock(&mut self, name: &str) {
 
 		self.technologies

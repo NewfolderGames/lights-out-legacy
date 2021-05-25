@@ -42,6 +42,13 @@ impl Upgrade {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.is_unlocked = false;
+		self.is_upgraded = false;
+
+	}
+
 	pub fn upgrade(&mut self) {
 
 		self.is_upgraded = true;

@@ -32,6 +32,12 @@ impl Unlock {
 		self.is_unlocked
 
 	}
+	
+	pub fn reset(&mut self) {
+		
+		self.is_unlocked = false;
+
+	}
 
 	pub fn unlock(&mut self) {
 

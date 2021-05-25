@@ -181,6 +181,18 @@ impl StuffManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.building_manager.reset();
+		self.feature_manager.reset();
+		self.resource_manager.reset();
+		self.stat_manager.reset();
+		self.technology_manager.reset();
+		self.unlock_manager.reset();
+		self.upgrade_manager.reset();
+
+	}
+
 	pub fn set_building(&mut self, name: &str, amount: i32) {
 
 		self.building_manager.set_count(name, amount);

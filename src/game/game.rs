@@ -87,6 +87,31 @@ impl Game {
 	}
 
 	#[wasm_bindgen]
+	pub fn load_save_from_string(&mut self, save: &str) {
+
+		self.rendering_manager.set_loading(true);
+		self.rendering_manager.set_loading_description("Loading save file");
+
+		self.is_playing = false;
+
+		// Load save.
+
+		self.stuff_manager.reset();
+		self.save_manager.load_from_string(save, &mut self.stuff_manager);
+
+		// Done.
+
+		self.is_playing = true;
+
+		self.rendering_manager.set_loading(false);
+		self.rendering_manager.set_loading_description("");
+		self.rendering_manager.render(&self.stuff_manager);
+
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save_loaded").unwrap_or("LOG_GAME_SAVE_LOADED"), Some("#ffffff"));
+
+	}
+
+	#[wasm_bindgen]
 	pub fn pause(&mut self) {
 
 		self.is_playing = false;

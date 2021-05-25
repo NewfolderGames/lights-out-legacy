@@ -46,6 +46,14 @@ impl FeatureManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.features
+			.iter_mut()
+			.for_each(|(_, f)| f.reset());
+
+	}
+
 	pub fn unlock(&mut self, name: &str) {
 
 		self.features

@@ -62,6 +62,14 @@ impl StatManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.stats
+			.iter_mut()
+			.for_each(|(_, s)| s.reset());
+
+	}
+
 	pub fn set_value(&mut self, name: &str, value: f64) {
 
 		self.stats

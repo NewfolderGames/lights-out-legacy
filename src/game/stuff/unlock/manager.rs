@@ -54,6 +54,14 @@ impl UnlockManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.unlocks
+			.iter_mut()
+			.for_each(|(_, u)| u.reset());
+
+	}
+
 	pub fn unlock(&mut self, name: &str) {
 
 		self.unlocks

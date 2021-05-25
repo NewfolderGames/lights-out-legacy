@@ -105,6 +105,15 @@ impl BuildingManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.is_dirty = true;
+		self.buildings
+			.iter_mut()
+			.for_each(|(_, b)| b.reset());
+
+	}
+
 	pub fn set_count(&mut self, name: &str, amount: i32) {
 
 		self.is_dirty = true;

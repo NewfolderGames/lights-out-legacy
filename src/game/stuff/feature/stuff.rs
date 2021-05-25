@@ -27,6 +27,12 @@ impl Feature {
 
 	}
 
+	pub fn reset(&mut self) {
+		
+		self.is_unlocked = false;
+		
+	}
+
 	pub fn unlock(&mut self) {
 
 		self.is_unlocked = true;

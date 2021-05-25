@@ -39,6 +39,12 @@ impl Stat {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.value = 0f64;
+
+	}
+
 	pub fn set_value(&mut self, value: f64) {
 
 		self.value = value;

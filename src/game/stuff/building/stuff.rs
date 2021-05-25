@@ -105,6 +105,14 @@ impl Building {
 
 	}
 
+	pub fn reset(&mut self) {
+		
+		self.is_dirty = true;
+		self.is_unlocked = false;
+		self.count = 0;
+
+	}
+
 	pub fn set_count(&mut self, amount: i32) {
 
 		self.is_dirty = true;

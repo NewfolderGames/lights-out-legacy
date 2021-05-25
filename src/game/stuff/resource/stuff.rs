@@ -28,7 +28,7 @@ impl Resource {
 			count: 0f64,
 			production: 0f64,
 			consumption: 0f64,
-			is_depleted: false,
+			is_depleted: true,
 			is_full: false,
 			is_unlocked: false,
 
@@ -117,6 +117,20 @@ impl Resource {
 	pub fn is_unlocked(&self) -> bool {
 
 		self.is_unlocked
+
+	}
+
+	pub fn reset(&mut self) {
+		
+		self.is_unlocked = false;
+
+		self.capacity = 0f64;
+		self.consumption = 0f64;
+		self.count = 0f64;
+		self.production = 0f64;
+
+		self.is_depleted = true;
+		self.is_full = false;
 
 	}
 

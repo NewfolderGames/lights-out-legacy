@@ -68,6 +68,14 @@ impl ResourceManager {
 
 	}
 
+	pub fn reset(&mut self) {
+
+		self.resources
+			.iter_mut()
+			.for_each(|(_, r)| r.reset());
+
+	}
+
 	pub fn set_count(&mut self, name: &str, amount: f64) {
 
 		self.resources
