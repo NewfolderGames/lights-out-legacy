@@ -5,6 +5,27 @@ use super::super::StuffManager;
 #[derive(Serialize, Deserialize)]
 pub struct Save {
 
+	pub stuff: SaveStuff,
+
+}
+
+impl Save {
+
+	pub fn new() -> Self {
+
+		Self {
+
+			stuff: SaveStuff::new()
+
+		}
+
+	}
+
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct SaveStuff {
+
 	pub buildings: HashMap<String, i32>,
 	pub resources: HashMap<String, f64>,
 	pub stats: HashMap<String, f64>,
@@ -14,7 +35,7 @@ pub struct Save {
 
 }
 
-impl Save {
+impl SaveStuff {
 
 	pub fn new() -> Self {
 

@@ -21,6 +21,12 @@ impl Feature {
 
 	}
 
+	pub fn get_asset(&self) -> &FeatureAsset {
+
+		&self.asset
+
+	}
+
 	pub fn is_unlocked(&self) -> bool {
 
 		self.is_unlocked

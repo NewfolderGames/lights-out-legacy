@@ -32,14 +32,14 @@ impl SaveManager {
 
 		// Set data.
 
-		self.save.clear();
+		self.save.stuff.clear();
 		
-		self.save.set_buildings(stuff_manager);
-		self.save.set_resources(stuff_manager);
-		self.save.set_stats(stuff_manager);
-		self.save.set_technologies(stuff_manager);
-		self.save.set_unlocks(stuff_manager);
-		self.save.set_upgrades(stuff_manager);
+		self.save.stuff.set_buildings(stuff_manager);
+		self.save.stuff.set_resources(stuff_manager);
+		self.save.stuff.set_stats(stuff_manager);
+		self.save.stuff.set_technologies(stuff_manager);
+		self.save.stuff.set_unlocks(stuff_manager);
+		self.save.stuff.set_upgrades(stuff_manager);
 
 		// Serialize.
 
@@ -70,12 +70,12 @@ impl SaveManager {
 
 		if let Ok(save) = serde_json::from_str::<Save>(&save) {
 
-			save.buildings.iter().for_each(|(b_name, b_count)| stuff_manager.set_building(b_name, *b_count));
-			save.resources.iter().for_each(|(r_name, r_count)| stuff_manager.set_resource(r_name, *r_count));
-			save.stats.iter().for_each(|(s_name, s_value)| stuff_manager.set_stat(s_name, *s_value));
-			save.unlocks.iter().for_each(|u| stuff_manager.unlock(u));
-			save.technologies.iter().for_each(|t| stuff_manager.research(t));
-			save.upgrades.iter().for_each(|u| stuff_manager.upgrade(u));
+			save.stuff.buildings.iter().for_each(|(b_name, b_count)| stuff_manager.set_building(b_name, *b_count));
+			save.stuff.resources.iter().for_each(|(r_name, r_count)| stuff_manager.set_resource(r_name, *r_count));
+			save.stuff.stats.iter().for_each(|(s_name, s_value)| stuff_manager.set_stat(s_name, *s_value));
+			save.stuff.unlocks.iter().for_each(|u| stuff_manager.unlock(u));
+			save.stuff.technologies.iter().for_each(|t| stuff_manager.research(t));
+			save.stuff.upgrades.iter().for_each(|u| stuff_manager.upgrade(u));
 
 			return true;
 

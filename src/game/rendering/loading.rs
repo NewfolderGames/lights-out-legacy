@@ -32,6 +32,12 @@ impl LoadingRenderer {
 
 	}
 
+	pub fn set_loading_title(&self, title: &str) {
+
+		self.title_element.set_inner_html(title);
+
+	}
+
 	pub fn set_loading_description(&self, description: &str) {
 
 		self.description_element.set_inner_html(description);

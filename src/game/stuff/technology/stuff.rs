@@ -24,6 +24,12 @@ impl Technology {
 
 	}
 
+	pub fn get_asset(&self) -> &TechnologyAsset {
+
+		&self.asset
+
+	}
+
 	pub fn is_researched(&self) -> bool {
 
 		self.is_researched
