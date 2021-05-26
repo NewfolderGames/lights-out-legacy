@@ -1,8 +1,8 @@
+use std::rc::Rc;
 use std::collections::HashMap;
 use web_sys::{ Document, Element, Window };
-use crate::game::StuffManager;
-use crate::utils::format_number_scientific;
-
+use crate::game::stuff::{ Stuff, StuffManager };
+use crate::utils::number::format_number_scientific;
 struct ResourceElement {
 
 	pub root_element: Element,
@@ -17,13 +17,16 @@ struct ResourceElement {
 struct ResourceCategoryElement {
 
 	pub root_element: Element, 
-
 	pub list_element: Element,
 	pub title_element: Element,
 
 }
 
-pub struct ResourceRenderer {
+/// A resource rendering manager.
+pub struct ResourceManager {
+
+	web_window: Rc<Window>,
+	web_document: Rc<Document>,
 
 	resource_category_elements: HashMap<String, ResourceCategoryElement>,
 	resource_container_element: Element,
@@ -31,27 +34,25 @@ pub struct ResourceRenderer {
 
 }
 
-impl ResourceRenderer {
+impl ResourceManager {
 
-	pub fn new() -> Self {
-
-		let window: Window = web_sys::window().expect("Window not found.");
-		let document: Document = window.document().expect("Document not found.");
-
+	/// Create a new resource manager.
+	pub fn new(window: Rc<Window>, document: Rc<Document>) -> Self {
+	
 		Self {
-
+	
+			web_window: window.clone(), 
+			web_document: document.clone(),
 			resource_category_elements: HashMap::new(),
 			resource_container_element: document.get_element_by_id("resource-container").unwrap(),
 			resource_elements: HashMap::new(),
-
+	
 		}
-
+	
 	}
 
+	/// Initialize the manager.
 	pub fn init(&mut self, stuff_manager: &StuffManager) {
-
-		let window: Window = web_sys::window().expect("Window not found.");
-		let document: Document = window.document().expect("Document not found.");
 
 		for (name, resource) in stuff_manager.iter_resource() {
 
@@ -61,9 +62,9 @@ impl ResourceRenderer {
 
 				let category_element = ResourceCategoryElement {
 
-					list_element: document.create_element("ul").unwrap(),
-					title_element: document.create_element("div").unwrap(),
-					root_element: document.create_element("div").unwrap(),
+					list_element: self.web_document.create_element("ul").unwrap(),
+					title_element: self.web_document.create_element("div").unwrap(),
+					root_element: self.web_document.create_element("div").unwrap(),
 
 				};
 
@@ -86,11 +87,11 @@ impl ResourceRenderer {
 			
 			let resource_element = ResourceElement {
 
-				root_element: document.create_element("li").unwrap(),
-				count_element: document.create_element("div").unwrap(),
-				production_element: document.create_element("div").unwrap(),
-				capacity_element: document.create_element("div").unwrap(),
-				title_element: document.create_element("div").unwrap(),
+				root_element: self.web_document.create_element("li").unwrap(),
+				count_element: self.web_document.create_element("div").unwrap(),
+				production_element: self.web_document.create_element("div").unwrap(),
+				capacity_element: self.web_document.create_element("div").unwrap(),
+				title_element: self.web_document.create_element("div").unwrap(),
 
 			};
 
@@ -136,6 +137,7 @@ impl ResourceRenderer {
 		
 	}
 
+	/// Renders resources.
 	pub fn render(&self, stuff_manager: &StuffManager) {
 
 		for (name, resource) in stuff_manager.iter_resource() {

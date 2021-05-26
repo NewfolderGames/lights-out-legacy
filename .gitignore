@@ -1,4 +1,5 @@
-/target
 /pkg
+/src-old
+/target
 /www/dist
 /www/node_modules

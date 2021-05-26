@@ -1,3 +1,1 @@
-mod number;
-
-pub use number::*;
+pub mod number;

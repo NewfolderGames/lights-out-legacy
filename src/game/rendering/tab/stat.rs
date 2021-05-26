@@ -1,7 +1,8 @@
 use std::collections::HashMap;
+use std::rc::Rc;
 use web_sys::{ Document, Element, Window };
-use crate::game::StuffManager;
-use crate::utils::format_number_scientific;
+use crate::game::stuff::{ Stuff, StuffManager };
+use crate::utils::number::format_number_scientific;
 use super::Tab;
 
 struct StatElement {
@@ -22,7 +23,11 @@ struct StatCategoryElement {
 
 }
 
+/// A stats tab.
 pub struct StatTab {
+
+	web_window: Rc<Window>,
+	web_document: Rc<Document>,
 
 	tab_element: Element,
 	tab_button_element: Element,
@@ -36,10 +41,9 @@ pub struct StatTab {
 
 impl StatTab {
 
-	pub fn new(stuff_manager: &StuffManager) -> Self {
+	/// Creates a new tab.
+	pub fn new(window: Rc<Window>, document: Rc<Document>, stuff_manager: &StuffManager) -> Self {
 
-		let window: Window = web_sys::window().expect("Window not found.");
-		let document: Document = window.document().expect("Document not found.");
 		let tab_list_element = document.get_element_by_id("tab-list").expect("Element id 'tab-list' not found.");
 
 		// Tab.
@@ -133,6 +137,8 @@ impl StatTab {
 
 		Self {
 
+			web_document: document.clone(),
+			web_window: window.clone(),
 			tab_element,
 			tab_button_element,
 			stat_category_elements,

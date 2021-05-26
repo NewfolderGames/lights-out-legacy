@@ -1,4 +1,4 @@
-use crate::game::stuff::{ StuffManager, FeatureAsset };
+use crate::game::stuff::{ Stuff, StuffManager, FeatureAsset };
 
 pub fn load(stuff_manager: &mut StuffManager) {
 

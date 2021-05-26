@@ -1,11 +1,11 @@
-mod manager;
 mod loading;
 mod log;
+mod manager;
 mod resource;
 mod tab;
 
+pub use loading::LoadingManager;
+pub use log::LogManager;
 pub use manager::RenderingManager;
-pub use loading::LoadingRenderer;
-pub use log::LogRenderer;
-pub use resource::ResourceRenderer;
-pub use tab::TabRenderer;
+pub use resource::ResourceManager;
+pub use tab::TabManager;

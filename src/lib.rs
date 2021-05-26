@@ -1,3 +1,3 @@
-mod assets;
-mod game;
-mod utils;
+pub mod assets;
+pub mod game;
+pub mod utils;

@@ -1,11 +1,13 @@
+use std::rc::Rc;
 use web_sys::{ Storage, Window };
+use crate::game::stuff::StuffManager;
 use super::Save;
-use super::super::StuffManager;
 
+/// A save manager.
 pub struct SaveManager {
 
-	window: Window,
-	storage: Storage,
+	web_window: Rc<Window>,
+	web_storage: Rc<Storage>,
 
 	save: Save
 
@@ -13,15 +15,14 @@ pub struct SaveManager {
 
 impl SaveManager {
 
-	pub fn new() -> Self {
+	pub fn new(window: Rc<Window>) -> Self {
 
-		let window = web_sys::window().expect("Window not found.");
-		let storage = window.local_storage().expect("Local Storage cannot be used.").expect("Local storage not found.");
+		let web_storage = window.local_storage().expect("Local Storage cannot be used.").expect("Local storage not found.");
 
 		Self {
 
-			window,
-			storage,
+			web_window: window.clone(),
+			web_storage: Rc::new(web_storage),
 			save: Save::new()
 
 		}
@@ -44,15 +45,15 @@ impl SaveManager {
 		// Serialize.
 
 		let save = serde_json::to_string(&self.save).unwrap();
-		let save = self.window.btoa(&save).unwrap();
+		let save = self.web_window.btoa(&save).unwrap();
 
-		self.storage.set_item("save", &save).unwrap();
+		self.web_storage.set_item("save", &save).unwrap();
 
 	}
 
 	pub fn load_from_storage(&self, stuff_manager: &mut StuffManager) -> bool {
 
-		if let Ok(Some(save)) = self.storage.get_item("save") {
+		if let Ok(Some(save)) = self.web_storage.get_item("save") {
 
 			self.load_from_string(&save, stuff_manager)
 
@@ -64,7 +65,7 @@ impl SaveManager {
 
 		// Decode.
 
-		let save = self.window.atob(save).unwrap();
+		let save = self.web_window.atob(save).unwrap();
 
 		// Deserialize.
 

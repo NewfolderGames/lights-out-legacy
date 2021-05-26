@@ -1,3 +1,4 @@
+/// Adds scientific notation to a number.
 pub fn format_number_scientific(number: f64) -> String {
 
 	if number >= 1000f64 {

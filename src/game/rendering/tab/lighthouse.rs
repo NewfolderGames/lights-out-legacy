@@ -1,8 +1,13 @@
+use std::rc::Rc;
 use web_sys::{ Document, Element, Window };
-use crate::game::StuffManager;
+use crate::game::stuff::StuffManager;
 use super::Tab;
 
+/// A lighthouse tab.
 pub struct LighthouseTab {
+
+	web_window: Rc<Window>,
+	web_document: Rc<Document>,
 
 	tab_element: Element,
 	tab_button_element: Element,
@@ -17,10 +22,9 @@ pub struct LighthouseTab {
 
 impl LighthouseTab {
 
-	pub fn new(stuff_manager: &StuffManager) -> Self {
+	/// Creates a new tab.
+	pub fn new(window: Rc<Window>, document: Rc<Document>, stuff_manager: &StuffManager) -> Self {
 
-		let window: Window = web_sys::window().expect("Window not found.");
-		let document: Document = window.document().expect("Document not found.");
 		let tab_list_element = document.get_element_by_id("tab-list").expect("Element id 'tab-list' not found.");
 
 		// Tab.
@@ -60,6 +64,8 @@ impl LighthouseTab {
 
 		Self {
 
+			web_document: document.clone(),
+			web_window: window.clone(),
 			tab_element,
 			tab_button_element,
 			button_examine_element,

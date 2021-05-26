@@ -1,32 +1,60 @@
+use std::rc::Rc;
 use wasm_bindgen::prelude::*;
-use crate::assets::*;
-use super::{ RenderingManager, SaveManager, StuffManager };
+use web_sys::{ Document, Window };
+use super::stuff::StuffManager;
+use super::rendering::RenderingManager;
+use super::save::SaveManager;
 
 #[wasm_bindgen]
 pub struct Game {
 
+	// Web stuffs.
+
+	web_window: Rc<Window>,
+	web_document: Rc<Document>,
+
+	// Managers.
+
 	rendering_manager: RenderingManager,
 	save_manager: SaveManager,
 	stuff_manager: StuffManager,
+
+	// State.
 
 	is_loaded: bool,
 	is_playing: bool,
 
 }
 
-// Exposed functions.
-
 #[wasm_bindgen]
 impl Game {
 
+	/// Creates a new game.
 	#[wasm_bindgen(constructor)]
 	pub fn new() -> Self {
 
+		// Panic hook.
+
+		std::panic::set_hook(Box::new(console_error_panic_hook::hook));
+
+		// Web stuffs.
+
+		let web_window = Rc::new(web_sys::window().expect("Window not found."));
+		let web_document = Rc::new(web_window.document().expect("Document not found."));
+
+		// Managers.
+
+		let rendering_manager = RenderingManager::new(web_window.clone(), web_document.clone());
+		let save_manager = SaveManager::new(web_window.clone());
+		let stuff_manager = StuffManager::new();
+
 		Self {
 
-			rendering_manager: RenderingManager::new(),
-			save_manager: SaveManager::new(),
-			stuff_manager: StuffManager::new(),
+			web_window,
+			web_document,
+			rendering_manager,
+			save_manager,
+			stuff_manager,
 			is_loaded: false,
 			is_playing: false,
 
@@ -36,15 +64,13 @@ impl Game {
 
 }
 
-// Game state.
-
 #[wasm_bindgen]
 impl Game {
 
 	#[wasm_bindgen]
 	pub fn load(&mut self) {
 
-		if self.is_playing || self.is_loaded { return }
+		if self.is_loaded { return }
 
 		self.rendering_manager.set_loading(true);
 
@@ -52,21 +78,23 @@ impl Game {
 
 		self.rendering_manager.set_loading_description("Loading assets.");
 
-		load_building(&mut self.stuff_manager);
-		load_feature(&mut self.stuff_manager);
-		load_modifier(&mut self.stuff_manager);
-		load_resource(&mut self.stuff_manager);
-		load_stat(&mut self.stuff_manager);
-		load_text(&mut self.stuff_manager);
-		load_technology(&mut self.stuff_manager);
-		load_unlock(&mut self.stuff_manager);
-		load_upgrade(&mut self.stuff_manager);
+		crate::assets::load_building(&mut self.stuff_manager);
+		crate::assets::load_feature(&mut self.stuff_manager);
+		crate::assets::load_modifier(&mut self.stuff_manager);
+		crate::assets::load_resource(&mut self.stuff_manager);
+		crate::assets::load_stat(&mut self.stuff_manager);
+		crate::assets::load_text(&mut self.stuff_manager);
+		crate::assets::load_technology(&mut self.stuff_manager);
+		crate::assets::load_unlock(&mut self.stuff_manager);
+		crate::assets::load_upgrade(&mut self.stuff_manager);
 
 		// Rendering.
 
+		self.rendering_manager.set_loading_description("Initializing rendering manager.");
+
 		self.rendering_manager.init(&self.stuff_manager);
 
-		// Load Save.
+		// Load save.
 
 		self.rendering_manager.set_loading_description("Loading save file.");
 
@@ -137,7 +165,7 @@ impl Game {
 
 	#[wasm_bindgen]
 	pub fn tick(&mut self) {
-
+		
 		if !self.is_playing { return }
 
 		self.stuff_manager.tick();
@@ -173,19 +201,27 @@ impl Game {
 
 		if !self.stuff_manager.is_unlocked("unlock_quest_exmaine") {
 
-			self.stuff_manager.unlock("unlock_quest_exmaine");
-			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_0").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_0"), None);
+			if self.stuff_manager.get_stat("stat_lighthouse_examined").unwrap().get_value() >= 5f64 {
+
+				self.stuff_manager.unlock("unlock_quest_exmaine");
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
+
+			} else {
+
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_0").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_0"), None);
+
+			}
 			
 		} else {
 		
 			if self.stuff_manager.is_unlocked("unlock_quest_gather") {
 
 				self.stuff_manager.add_resource("resource_science", 1f64);
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_2").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_2"), None);
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_3").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_3"), None);
 			
 			} else {
 
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_2").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_2"), None);
 
 			}
 
@@ -196,6 +232,7 @@ impl Game {
 	pub fn lighthouse_gather(&mut self) {
 
 		self.stuff_manager.add_stat("stat_lighthouse_gathered", 1f64);
+		let gathered = self.stuff_manager.get_stat("stat_lighthouse_gathered").unwrap().get_value();
 
 		if !self.stuff_manager.is_unlocked("unlock_quest_gather") {
 

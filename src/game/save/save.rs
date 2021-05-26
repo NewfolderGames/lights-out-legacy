@@ -1,6 +1,6 @@
 use std::collections::{ HashMap, HashSet };
 use serde::{ Serialize, Deserialize };
-use super::super::StuffManager;
+use crate::game::stuff::StuffManager;
 
 #[derive(Serialize, Deserialize)]
 pub struct Save {
@@ -131,7 +131,7 @@ impl SaveStuff {
 	pub fn set_upgrades(&mut self, stuff_manager: &StuffManager) {
 
 		stuff_manager
-			.iter_upgrades()
+			.iter_upgrade()
 			.for_each(|(u_name, u)| {
 				
 				if !u.is_unlocked() || !u.is_unlocked() { return }
