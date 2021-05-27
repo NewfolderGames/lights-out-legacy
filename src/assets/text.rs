@@ -2,6 +2,17 @@ use crate::game::stuff::{ StuffManager, TextAsset };
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
+	// Building.
+
+	stuff_manager.load_text(TextAsset::new("building_category_mana", "Mana"));
+	stuff_manager.load_text(TextAsset::new("building_category_storage", "Storage"));
+
+	stuff_manager.load_text(TextAsset::new("building_stockpile_title", "Stockpile"));
+	stuff_manager.load_text(TextAsset::new("building_researchBench_title", "Research Bench"));
+
+	stuff_manager.load_text(TextAsset::new("building_stockpile_description", "An area where you can put all sorts of stuffs."));
+	stuff_manager.load_text(TextAsset::new("building_researchBench_description", "A simple bench where you can store papers."));
+
 	// Log.
 
 	stuff_manager.load_text(TextAsset::new("log_game_pause", "Game paused."));
@@ -15,6 +26,9 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_3", "You have studied the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_gather_0", "You have gathered scraps lying around."));
 	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_gather_1", "You should build something with it."));
+
+	// Modifiers.
+	
 
 	// Resource.
 
@@ -52,6 +66,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("technology_agriculture_description", "Develops a way to grow platns using the lighthouse."));
 
 	// UI.
+
+	stuff_manager.load_text(TextAsset::new("ui_tab_building", "Building"));
 
 	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse", "Lighthouse"));
 	stuff_manager.load_text(TextAsset::new("ui_tab_lighthouse_button_examine", "Examine the lighthouse"));

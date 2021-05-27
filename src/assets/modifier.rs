@@ -7,8 +7,11 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Resource - Categories.
 
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_rawMaterial_capacity_base"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_rawMaterial_capacity_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_category_rawMaterial_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_category_rawMaterial_capacity_multiplier"));
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_category_mana_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_category_mana_capacity_multiplier"));
 
 	// Resource - Types.
 
@@ -19,13 +22,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_copper_capacity_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_copper_capacity_multiplier"));
 	
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_production_base"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_production_multiplier"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_consumption_base"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_consumption_multiplier"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_capacity_base"));
-	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_capacity_multiplier"));
-	
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_production_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_production_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_consumption_base"));
@@ -33,6 +29,20 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_capacity_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_capacity_multiplier"));
 
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_production_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_capacity_multiplier"));
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_production_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_stone_capacity_multiplier"));
+	
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_wood_production_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_wood_production_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_wood_consumption_base"));

@@ -36,17 +36,31 @@ impl StuffManager {
 
 	}
 
-	/// Adds a resource count.
+	/// Adds a building's count.
+	pub fn add_building(&mut self, name: &str, amount: i32) {
+
+		self.building_storage.add_count(name, amount);
+
+	}
+
+	/// Adds a resource's count.
 	pub fn add_resource(&mut self, name: &str, amount: f64) {
 
 		self.resource_storage.add_count(name, amount);
 
 	}
 
-	/// Adds a stat value.
+	/// Adds a stat's value.
 	pub fn add_stat(&mut self, name: &str, amount: f64) {
 
 		self.stat_storage.add_value(name, amount);
+
+	}
+
+	/// Returns a reference to a building.
+	pub fn get_building(&self, name: &str) -> Option<&Building> {
+
+		self.building_storage.get(name)
 
 	}
 
@@ -215,7 +229,27 @@ impl StuffManager {
 
 	}
 
-	/// Tries to purchage technology.
+	/// Tries to purchase a building.
+	pub fn purchase_building(&mut self, name: &str) -> bool {
+
+		if let Some(building) = self.building_storage.get(name) {
+
+			if !building.is_unlocked() { return false; }
+
+			if self.resource_storage.spend_resources(building.get_price()) {
+
+				self.add_building(name, 1);
+				return true;
+
+			}
+
+		}
+
+		false
+
+	}
+
+	/// Tries to purchase a technology.
 	pub fn purchase_technology(&mut self, name: &str) -> bool {
 
 		if let Some(technology) = self.technology_storage.get(name) {
@@ -311,13 +345,13 @@ impl StuffManager {
 
 			});
 
-		// Calculate resource.
-
-		self.resource_storage.calculate(&self.modifier_storage);
-
 		// Set modifiers.
 
 		modifiers.iter().for_each(|(name, value)| self.modifier_storage.set_value(name, *value));
+
+		// Calculate resource.
+
+		self.resource_storage.calculate(&self.modifier_storage);
 
 		// Stats.
 

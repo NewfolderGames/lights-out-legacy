@@ -6,6 +6,7 @@ pub struct Building {
 
 	asset: BuildingAsset,
 	
+	base_modifier: Vec<(String, f64)>,
 	calculated_modifiers: Vec<(String, f64)>,
 	calculated_price: Vec<(String, f64)>,
 	count: i32,
@@ -33,7 +34,10 @@ impl Building {
 			.modifiers
 			.as_ref()(modifier_storage, resource_storage)
 			.iter()
-			.for_each(|(m_name, m_value)| self.calculated_modifiers.push((String::from(*m_name), *m_value * self.count as f64)));
+			.for_each(|(m_name, m_value)| { 
+				self.base_modifier.push((String::from(*m_name), *m_value));
+				self.calculated_modifiers.push((String::from(*m_name), *m_value * self.count as f64));
+			});
 
 	}
 
@@ -42,10 +46,17 @@ impl Building {
 
 		self.calculated_price.clear();
 		self.asset
-			.modifiers
+			.price
 			.as_ref()(modifier_storage, resource_storage)
 			.iter()
-			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), r_price * self.asset.price_multiplier.powi(self.count + 1))))
+			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), r_price * self.asset.price_multiplier.powi(self.count))))
+
+	}
+
+	/// Returns the building's base modifiers.
+	pub fn get_base_modifiers(&self) -> &Vec<(String, f64)> {
+
+		&self.base_modifier
 
 	}
 
@@ -67,6 +78,13 @@ impl Building {
 	pub fn get_price(&self) -> &Vec<(String, f64)> {
 
 		&self.calculated_price
+
+	}
+
+	/// Returns `ture` if the building is enabled.
+	pub fn is_active(&self) -> bool {
+
+		self.is_active
 
 	}
 
@@ -111,6 +129,7 @@ impl Stuff for Building {
 		Self {
 
 			asset,
+			base_modifier: Vec::new(),
 			calculated_modifiers: Vec::new(),
 			calculated_price: Vec::new(),
 			count: 0,

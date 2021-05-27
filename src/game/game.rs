@@ -88,14 +88,6 @@ impl Game {
 		crate::assets::load_unlock(&mut self.stuff_manager);
 		crate::assets::load_upgrade(&mut self.stuff_manager);
 
-		self.stuff_manager.tick();
-
-		// Rendering.
-
-		self.rendering_manager.set_loading_description("Initializing rendering manager.");
-
-		self.rendering_manager.init(&self.stuff_manager);
-
 		// Load save.
 
 		self.rendering_manager.set_loading_description("Loading save file.");
@@ -104,6 +96,13 @@ impl Game {
 
 		self.stuff_manager.unlock("unlock_default");
 		self.stuff_manager.add_stat("stat_game_booted", 1f64);
+		self.stuff_manager.tick();
+
+		// Rendering.
+
+		self.rendering_manager.set_loading_description("Initializing rendering manager.");
+
+		self.rendering_manager.init(&self.stuff_manager);
 
 		// Done.
 
@@ -181,6 +180,17 @@ impl Game {
 
 #[wasm_bindgen] 
 impl Game {
+
+	#[wasm_bindgen]
+	pub fn purchase_building(&mut self, name: &str) {
+
+		if self.stuff_manager.purchase_building(name) {
+
+			self.rendering_manager.render(&self.stuff_manager);
+
+		}
+
+	}
 
 	#[wasm_bindgen]
 	pub fn purchase_technology(&mut self, name: &str) {

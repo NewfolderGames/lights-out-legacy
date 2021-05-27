@@ -27,7 +27,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"technology_woodworking",
 		Box::new(|_| {
 			vec![
-				("resource_science", 100f64),
+				("resource_science", 40f64),
 				("resource_wood", 25f64),
 			]
 		})
@@ -37,7 +37,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"technology_mining",
 		Box::new(|_| {
 			vec![
-				("resource_science", 100f64),
+				("resource_science", 40f64),
 				("resource_stone", 25f64),
 			]
 		})

@@ -83,7 +83,7 @@ impl StatTab {
 				category_element.root_element.append_with_node_1(&category_element.title_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.list_element).unwrap();
 
-				category_element.title_element.set_inner_html(stuff_manager.get_text(&["stat_category_", stat.get_asset().category].join("")).unwrap_or("STAT_CATEGORY"));
+				category_element.title_element.set_inner_html(stuff_manager.get_text(&format!("stat_category_{}", stat.get_asset().category)).unwrap_or(&format!("STAT_CATEGORY_{}", stat.get_asset().category.to_uppercase())));
 
 				stat_category_elements.insert(String::from(stat.get_asset().category), category_element);
 
@@ -161,6 +161,8 @@ impl Tab for StatTab {
 
 	fn render(&mut self, stuff_manager: &StuffManager) {
 
+		// Tab.
+
 		if !stuff_manager.is_feature_unlocked("feature_tab_stats") {
 
 			self.tab_element.set_class_name("tab locked");
@@ -173,6 +175,8 @@ impl Tab for StatTab {
 			self.tab_button_element.set_class_name(if self.is_selected { "button active" } else { "button" });
 
 		}
+
+		// Stats.
 
 		for (name, stat) in stuff_manager.iter_stat() {
 

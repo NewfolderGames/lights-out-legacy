@@ -32,11 +32,11 @@ impl Resource {
 
 		self.capacity = self.asset.capacity;
 		self.capacity +=
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_storage_base"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_storage_base"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_capacity_base", self.asset.name)).unwrap_or(1f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_capacity_base", self.asset.category)).unwrap_or(0f64);
 		self.capacity *= 1f64 +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_storage_multiplier"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_storage_multiplier"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_capacity_multiplier", self.asset.name)).unwrap_or(0f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_capacity_multiplier", self.asset.category)).unwrap_or(0f64);
 
 	}
 
@@ -45,11 +45,11 @@ impl Resource {
 
 		self.production = 0f64;
 		self.production +=
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_production_base"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_production_base"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_production_base", self.asset.name)).unwrap_or(0f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_production_base", self.asset.category)).unwrap_or(0f64);
 		self.production *= 1f64 +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_production_multiplier"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_production_multiplier"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_production_mutiplier", self.asset.name)).unwrap_or(0f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_production_mutiplier", self.asset.category)).unwrap_or(0f64);
 		
 	}
 
@@ -58,11 +58,11 @@ impl Resource {
 
 		self.consumption = 0f64;
 		self.consumption +=
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_consumption_base"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_consumption_base"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_consumption_base", self.asset.name)).unwrap_or(0f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_consumption_base", self.asset.category)).unwrap_or(0f64);
 		self.consumption *= 1f64 +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.name, "_consumption_multiplier"].join("")).unwrap_or(0f64) +
-			modifier_storage.get_value(&["modifier_resource_", self.asset.category, "_consumption_multiplier"].join("")).unwrap_or(0f64);
+			modifier_storage.get_value(&format!("modifier_{}_consumption_mutiplier", self.asset.name)).unwrap_or(0f64) +
+			modifier_storage.get_value(&format!("modifier_resource_category_{}_consumption_mutiplier", self.asset.category)).unwrap_or(0f64);
 		
 	}
 

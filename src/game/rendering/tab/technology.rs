@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::rc::Rc;
 use web_sys::{ Document, Element, Window };
-use crate::game::stuff::{ Stuff, StuffManager };
+use crate::game::stuff::StuffManager;
 use crate::utils::number::format_number_scientific;
 use super::Tab;
 
@@ -72,6 +72,7 @@ impl TechnologyTab {
 		for (name, technology) in stuff_manager.iter_technology() {
 
 			let mut technology_element = TechnologyElement {
+
 				is_researched: technology.is_researched(),
 				is_unlocked: technology.is_unlocked(),
 				root_element: document.create_element("div").unwrap(),
@@ -79,6 +80,7 @@ impl TechnologyTab {
 				description_element: document.create_element("div").unwrap(),
 				price_container_element: document.create_element("div").unwrap(),
 				price_elements: HashMap::new()
+
 			};
 
 			technology_element.root_element.set_class_name("technology");
@@ -86,8 +88,8 @@ impl TechnologyTab {
 			technology_element.description_element.set_class_name("technology-description");
 			technology_element.price_container_element.set_class_name("technology-price-container");
 
-			technology_element.title_element.set_inner_html(stuff_manager.get_text(&[name, "_title"].join("")).unwrap_or(&[&name.to_uppercase(), "_TITLE"].join("")));
-			technology_element.description_element.set_inner_html(stuff_manager.get_text(&[name, "_description"].join("")).unwrap_or(&[&name.to_uppercase(), "_DESCRIPTION"].join("")));
+			technology_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
+			technology_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
 			technology_element.root_element.set_attribute("onclick", &format!("window.Game.purchase_technology('{}')", name)).unwrap();
 
@@ -96,14 +98,16 @@ impl TechnologyTab {
 			for (resource_name, resource_count) in technology.get_price() {
 
 				let price_element = TechnologyPriceElement {
+					
 					root_element: document.create_element("div").unwrap(),
 					resource_element: document.create_element("div").unwrap(),
 					count_element: document.create_element("div").unwrap()
+
 				};
 
 				price_element.root_element.set_class_name("technology-price");
-				price_element.resource_element.set_class_name("technology-resource");
-				price_element.count_element.set_class_name("technology-count");
+				price_element.resource_element.set_class_name("technology-resource-name");
+				price_element.count_element.set_class_name("technology-resource-count");
 
 				price_element.resource_element.set_inner_html(stuff_manager.get_text(&[resource_name, "_title"].join("")).unwrap_or(&[&resource_name.to_uppercase(), "_TITLE"].join("")));
 				price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
@@ -206,12 +210,12 @@ impl Tab for TechnologyTab {
 
 				if current_resource_count >= *resource_count {
 
-					price_element.count_element.set_class_name("technology-count");
+					price_element.count_element.set_class_name("technology-resuorce-count");
 					price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
 
 				} else {
 
-					price_element.count_element.set_class_name("technology-count needs_more");
+					price_element.count_element.set_class_name("technology-resource-count needs_more");
 					price_element.count_element.set_inner_html(&format!("{} / {}", format_number_scientific(current_resource_count), format_number_scientific(*resource_count)));
 
 				}

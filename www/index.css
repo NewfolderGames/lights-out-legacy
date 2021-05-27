@@ -234,6 +234,91 @@ button {
 	display: block;
 }
 
+/* Game container - Tabs - Building */
+
+#tab-building .building-category.locked {
+	display: none;
+}
+
+#tab-building .building-category-title {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#tab-building .building-category-list {
+	list-style-type: none;
+	margin: 16px 0;
+	padding: 0;
+}
+
+#tab-building .building {
+	border: 1px solid var(--border-color-dark);
+	margin: 16px 0;
+	padding: 8px;
+}
+#tab-building .building:hover {
+	cursor: pointer;
+}
+#tab-building .building.locked {
+	display: none;
+}
+
+#tab-building .building-title {
+	margin-bottom: 4px;
+	font-weight: bold;
+}
+
+#tab-building .building-description {
+	margin-bottom: 4px;
+}
+
+#tab-building .building-modifier-container {
+	border-top: 1px solid var(--border-color-dark);
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
+#tab-building .building-modifier {
+	display: flex;
+}
+#tab-building .building-modifier:hover {
+	background: var(--background-color-hover);
+}
+
+#tab-building .building-modifier .building-modifier-name {
+	flex-grow: 1;
+}
+
+#tab-building .building-modifier .building-modifier-count {
+	flex-grow: 1;
+	text-align: right;
+}
+
+#tab-building .building-price-container {
+	border-top: 1px solid var(--border-color-dark);
+	padding-top: 4px;
+}
+
+#tab-building .building-price {
+	display: flex;
+}
+#tab-building .building-price:hover {
+	background: var(--background-color-hover);
+}
+
+#tab-building .building-price .building-resource-name {
+	flex-grow: 1;
+}
+
+#tab-building .building-price .building-resource-count {
+	flex-grow: 1;
+	text-align: right;
+}
+#tab-building .building-price .building-resource-count.needs_more {
+	color: var(--font-color-danger);
+}
+
+
 /* Game container - Tabs - Lighthouse */
 
 #tab-lighthouse #tab-lighthouse-buttons {
@@ -351,15 +436,15 @@ button {
 	background: var(--background-color-hover);
 }
 
-#tab-technology .technology-price .technology-resource {
-	flex-basis: 100px;
+#tab-technology .technology-price .technology-resource-name {
+	flex-grow: 1;
 }
 
-#tab-technology .technology-price .technology-count {
+#tab-technology .technology-price .technology-resource-count {
 	flex-grow: 1;
 	text-align: right;
 }
-#tab-technology .technology-price .technology-count.needs_more {
+#tab-technology .technology-price .technology-resource-count.needs_more {
 	color: var(--font-color-danger);
 }
 
