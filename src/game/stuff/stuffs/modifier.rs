@@ -104,12 +104,12 @@ impl ModifierStorage {
 
 	}
 
-	/// Returns a modifier's value.
-	pub fn set_value(&self, name: &str) -> Option<f64> {
+	/// Sets a modifier's value.
+	pub fn set_value(&mut self, name: &str, value: f64) {
 
 		self.modifiers
-			.get(name)
-			.map(|m| m.get_value())
+			.get_mut(name)
+			.map(|m| m.set_value(value));
 
 	}
 

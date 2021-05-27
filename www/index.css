@@ -1,5 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap');
 
+/* Variables */
+
+:root {
+
+	--font-color-danger: #992222;
+	--font-color-dark: #444444;
+	--font-color-normal: #999999;
+	--font-color-warn: #996622;
+
+	--border-color-dark: #444444;
+	--border-color-normal: #999999;
+
+	--background-color-hover: rgba(255, 255, 255, 0.1);
+
+}
+
 /* Animations */
 
 @keyframes fadeInBlock {
@@ -170,7 +186,7 @@ button {
 	display: flex;
 }
 #resource-container .resource:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--background-color-hover);
 }
 #resource-container .resource.locked {
 	display: none;
@@ -188,7 +204,7 @@ button {
 
 #resource-container .resource-capacity {
 	text-align: right;
-	color: #444444;
+	color: var(--font-color-dark);
 	flex-basis: 64px;
 }
 
@@ -200,7 +216,7 @@ button {
 /* Game container - Tabs */
 
 #tab-wrapper {
-	border: #444444 solid 1px;
+	border: var(--border-color-normal) solid 1px;
 	border-bottom: none;
 	border-top: none;
 	box-sizing: border-box;
@@ -211,6 +227,7 @@ button {
 #tab-wrapper .tab {
 	display: none;
 	height: 100%;
+	overflow-y: auto;
 	position: relative;
 }
 #tab-wrapper .tab.active {
@@ -236,7 +253,7 @@ button {
 	width: 256px;
 }
 #tab-lighthouse #tab-lighthouse-buttons .button:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--background-color-hover);
 	color: #ffffff;
 	cursor: pointer;
 	text-decoration: underline;
@@ -265,12 +282,13 @@ button {
 }
 
 #tab-stats .stat-category-list {
-	padding: 0;
 	list-style-type: none;
+	margin: 16px 0;
+	padding: 0;
 }
 
 #tab-stats .stat:hover {
-	background: rgba(255, 255, 255, 0.1);
+	background: var(--background-color-hover);
 }
 
 #tab-stats .stat-title {
@@ -280,6 +298,69 @@ button {
 #tab-stats .stat-value {
 	flex-basis: 64px;
 	text-align: right;
+}
+
+/* Game container - Tabs - Technology */
+
+#tab-technology > div {
+	margin: 16px 0;
+}
+
+#tab-technology > div > .title {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#tab-technology #tab-technology-locked {
+	display: none;
+}
+
+#tab-technology #tab-technology-researchable .technology:hover {
+	cursor: pointer;
+}
+
+#tab-technology #tab-technology-researched .technology {
+	color: var(--font-color-dark);
+	border-color: var(--border-color-dark);
+}
+
+#tab-technology .technology {
+	border: 1px solid var(--border-color-dark);
+	margin: 16px 0;
+	padding: 8px;
+}
+
+#tab-technology .technology-title {
+	margin-bottom: 4px;
+	font-weight: bold;
+}
+
+#tab-technology .technology-description {
+	margin-bottom: 4px;
+}
+
+#tab-technology .technology-price-container {
+	border-top: 1px solid var(--border-color-dark);
+	padding-top: 4px;
+}
+
+#tab-technology .technology-price {
+	display: flex;
+}
+#tab-technology .technology-price:hover {
+	background: var(--background-color-hover);
+}
+
+#tab-technology .technology-price .technology-resource {
+	flex-basis: 100px;
+}
+
+#tab-technology .technology-price .technology-count {
+	flex-grow: 1;
+	text-align: right;
+}
+#tab-technology .technology-price .technology-count.needs_more {
+	color: var(--font-color-danger);
 }
 
 /* Game container - Log container */

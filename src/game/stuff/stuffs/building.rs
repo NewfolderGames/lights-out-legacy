@@ -25,7 +25,7 @@ impl Building {
 
 	}
 
-	/// Calculates building modifiers.
+	/// Calculates the building's modifiers.
 	pub fn calculate_modifiers(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
 
 		self.calculated_modifiers.clear();
@@ -37,7 +37,7 @@ impl Building {
 
 	}
 
-	/// Calculates building price.
+	/// Calculates the building's price.
 	pub fn calculate_price(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
 
 		self.calculated_price.clear();

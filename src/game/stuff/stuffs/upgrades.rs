@@ -126,7 +126,9 @@ impl UpgradeStorage {
 	/// Calculates upgrade modifiers.
 	pub fn calculate(&mut self, modifier_storage: &ModifierStorage) {
 
-		for (_, upgrade) in self.upgrades.iter() {
+		self.calculated_modifiers.clear();
+
+		for (_, upgrade) in self.upgrades.iter_mut() {
 
 			if !upgrade.is_unlocked() || !upgrade.is_upgraded() { continue; }
 

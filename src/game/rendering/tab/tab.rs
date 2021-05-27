@@ -6,7 +6,7 @@ pub trait Tab {
 	fn is_selected(&self) -> bool;
 
 	/// Renders tab.
-	fn render(&self, stuff_manager: &StuffManager);
+	fn render(&mut self, stuff_manager: &StuffManager);
 
 	/// Selects this tab.
 	fn set_selected(&mut self, selected: bool);

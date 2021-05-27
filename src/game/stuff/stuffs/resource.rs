@@ -243,6 +243,32 @@ impl ResourceStorage {
 
 	}
 
+	/// Spends resources.
+	/// Returns `false` if failed.
+	pub fn spend_resources(&mut self, resources: &Vec<(String, f64)>) -> bool {
+
+		for (name, count) in resources.iter() {
+
+			if let Some(r) = self.resources.get(name) {
+
+				if r.get_count() < *count { return false; }
+
+			} else { return false; }
+
+		}
+
+		for (name, count) in resources.iter() {
+
+			self.resources
+				.get_mut(name)
+				.map(|r| r.add_count(-count));
+
+		}
+
+		return true;
+
+	}
+
 	/// Unlocks a resource.
 	pub fn unlock(&mut self, name: &str) {
 

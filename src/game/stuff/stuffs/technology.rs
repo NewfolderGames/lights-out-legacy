@@ -6,12 +6,33 @@ pub struct Technology {
 
 	asset: TechnologyAsset,
 
+	calculated_price: Vec<(String, f64)>,
+
 	is_researched: bool,
 	is_unlocked: bool
 
 }
 
 impl Technology {
+
+	/// Calculates the technology's price.
+	pub fn calculate_price(&mut self, modifier_storage: &ModifierStorage) {
+
+		self.calculated_price.clear();
+		self.asset
+			.price
+			.as_ref()(modifier_storage)
+			.iter()
+			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), *r_price)));
+
+	}
+
+	/// Returns calculated price.
+	pub fn get_price(&self) -> &Vec<(String, f64)> {
+
+		&self.calculated_price
+
+	}
 
 	/// Returns `true` if the technology is unlocked.
 	pub fn is_unlocked(&self) -> bool {
@@ -53,6 +74,7 @@ impl Stuff for Technology {
 		Self {
 
 			asset,
+			calculated_price: Vec::new(),
 			is_researched: false,
 			is_unlocked: false,
 
@@ -81,24 +103,18 @@ pub struct TechnologyAsset {
 	pub name: &'static str,
 
 	pub price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
-	pub unlock: &'static str,
 
 }
 
 impl TechnologyAsset {
 
 	/// Creates a new technology asset.
-	pub fn new(
-		name: &'static str,
-		price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
-		unlock: &'static str
-	) -> Self {
+	pub fn new(name: &'static str, price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>) -> Self {
 
 		Self {
 
 			name,
 			price,
-			unlock
 
 		}
 
@@ -120,6 +136,15 @@ pub struct TechnologyStorage {
 }
 
 impl TechnologyStorage {
+
+	/// Calculates technology prices.
+	pub fn calculate(&mut self, modifier_storage: &ModifierStorage) {
+
+		self.technologies
+			.iter_mut()
+			.for_each(|(_, t)| t.calculate_price(modifier_storage));
+
+	}
 
 	/// Unlocks a technology.
 	pub fn unlock(&mut self, name: &str) {

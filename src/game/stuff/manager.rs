@@ -64,6 +64,13 @@ impl StuffManager {
 
 	}
 
+	/// Returns a reference to a technology.
+	pub fn get_technology(&self, name: &str) -> Option<&Technology> {
+
+		self.technology_storage.get(name)
+
+	}
+
 	/// Returns a reference to a text.
 	pub fn get_text(&self, name: &str) -> Option<&str> {
 
@@ -208,6 +215,26 @@ impl StuffManager {
 
 	}
 
+	/// Tries to purchage technology.
+	pub fn purchase_technology(&mut self, name: &str) -> bool {
+
+		if let Some(technology) = self.technology_storage.get(name) {
+
+			if !technology.is_unlocked() || technology.is_researched() { return false; }
+
+			if self.resource_storage.spend_resources(technology.get_price()) {
+
+				self.research(name);
+				return true;
+
+			}
+
+		}
+
+		false
+
+	}
+
 	/// Resets all stuffs to original state.
 	pub fn reset(&mut self) {
 
@@ -266,6 +293,7 @@ impl StuffManager {
 		let mut modifiers: HashMap<String, f64> = HashMap::new();
 
 		self.upgrade_storage.calculate(&self.modifier_storage);
+		self.technology_storage.calculate(&self.modifier_storage);
 		self.building_storage.calculate(&self.modifier_storage, &self.resource_storage);
 
 		self.upgrade_storage
@@ -286,6 +314,10 @@ impl StuffManager {
 		// Calculate resource.
 
 		self.resource_storage.calculate(&self.modifier_storage);
+
+		// Set modifiers.
+
+		modifiers.iter().for_each(|(name, value)| self.modifier_storage.set_value(name, *value));
 
 		// Stats.
 

@@ -39,13 +39,14 @@ impl TabManager {
 
 		self.tabs.insert("Lighthouse", lighthouse);
 		self.tabs.insert("Stats", Box::new(StatTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
+		self.tabs.insert("Technology", Box::new(TechnologyTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
 
 	}
 
 	/// Renders a tab.
-	pub fn render(&self, stuff_manager: &StuffManager) {
+	pub fn render(&mut self, stuff_manager: &StuffManager) {
 
-		for (_, tab) in self.tabs.iter() {
+		for (_, tab) in self.tabs.iter_mut() {
 
 			tab.render(stuff_manager);
 

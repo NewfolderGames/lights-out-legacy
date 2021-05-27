@@ -88,6 +88,8 @@ impl Game {
 		crate::assets::load_unlock(&mut self.stuff_manager);
 		crate::assets::load_upgrade(&mut self.stuff_manager);
 
+		self.stuff_manager.tick();
+
 		// Rendering.
 
 		self.rendering_manager.set_loading_description("Initializing rendering manager.");
@@ -175,6 +177,25 @@ impl Game {
 
 }
 
+// Stuffs.
+
+#[wasm_bindgen] 
+impl Game {
+
+	#[wasm_bindgen]
+	pub fn purchase_technology(&mut self, name: &str) {
+
+		if self.stuff_manager.purchase_technology(name) {
+
+			self.stuff_manager.unlock(&format!("unlock_{}", name));
+			self.rendering_manager.render(&self.stuff_manager);
+
+		}
+
+	}
+
+}
+
 // UI.
 
 #[wasm_bindgen] 
@@ -234,17 +255,18 @@ impl Game {
 		self.stuff_manager.add_stat("stat_lighthouse_gathered", 1f64);
 		let gathered = self.stuff_manager.get_stat("stat_lighthouse_gathered").unwrap().get_value();
 
-		if !self.stuff_manager.is_unlocked("unlock_quest_gather") {
-
-			self.stuff_manager.unlock("unlock_quest_gather");
-			
-		}
-
 		self.stuff_manager.add_resource("resource_stone", 1f64);
 		self.stuff_manager.add_resource("resource_wood", 1f64);
 
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None);
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_0").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None);
 
+
+		if !self.stuff_manager.is_unlocked("unlock_quest_gather") && gathered >= 10f64 {
+
+			self.stuff_manager.unlock("unlock_quest_gather");
+			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None)
+			
+		}
 	}
 
 	pub fn lighthouse_lightsout(&mut self) {

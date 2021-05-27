@@ -87,7 +87,7 @@ impl Tab for LighthouseTab {
 
 	}
 
-	fn render(&self, stuff_manager: &StuffManager) {
+	fn render(&mut self, stuff_manager: &StuffManager) {
 
 		if !stuff_manager.is_feature_unlocked("feature_tab_lighthouse") {
 
