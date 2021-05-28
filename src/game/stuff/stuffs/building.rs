@@ -230,6 +230,8 @@ impl BuildingStorage {
 			building.calculate_modifiers(modifier_storage, resource_storage);
 			building.calculate_price(modifier_storage, resource_storage);
 
+			if !building.is_unlocked() || !building.is_active() || building.count == 0 { continue; }
+
 			// Set modifiers.
 
 			for (name, value) in building.get_modifiers() {

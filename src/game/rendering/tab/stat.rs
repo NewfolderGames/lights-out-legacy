@@ -176,6 +176,8 @@ impl Tab for StatTab {
 
 		}
 
+		if !self.is_selected { return }
+
 		// Stats.
 
 		for (name, stat) in stuff_manager.iter_stat() {

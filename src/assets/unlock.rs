@@ -36,7 +36,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Building("building_researchBench"),
 			Unlockable::Building("building_stockpile"),
 			Unlockable::Technology("technology_agriculture"),
-			Unlockable::Technology("technology_hut"),
 		]
 	));
 
@@ -45,22 +44,27 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		vec![
 			Unlockable::Building("building_garden"),
 			Unlockable::Resource("resource_food"),
+			Unlockable::Technology("technology_workbench"),
 			Unlockable::Technology("technology_woodworking"),
 			Unlockable::Technology("technology_mining"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_hut",
+		"unlock_technology_workbench",
 		vec![
-			Unlockable::Building("building_hut"),
+			Unlockable::Building("building_workbench"),
+			Unlockable::Feature("feature_tab_upgrade"),
+			Unlockable::Resource("resource_knowledge"),
+			Unlockable::Upgrade("upgrade_lighthouse_examine"),
+			Unlockable::Upgrade("upgrade_lighthouse_gather"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
 		"unlock_technology_mining",
 		vec![
-			Unlockable::Technology("technology_copper"),
+			Unlockable::Technology("technology_smelting"),
 			Unlockable::Technology("technology_stoneCutting"),
 		]
 	));

@@ -89,6 +89,8 @@ impl Tab for LighthouseTab {
 
 	fn render(&mut self, stuff_manager: &StuffManager) {
 
+		// Tab.
+
 		if !stuff_manager.is_feature_unlocked("feature_tab_lighthouse") {
 
 			self.tab_element.set_class_name("tab locked");
@@ -101,6 +103,8 @@ impl Tab for LighthouseTab {
 			self.tab_button_element.set_class_name(if self.is_selected { "button active" } else { "button" });
 
 		}
+
+		if !self.is_selected { return }
 
 		// Buttons.
 

@@ -64,6 +64,15 @@ impl StuffManager {
 
 	}
 
+	/// Returns a modifier's value.
+	pub fn get_modifier_value(&self, name: &str) -> Option<f64> {
+
+		self.modifier_storage
+			.get(name)
+			.map(|m| m.get_value())
+
+	}
+
 	/// Returns a reference to a resource.
 	pub fn get_resource(&self, name: &str) -> Option<&Resource> {
 
@@ -109,12 +118,30 @@ impl StuffManager {
 
 	}
 
+	/// Returns `true` if the technology is researched.
+	pub fn is_technology_researched(&self, name: &str) -> bool {
+
+		self.technology_storage
+			.get(name)
+			.map_or(false,|t| t.is_researched())
+
+	}
+
 	/// Retuns `true` if unlocked.
 	pub fn is_unlocked(&self, name: &str) -> bool {
 
 		self.unlock_storage
 			.get(name)
 			.map_or(false, |u| u.is_unlocked())
+
+	}
+
+	/// Returns `true` if the upgrade is researched.
+	pub fn is_upgrade_researched(&self, name: &str) -> bool {
+
+		self.upgrade_storage
+			.get(name)
+			.map_or(false,|u| u.is_researched())
 
 	}
 
@@ -266,7 +293,27 @@ impl StuffManager {
 
 			if self.resource_storage.spend_resources(technology.get_price()) {
 
-				self.research(name);
+				self.research_technology(name);
+				return true;
+
+			}
+
+		}
+
+		false
+
+	}
+
+	/// Tries to purchase a upgrade.
+	pub fn purchase_upgrade(&mut self, name: &str) -> bool {
+
+		if let Some(upgrade) = self.upgrade_storage.get(name) {
+
+			if !upgrade.is_unlocked() || upgrade.is_researched() { return false; }
+
+			if self.resource_storage.spend_resources(upgrade.get_price()) {
+
+				self.research_upgrade(name);
 				return true;
 
 			}
@@ -292,11 +339,20 @@ impl StuffManager {
 	}
 
 	/// Researchs a technology.
-	pub fn research(&mut self, name: &str) {
+	pub fn research_technology(&mut self, name: &str) {
 
 		self.technology_storage
 			.get_mut(name)
 			.map(|t| t.research());
+
+	}
+
+	/// Researchs a upgrade.
+	pub fn research_upgrade(&mut self, name: &str) {
+
+		self.upgrade_storage
+			.get_mut(name)
+			.map(|u| u.research());
 
 	}
 
@@ -391,15 +447,6 @@ impl StuffManager {
 			}
 
 		}
-
-	}
-
-	/// Apply an upgrade.
-	pub fn upgrade(&mut self, name: &str) {
-
-		self.upgrade_storage
-			.get_mut(name)
-			.map(|t| t.upgrade());
 
 	}
 

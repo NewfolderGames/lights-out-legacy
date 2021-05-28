@@ -6,12 +6,53 @@ pub struct Upgrade {
 
 	asset: UpgradeAsset,
 
-	is_upgraded: bool,
+	calculated_modifiers: Vec<(String, f64)>,
+	calculated_price: Vec<(String, f64)>,
+
+	is_researched: bool,
 	is_unlocked: bool
 
 }
 
 impl Upgrade {
+
+	/// Calculates the upgrades's modifiers.
+	pub fn calculate_modifiers(&mut self, modifier_storage: &ModifierStorage) {
+
+		self.calculated_modifiers.clear();
+		self.asset
+			.modifiers
+			.as_ref()(modifier_storage)
+			.iter()
+			.for_each(|(m_name, m_value)| { self.calculated_modifiers.push((String::from(*m_name), *m_value)); });
+
+	}
+
+	/// Calculates the upgrade's price.
+	pub fn calculate_price(&mut self, modifier_storage: &ModifierStorage) {
+
+		self.calculated_price.clear();
+		self.asset
+			.price
+			.as_ref()(modifier_storage)
+			.iter()
+			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), *r_price)));
+
+	}
+
+	/// Returns the upgrade's calculated modifiers.
+	pub fn get_modifiers(&self) -> &Vec<(String, f64)> {
+
+		&self.calculated_modifiers
+
+	}
+
+	/// Returns calculated price.
+	pub fn get_price(&self) -> &Vec<(String, f64)> {
+
+		&self.calculated_price
+
+	}
 
 	/// Returns `true` if the upgrade is unlocked.
 	pub fn is_unlocked(&self) -> bool {
@@ -21,16 +62,16 @@ impl Upgrade {
 	}
 
 	/// Returns `true` if the upgrade is researched.
-	pub fn is_upgraded(&self) -> bool {
+	pub fn is_researched(&self) -> bool {
 
-		self.is_upgraded
+		self.is_researched
 
 	}
 
 	/// Researches the upgrade.
-	pub fn upgrade(&mut self) {
+	pub fn research(&mut self) {
 
-		self.is_upgraded = true;
+		self.is_researched = true;
 
 	}
 
@@ -53,7 +94,9 @@ impl Stuff for Upgrade {
 		Self {
 
 			asset,
-			is_upgraded: false,
+			calculated_modifiers: Vec::new(),
+			calculated_price: Vec::new(),
+			is_researched: false,
 			is_unlocked: false,
 
 		}
@@ -68,7 +111,7 @@ impl Stuff for Upgrade {
 
 	fn reset(&mut self) {
 		
-		self.is_upgraded = false;
+		self.is_researched = false;
 		self.is_unlocked = false;
 
 	}
@@ -130,17 +173,20 @@ impl UpgradeStorage {
 
 		for (_, upgrade) in self.upgrades.iter_mut() {
 
-			if !upgrade.is_unlocked() || !upgrade.is_upgraded() { continue; }
+			upgrade.calculate_modifiers(modifier_storage);
+			upgrade.calculate_price(modifier_storage);
 
-			for (name, value) in upgrade.get_asset().modifiers.as_ref()(modifier_storage).iter() {
+			if !upgrade.is_unlocked() || !upgrade.is_researched() { continue; }
 
-				if let Some(modifier) = self.calculated_modifiers.get_mut(*name) {
+			for (name, value) in upgrade.get_modifiers() {
+
+				if let Some(modifier) = self.calculated_modifiers.get_mut(name) {
 
 					*modifier += value;
 
 				} else {
 
-					self.calculated_modifiers.insert(String::from(*name), *value);
+					self.calculated_modifiers.insert(String::from(name), *value);
 
 				}
 

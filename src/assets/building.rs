@@ -24,6 +24,23 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		1.15f64
 	));
 
+	stuff_manager.load_building(BuildingAsset::new(
+		"building_workbench",
+		"mana",
+		Box::new(|_, _| {
+			vec![
+				("modifier_resource_knowledge_capacity_base", 10f64),
+			]
+		}),
+		Box::new(|_, _| {
+			vec![
+				("resource_stone", 25f64),
+				("resource_wood", 25f64),
+			]
+		}),
+		1.15f64
+	));
+
 	// Housing.
 
 	stuff_manager.load_building(BuildingAsset::new(

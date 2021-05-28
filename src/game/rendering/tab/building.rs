@@ -1,4 +1,3 @@
-use core::panic;
 use std::collections::HashMap;
 use std::rc::Rc;
 use web_sys::{ Document, Element, Window };
@@ -9,7 +8,7 @@ use super::Tab;
 struct BuildingModifierElement {
 
 	root_element: Element,
-	modifier_element: Element,
+	name_element: Element,
 	value_element: Element
 
 }
@@ -17,7 +16,7 @@ struct BuildingModifierElement {
 struct BuildingPriceElement {
 
 	root_element: Element,
-	resource_element: Element,
+	name_element: Element,
 	count_element: Element
 
 }
@@ -151,20 +150,20 @@ impl BuildingTab {
 				let modifier_element = BuildingModifierElement {
 
 					root_element: document.create_element("div").unwrap(),
-					modifier_element: document.create_element("div").unwrap(),
+					name_element: document.create_element("div").unwrap(),
 					value_element: document.create_element("div").unwrap()
 
 				};
 
 				modifier_element.root_element.set_class_name("building-modifier");
-				modifier_element.modifier_element.set_class_name("building-modifier-name");
+				modifier_element.name_element.set_class_name("building-modifier-name");
 				modifier_element.value_element.set_class_name("building-modifier-value");
 
-				modifier_element.modifier_element.set_inner_html(stuff_manager.get_text(&format!("{}", modifier_name)).unwrap_or(&format!("{}", modifier_name.to_uppercase())));
+				modifier_element.name_element.set_inner_html(stuff_manager.get_text(&format!("{}", modifier_name)).unwrap_or(&format!("{}", modifier_name.to_uppercase())));
 				modifier_element.value_element.set_inner_html(&format_number_scientific(*modifier_value));
 
 				building_element.modifier_container_element.append_with_node_1(&modifier_element.root_element).unwrap();
-				modifier_element.root_element.append_with_node_1(&modifier_element.modifier_element).unwrap();
+				modifier_element.root_element.append_with_node_1(&modifier_element.name_element).unwrap();
 				modifier_element.root_element.append_with_node_1(&modifier_element.value_element).unwrap();
 
 				building_element.modifier_elements.insert(String::from(modifier_name), modifier_element);
@@ -178,20 +177,20 @@ impl BuildingTab {
 				let price_element = BuildingPriceElement {
 
 					root_element: document.create_element("div").unwrap(),
-					resource_element: document.create_element("div").unwrap(),
+					name_element: document.create_element("div").unwrap(),
 					count_element: document.create_element("div").unwrap()
 
 				};
 
 				price_element.root_element.set_class_name("building-price");
-				price_element.resource_element.set_class_name("building-resource-name");
+				price_element.name_element.set_class_name("building-resource-name");
 				price_element.count_element.set_class_name("building-resource-count");
 
-				price_element.resource_element.set_inner_html(stuff_manager.get_text(&format!("{}", resource_name)).unwrap_or(&format!("{}", resource_name.to_uppercase())));
+				price_element.name_element.set_inner_html(stuff_manager.get_text(&format!("{}", resource_name)).unwrap_or(&format!("{}", resource_name.to_uppercase())));
 				price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
 
 				building_element.price_container_element.append_with_node_1(&price_element.root_element).unwrap();
-				price_element.root_element.append_with_node_1(&price_element.resource_element).unwrap();
+				price_element.root_element.append_with_node_1(&price_element.name_element).unwrap();
 				price_element.root_element.append_with_node_1(&price_element.count_element).unwrap();
 
 				building_element.price_elements.insert(String::from(resource_name), price_element);

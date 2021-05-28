@@ -464,6 +464,98 @@ button {
 	color: var(--font-color-danger);
 }
 
+/* Game container - Tabs - Upgrade */
+
+#tab-upgrade > div {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 16px 0;
+}
+
+#tab-upgrade > div > .title {
+	color: #ffffff;
+	flex-basis: 100%;
+	font-weight: bold;
+	margin-bottom: 16px;
+}
+
+#tab-upgrade #tab-upgrade-locked {
+	display: none;
+}
+
+#tab-upgrade #tab-upgrade-researchable .upgrade:hover {
+	cursor: pointer;
+}
+
+#tab-upgrade #tab-upgrade-researched .upgrade {
+	color: var(--font-color-dark);
+	border-color: var(--border-color-dark);
+}
+
+#tab-upgrade .upgrade {
+	border: 1px solid var(--border-color-dark);
+	box-sizing: border-box;
+	flex-basis: calc(50% - 8px);
+	margin: 8px 0;
+	padding: 8px;
+}
+
+#tab-upgrade .upgrade-title {
+	margin-bottom: 4px;
+	font-weight: bold;
+}
+
+#tab-upgrade .upgrade-description {
+	margin-bottom: 4px;
+}
+
+#tab-upgrade .upgrade-modifier-container {
+	border-top: 1px solid var(--border-color-dark);
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
+#tab-upgrade .upgrade-modifier {
+	display: flex;
+}
+#tab-upgrade .upgrade-modifier:hover {
+	background: var(--background-color-hover);
+}
+
+#tab-upgrade .upgrade-modifier .upgrade-modifier-name {
+	flex-grow: 1;
+}
+
+#tab-upgrade .upgrade-modifier .upgrade-modifier-value {
+	flex-grow: 1;
+	text-align: right;
+}
+
+#tab-upgrade .upgrade-price-container {
+	border-top: 1px solid var(--border-color-dark);
+	padding-top: 4px;
+}
+
+#tab-upgrade .upgrade-price {
+	display: flex;
+}
+#tab-upgrade .upgrade-price:hover {
+	background: var(--background-color-hover);
+}
+
+#tab-upgrade .upgrade-price .upgrade-resource-name {
+	flex-grow: 1;
+}
+
+#tab-upgrade .upgrade-price .upgrade-resource-count {
+	flex-grow: 1;
+	text-align: right;
+}
+#tab-upgrade .upgrade-price .upgrade-resource-count.needs_more {
+	color: var(--font-color-danger);
+}
+
 /* Game container - Log container */
 
 #log-container {

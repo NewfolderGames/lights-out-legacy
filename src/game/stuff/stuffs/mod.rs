@@ -6,7 +6,7 @@ mod stat;
 mod technology;
 mod text;
 mod unlock;
-mod upgrades;
+mod upgrade;
 
 pub use building::*;
 pub use feature::*;
@@ -16,4 +16,4 @@ pub use stat::*;
 pub use technology::*;
 pub use text::*;
 pub use unlock::*;
-pub use upgrades::*;
+pub use upgrade::*;

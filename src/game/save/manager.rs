@@ -75,8 +75,8 @@ impl SaveManager {
 			save.stuff.resources.iter().for_each(|(r_name, r_count)| stuff_manager.set_resource(r_name, *r_count));
 			save.stuff.stats.iter().for_each(|(s_name, s_value)| stuff_manager.set_stat(s_name, *s_value));
 			save.stuff.unlocks.iter().for_each(|u| stuff_manager.unlock(u));
-			save.stuff.technologies.iter().for_each(|t| stuff_manager.research(t));
-			save.stuff.upgrades.iter().for_each(|u| stuff_manager.upgrade(u));
+			save.stuff.technologies.iter().for_each(|t| stuff_manager.research_technology(t));
+			save.stuff.upgrades.iter().for_each(|u| stuff_manager.research_upgrade(u));
 
 			return true;
 

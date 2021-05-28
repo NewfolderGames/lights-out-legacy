@@ -46,6 +46,7 @@ pub struct TechnologyTab {
 
 impl TechnologyTab {
 
+	// Creates a new technology tab.
 	pub fn new(window: Rc<Window>, document: Rc<Document>, stuff_manager: &StuffManager) -> Self {
 
 		let tab_list_element = document.get_element_by_id("tab-list").expect("Element id 'tab-list' not found.");
@@ -177,6 +178,8 @@ impl Tab for TechnologyTab {
 
 		}
 
+		if !self.is_selected { return }
+
 		// Techology.
 
 		for (name, technology) in stuff_manager.iter_technology() {
@@ -199,9 +202,9 @@ impl Tab for TechnologyTab {
 
 			}
 
+			if !technology_element.is_unlocked{ continue; }
+			
 			// Update price.
-
-			if !technology.is_unlocked() { continue; }
 
 			for (resource_name, resource_count) in technology.get_price() {
 

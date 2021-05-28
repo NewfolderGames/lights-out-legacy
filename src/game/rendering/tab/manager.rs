@@ -40,6 +40,7 @@ impl TabManager {
 		self.tabs.insert("Lighthouse", lighthouse);
 		self.tabs.insert("Building", Box::new(BuildingTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
 		self.tabs.insert("Technology", Box::new(TechnologyTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
+		self.tabs.insert("Upgrade", Box::new(UpgradeTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
 		self.tabs.insert("Stats", Box::new(StatTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
 
 	}

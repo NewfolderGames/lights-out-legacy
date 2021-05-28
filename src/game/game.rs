@@ -206,6 +206,18 @@ impl Game {
 
 	}
 
+	#[wasm_bindgen]
+	pub fn purchase_upgrade(&mut self, name: &str) {
+
+		if self.stuff_manager.purchase_upgrade(name) {
+
+			self.rendering_manager.render(&self.stuff_manager);
+			self.rendering_manager.push_log(&format!("Researched a upgrade '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+
+		}
+
+	}
+
 	pub fn unlock(&mut self, name: &str) {
 
 		self.stuff_manager.unlock(name);
@@ -222,7 +234,7 @@ impl Game {
 
 						Unlockable::Building(name) => format!("Unlocked a new buliding '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
 						Unlockable::Feature(name) => format!("Unlocked a new feature '{}'.", self.stuff_manager.get_text(name).unwrap_or(&name.to_uppercase())),
-						Unlockable::Resource(name) => format!("Unlocked a new resource '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
+						Unlockable::Resource(name) => format!("Unlocked a new resource '{}'.", self.stuff_manager.get_text(name).unwrap_or(&name.to_uppercase())),
 						Unlockable::Technology(name) => format!("Unlocked a new technology '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
 						Unlockable::Upgrade(name) => format!("Unlocked a new upgrade '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
 						_ => format!("Unlocked a new thing '{}'.", &name.to_uppercase())
@@ -279,7 +291,14 @@ impl Game {
 		
 			if self.stuff_manager.is_unlocked("unlock_quest_gather") {
 
-				self.stuff_manager.add_resource("resource_science", 1f64);
+				self.stuff_manager.add_resource("resource_science", 1f64 + self.stuff_manager.get_modifier_value("modifier_lighthouse_examine_base").unwrap_or(0f64));
+
+				if self.stuff_manager.is_upgrade_researched("upgrade_lighthouse_examine") {
+
+					self.stuff_manager.add_resource("resource_knowledge", self.stuff_manager.get_modifier_value("modifier_lighthouse_examine_base").unwrap_or(0f64));
+
+				}
+
 				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_3").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_3"), None);
 			
 			} else {
@@ -297,8 +316,8 @@ impl Game {
 		self.stuff_manager.add_stat("stat_lighthouse_gathered", 1f64);
 		let gathered = self.stuff_manager.get_stat("stat_lighthouse_gathered").unwrap().get_value();
 
-		self.stuff_manager.add_resource("resource_stone", 1f64);
-		self.stuff_manager.add_resource("resource_wood", 1f64);
+		self.stuff_manager.add_resource("resource_stone", 1f64 + self.stuff_manager.get_modifier_value("modifier_lighthouse_gather_base").unwrap_or(0f64));
+		self.stuff_manager.add_resource("resource_wood", 1f64 + self.stuff_manager.get_modifier_value("modifier_lighthouse_gather_base").unwrap_or(0f64));
 
 		self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_0").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None);
 
