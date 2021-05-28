@@ -187,7 +187,7 @@ impl Game {
 		if self.stuff_manager.purchase_building(name) {
 
 			self.rendering_manager.render(&self.stuff_manager);
-			self.rendering_manager.push_log(&format!("Built a building '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+			self.rendering_manager.push_log(&format!("Constructed a building '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
 
 		}
 

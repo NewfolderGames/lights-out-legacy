@@ -14,7 +14,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		}),
 		Box::new(|_| {
 			vec![
-				("resource_science", 50f64),
+				("resource_science", 30f64),
 			]
 		})
 	));
@@ -28,8 +28,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		}),
 		Box::new(|_| {
 			vec![
-				("resource_knowledge", 10f64),
-				("resource_wood", 50f64),
+				("resource_knowledge", 30f64),
+				("resource_wood", 30f64),
 			]
 		})
 	));
@@ -43,8 +43,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		}),
 		Box::new(|_| {
 			vec![
-				("resource_knowledge", 50f64),
-				("resource_wood", 50f64),
+				("resource_knowledge", 30f64),
+				("resource_wood", 30f64),
 			]
 		})
 	));
@@ -58,8 +58,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		}),
 		Box::new(|_| {
 			vec![
-				("resource_knowledge", 50f64),
-				("resource_wood", 50f64),
+				("resource_knowledge", 30f64),
+				("resource_wood", 30f64),
 			]
 		})
 	));

@@ -1,6 +1,6 @@
 [package]
 name = "lights_out"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["이민용 <me@newfolder.games>"]
 edition = "2018"
 

@@ -37,7 +37,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"technology_workbench",
 		Box::new(|_| {
 			vec![
-				("resource_science", 45f64),
+				("resource_science", 40f64),
 				("resource_stone", 20f64),
 				("resource_wood", 20f64),
 			]
