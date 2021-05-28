@@ -1,7 +1,7 @@
 use std::rc::Rc;
 use wasm_bindgen::prelude::*;
 use web_sys::{ Document, Window };
-use super::stuff::StuffManager;
+use super::stuff::{ Stuff, StuffManager, Unlockable };
 use super::rendering::RenderingManager;
 use super::save::SaveManager;
 
@@ -187,6 +187,7 @@ impl Game {
 		if self.stuff_manager.purchase_building(name) {
 
 			self.rendering_manager.render(&self.stuff_manager);
+			self.rendering_manager.push_log(&format!("Built a building '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
 
 		}
 
@@ -197,10 +198,41 @@ impl Game {
 
 		if self.stuff_manager.purchase_technology(name) {
 
-			self.stuff_manager.unlock(&format!("unlock_{}", name));
 			self.rendering_manager.render(&self.stuff_manager);
+			self.rendering_manager.push_log(&format!("Researched a technology '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+			self.unlock(&format!("unlock_{}", name));
 
 		}
+
+	}
+
+	pub fn unlock(&mut self, name: &str) {
+
+		self.stuff_manager.unlock(name);
+		self.stuff_manager
+			.get_unlock(name)
+			.map(|u| {
+
+				u.get_asset()
+				 .unlocks
+				 .iter()
+				 .for_each(|u| {
+
+					let log = match *u {
+
+						Unlockable::Building(name) => format!("Unlocked a new buliding '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
+						Unlockable::Feature(name) => format!("Unlocked a new feature '{}'.", self.stuff_manager.get_text(name).unwrap_or(&name.to_uppercase())),
+						Unlockable::Resource(name) => format!("Unlocked a new resource '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
+						Unlockable::Technology(name) => format!("Unlocked a new technology '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
+						Unlockable::Upgrade(name) => format!("Unlocked a new upgrade '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())),
+						_ => format!("Unlocked a new thing '{}'.", &name.to_uppercase())
+						
+					};
+					self.rendering_manager.push_log(&log, Some("#ffbb44"));
+
+				 });
+
+			});
 
 	}
 
@@ -234,8 +266,8 @@ impl Game {
 
 			if self.stuff_manager.get_stat("stat_lighthouse_examined").unwrap().get_value() >= 5f64 {
 
-				self.stuff_manager.unlock("unlock_quest_exmaine");
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
+				self.unlock("unlock_quest_exmaine");
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), Some("#ffffff"));
 
 			} else {
 
@@ -273,8 +305,8 @@ impl Game {
 
 		if !self.stuff_manager.is_unlocked("unlock_quest_gather") && gathered >= 10f64 {
 
-			self.stuff_manager.unlock("unlock_quest_gather");
-			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None)
+			self.unlock("unlock_quest_gather");
+			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), Some("#ffffff"))
 			
 		}
 	}

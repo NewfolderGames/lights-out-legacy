@@ -77,7 +77,7 @@ impl ResourceManager {
 				category_element.root_element.append_with_node_1(&category_element.title_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.list_element).unwrap();
 
-				category_element.title_element.set_inner_html(stuff_manager.get_text(&["resource_category_", resource.get_asset().category].join("")).unwrap_or("RESOURCE_CATEGORY"));
+				category_element.title_element.set_inner_html(stuff_manager.get_text(&format!("resource_category_{}", resource.get_asset().category)).unwrap_or(&resource.get_asset().category.to_uppercase()));
 
 				self.resource_category_elements.insert(String::from(resource.get_asset().category), category_element);
 
@@ -106,7 +106,7 @@ impl ResourceManager {
 			resource_element.root_element.append_with_node_1(&resource_element.capacity_element).unwrap();
 			resource_element.root_element.append_with_node_1(&resource_element.production_element).unwrap();
 
-			resource_element.title_element.set_inner_html(stuff_manager.get_text(&[resource.get_asset().name, "_title"].join("")).unwrap_or("RESOURCE_TITLE"));
+			resource_element.title_element.set_inner_html(stuff_manager.get_text(name).unwrap_or(&name.to_uppercase()));
 
 			self.resource_elements.insert(String::from(name), resource_element);
 
@@ -158,7 +158,7 @@ impl ResourceManager {
 
 				resource_element.count_element.set_inner_html(&format_number_scientific(resource.get_count()));
 				resource_element.capacity_element.set_inner_html(&format_number_scientific(resource.get_capacity()));
-				resource_element.production_element.set_inner_html(&format_number_scientific(resource.get_production() - resource.get_consumption()));
+				resource_element.production_element.set_inner_html(&format!("{}/s", &format_number_scientific((resource.get_production() - resource.get_consumption()) * 5f64)));
 
 			}
 

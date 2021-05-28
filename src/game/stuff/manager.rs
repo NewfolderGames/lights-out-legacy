@@ -92,6 +92,14 @@ impl StuffManager {
 
 	}
 
+	/// Returns a reference to a unlock.
+	pub fn get_unlock(&self, name: &str) -> Option<&Unlock> {
+
+		self.unlock_storage.get(name)
+
+	}
+
+
 	/// Returns `true` if the feature is unlocked.
 	pub fn is_feature_unlocked(&self, name: &str) -> bool {
 

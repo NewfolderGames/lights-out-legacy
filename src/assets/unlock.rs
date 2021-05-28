@@ -36,6 +36,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Building("building_researchBench"),
 			Unlockable::Building("building_stockpile"),
 			Unlockable::Technology("technology_agriculture"),
+			Unlockable::Technology("technology_hut"),
 		]
 	));
 
@@ -46,6 +47,13 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Resource("resource_food"),
 			Unlockable::Technology("technology_woodworking"),
 			Unlockable::Technology("technology_mining"),
+		]
+	));
+
+	stuff_manager.load_unlock(UnlockAsset::new(
+		"unlock_technology_hut",
+		vec![
+			Unlockable::Building("building_hut"),
 		]
 	));
 

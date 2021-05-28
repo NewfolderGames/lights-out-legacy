@@ -236,6 +236,10 @@ button {
 
 /* Game container - Tabs - Building */
 
+#tab-building .building-category {
+	margin: 16px 0;
+}
+
 #tab-building .building-category.locked {
 	display: none;
 }
@@ -243,17 +247,22 @@ button {
 #tab-building .building-category-title {
 	color: #ffffff;
 	font-weight: bold;
+	margin-bottom: 16px;
 }
 
 #tab-building .building-category-list {
+	display: flex;
+	justify-content: space-between;
 	list-style-type: none;
-	margin: 16px 0;
+	margin: 0;
 	padding: 0;
 }
 
 #tab-building .building {
 	border: 1px solid var(--border-color-dark);
-	margin: 16px 0;
+	box-sizing: border-box;
+	flex-basis: calc(50% - 8px);
+	margin: 8px 0;
 	padding: 8px;
 }
 #tab-building .building:hover {
@@ -388,12 +397,17 @@ button {
 /* Game container - Tabs - Technology */
 
 #tab-technology > div {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	margin: 16px 0;
 }
 
 #tab-technology > div > .title {
 	color: #ffffff;
+	flex-basis: 100%;
 	font-weight: bold;
+	margin-bottom: 16px;
 }
 
 #tab-technology #tab-technology-locked {
@@ -411,7 +425,9 @@ button {
 
 #tab-technology .technology {
 	border: 1px solid var(--border-color-dark);
-	margin: 16px 0;
+	box-sizing: border-box;
+	flex-basis: calc(50% - 8px);
+	margin: 8px 0;
 	padding: 8px;
 }
 

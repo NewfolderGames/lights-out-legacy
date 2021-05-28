@@ -160,7 +160,7 @@ impl BuildingTab {
 				modifier_element.modifier_element.set_class_name("building-modifier-name");
 				modifier_element.value_element.set_class_name("building-modifier-value");
 
-				modifier_element.modifier_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", modifier_name)).unwrap_or(&format!("{}_TITLE", modifier_name.to_uppercase())));
+				modifier_element.modifier_element.set_inner_html(stuff_manager.get_text(&format!("{}", modifier_name)).unwrap_or(&format!("{}", modifier_name.to_uppercase())));
 				modifier_element.value_element.set_inner_html(&format_number_scientific(*modifier_value));
 
 				building_element.modifier_container_element.append_with_node_1(&modifier_element.root_element).unwrap();
@@ -187,7 +187,7 @@ impl BuildingTab {
 				price_element.resource_element.set_class_name("building-resource-name");
 				price_element.count_element.set_class_name("building-resource-count");
 
-				price_element.resource_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", resource_name)).unwrap_or(&format!("{}_TITLE", resource_name.to_uppercase())));
+				price_element.resource_element.set_inner_html(stuff_manager.get_text(&format!("{}", resource_name)).unwrap_or(&format!("{}", resource_name.to_uppercase())));
 				price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
 
 				building_element.price_container_element.append_with_node_1(&price_element.root_element).unwrap();

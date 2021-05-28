@@ -109,7 +109,7 @@ impl TechnologyTab {
 				price_element.resource_element.set_class_name("technology-resource-name");
 				price_element.count_element.set_class_name("technology-resource-count");
 
-				price_element.resource_element.set_inner_html(stuff_manager.get_text(&[resource_name, "_title"].join("")).unwrap_or(&[&resource_name.to_uppercase(), "_TITLE"].join("")));
+				price_element.resource_element.set_inner_html(stuff_manager.get_text(resource_name).unwrap_or(&resource_name.to_uppercase()));
 				price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
 
 				technology_element.price_container_element.append_with_node_1(&price_element.root_element).unwrap();

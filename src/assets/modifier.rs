@@ -21,6 +21,13 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_copper_consumption_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_copper_capacity_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_copper_capacity_multiplier"));
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_production_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_food_capacity_multiplier"));
 	
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_production_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_iron_production_multiplier"));

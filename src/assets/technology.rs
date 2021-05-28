@@ -24,10 +24,20 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
+		"technology_hut",
+		Box::new(|_| {
+			vec![
+				("resource_science", 35f64),
+				("resource_wood", 20f64),
+			]
+		})
+	));
+
+	stuff_manager.load_technology(TechnologyAsset::new(
 		"technology_woodworking",
 		Box::new(|_| {
 			vec![
-				("resource_science", 40f64),
+				("resource_science", 50f64),
 				("resource_wood", 25f64),
 			]
 		})
@@ -37,7 +47,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		"technology_mining",
 		Box::new(|_| {
 			vec![
-				("resource_science", 40f64),
+				("resource_science", 50f64),
 				("resource_stone", 25f64),
 			]
 		})

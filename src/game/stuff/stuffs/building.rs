@@ -225,8 +225,6 @@ impl BuildingStorage {
 
 		for (_, building) in self.buildings.iter_mut() {
 
-			if !building.is_unlocked() || !building.get_count() == 0 || !building.is_active { continue; }
-
 			// Calculate.
 
 			building.calculate_modifiers(modifier_storage, resource_storage);
