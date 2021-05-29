@@ -6,6 +6,7 @@
 
 	--font-color-danger: #992222;
 	--font-color-dark: #444444;
+	--font-color-debug: #99ff33;
 	--font-color-info: #00bbff;
 	--font-color-light: #ffffff;
 	--font-color-normal: #999999;
@@ -587,6 +588,14 @@ button {
 
 #log-list .log.log-info {
 	color: var(--font-color-info);
+}
+
+#log-list .log.log-warn {
+	color: var(--font-color-warn);
+}
+
+#log-list .log.log-debug {
+	color: var(--font-color-debug);
 }
 
 /* Tab list */

@@ -240,7 +240,7 @@ impl Game {
 						_ => format!("Unlocked a new thing '{}'.", &name.to_uppercase())
 						
 					};
-					self.rendering_manager.push_log(&log, Some("log-info"));
+					self.rendering_manager.push_log(&log, Some("log-warn"));
 
 				 });
 
@@ -348,7 +348,7 @@ impl Game {
 		self.stuff_manager.add_resource(name, amount);
 		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
-		self.rendering_manager.push_log("DEBUG_ADD_RESOURCE", Some("#00FF00"));
+		self.rendering_manager.push_log("DEBUG_ADD_RESOURCE", Some("log-debug"));
 
 	}
 
@@ -358,7 +358,7 @@ impl Game {
 		self.stuff_manager.set_resource(name, amount);
 		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
-		self.rendering_manager.push_log("DEBUG_SET_RESOURCE", Some("#00FF00"));
+		self.rendering_manager.push_log("DEBUG_SET_RESOURCE", Some("log-debug"));
 
 	}
 
@@ -368,7 +368,7 @@ impl Game {
 		self.stuff_manager.unlock(name);
 		self.stuff_manager.add_stat("stat_debug", 1f64);
 		self.rendering_manager.render(&self.stuff_manager);
-		self.rendering_manager.push_log("DEBUG_UNLOCK", Some("#00FF00"));
+		self.rendering_manager.push_log("DEBUG_UNLOCK", Some("log-debug"));
 
 	}
 
