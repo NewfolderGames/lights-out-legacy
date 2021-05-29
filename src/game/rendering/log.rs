@@ -27,7 +27,7 @@ impl LogManager {
 	
 	}
 
-	pub fn push(&self, log: &str, color: Option<&str>) {
+	pub fn push(&self, log: &str, class: Option<&str>) {
 
 		// Remove old log.
 
@@ -44,9 +44,8 @@ impl LogManager {
 
 		let log_element = self.web_document.create_element("li").unwrap();
 
-		log_element.set_class_name("log");
+		log_element.set_class_name(&format!("log {}", class.unwrap_or("")));
 		log_element.set_inner_html(log);
-		log_element.set_attribute("style", &["color: ", color.unwrap_or("inherit")].join("")).unwrap();
 
 		self.root_element.prepend_with_node_1(&log_element).unwrap();
 

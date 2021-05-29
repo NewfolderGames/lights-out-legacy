@@ -136,7 +136,7 @@ impl Game {
 		self.rendering_manager.set_loading_description("");
 		self.rendering_manager.render(&self.stuff_manager);
 
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save_loaded").unwrap_or("LOG_GAME_SAVE_LOADED"), Some("#ffffff"));
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save_loaded").unwrap_or("LOG_GAME_SAVE_LOADED"), Some("log-game"));
 
 	}
 
@@ -144,7 +144,7 @@ impl Game {
 	pub fn pause(&mut self) {
 
 		self.is_playing = false;
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_pause").unwrap_or("LOG_GAME_PAUSE"), Some("#ffffff"));
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_pause").unwrap_or("LOG_GAME_PAUSE"), Some("log-game"));
 
 	}
 
@@ -152,7 +152,7 @@ impl Game {
 	pub fn resume(&mut self) {
 
 		self.is_playing = true;
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_resume").unwrap_or("LOG_GAME_RESUME"), Some("#ffffff"));
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_resume").unwrap_or("LOG_GAME_RESUME"), Some("log-game"));
 
 	}
 
@@ -160,7 +160,7 @@ impl Game {
 	pub fn save(&mut self) {
 
 		self.save_manager.save(&self.stuff_manager);
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save").unwrap_or("LOG_GAME_SAVE"), Some("#ffffff"));
+		self.rendering_manager.push_log(self.stuff_manager.get_text("log_game_save").unwrap_or("LOG_GAME_SAVE"), Some("log-game"));
 
 	}
 
@@ -187,7 +187,7 @@ impl Game {
 		if self.stuff_manager.purchase_building(name) {
 
 			self.rendering_manager.render(&self.stuff_manager);
-			self.rendering_manager.push_log(&format!("Constructed a building '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+			self.rendering_manager.push_log(&format!("Constructed a building '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("log-info"));
 
 		}
 
@@ -199,7 +199,7 @@ impl Game {
 		if self.stuff_manager.purchase_technology(name) {
 
 			self.rendering_manager.render(&self.stuff_manager);
-			self.rendering_manager.push_log(&format!("Researched a technology '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+			self.rendering_manager.push_log(&format!("Researched a technology '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("log-info"));
 			self.unlock(&format!("unlock_{}", name));
 
 		}
@@ -212,7 +212,7 @@ impl Game {
 		if self.stuff_manager.purchase_upgrade(name) {
 
 			self.rendering_manager.render(&self.stuff_manager);
-			self.rendering_manager.push_log(&format!("Researched a upgrade '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("#44aaff"));
+			self.rendering_manager.push_log(&format!("Researched a upgrade '{}'.", self.stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&name.to_uppercase())), Some("log-info"));
 
 		}
 
@@ -240,7 +240,7 @@ impl Game {
 						_ => format!("Unlocked a new thing '{}'.", &name.to_uppercase())
 						
 					};
-					self.rendering_manager.push_log(&log, Some("#ffbb44"));
+					self.rendering_manager.push_log(&log, Some("log-info"));
 
 				 });
 
@@ -279,7 +279,7 @@ impl Game {
 			if self.stuff_manager.get_stat("stat_lighthouse_examined").unwrap().get_value() >= 5f64 {
 
 				self.unlock("unlock_quest_exmaine");
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), Some("#ffffff"));
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
 
 			} else {
 
@@ -325,7 +325,7 @@ impl Game {
 		if !self.stuff_manager.is_unlocked("unlock_quest_gather") && gathered >= 10f64 {
 
 			self.unlock("unlock_quest_gather");
-			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), Some("#ffffff"))
+			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None)
 			
 		}
 	}

@@ -6,6 +6,8 @@
 
 	--font-color-danger: #992222;
 	--font-color-dark: #444444;
+	--font-color-info: #00bbff;
+	--font-color-light: #ffffff;
 	--font-color-normal: #999999;
 	--font-color-warn: #996622;
 
@@ -577,6 +579,14 @@ button {
 	animation-fill-mode: forwards;
 	margin: 4px 0;
 	opacity: 0;
+}
+
+#log-list .log.log-game {
+	color: var(--font-color-light);
+}
+
+#log-list .log.log-info {
+	color: var(--font-color-info);
 }
 
 /* Tab list */
