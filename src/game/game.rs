@@ -218,7 +218,7 @@ impl Game {
 
 	}
 
-	pub fn unlock(&mut self, name: &str) {
+	fn unlock(&mut self, name: &str) {
 
 		self.stuff_manager.unlock(name);
 		self.stuff_manager
@@ -311,6 +311,7 @@ impl Game {
 
 	}
 
+	#[wasm_bindgen]
 	pub fn lighthouse_gather(&mut self) {
 
 		self.stuff_manager.add_stat("stat_lighthouse_gathered", 1f64);
@@ -330,7 +331,14 @@ impl Game {
 		}
 	}
 
+	#[wasm_bindgen]
 	pub fn lighthouse_lightsout(&mut self) {
+
+
+	}
+
+	#[wasm_bindgen]
+	pub fn lighthouse_search(&mut self) {
 
 
 	}

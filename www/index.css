@@ -10,7 +10,7 @@
 	--font-color-info: #00bbff;
 	--font-color-light: #ffffff;
 	--font-color-normal: #999999;
-	--font-color-warn: #996622;
+	--font-color-warn: #ffaa33;
 
 	--border-color-dark: #444444;
 	--border-color-normal: #999999;
@@ -99,6 +99,7 @@ button {
 	left: 50%;
 	position: absolute;
 	top: 50%;
+	text-align: center;
 	transform: translate(-50%, -50%);
 }
 

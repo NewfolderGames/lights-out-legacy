@@ -11,5 +11,6 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_examine"));
 	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_gather"));
 	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_lightsout"));
+	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_search"));
 	
 }

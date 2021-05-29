@@ -14,6 +14,7 @@ pub struct LighthouseTab {
 
 	button_examine_element: Element,
 	button_gather_element: Element,
+	button_search_element: Element,
 	button_ligtsout_element: Element,
 
 	is_selected: bool,
@@ -44,22 +45,27 @@ impl LighthouseTab {
 
 		let button_examine_element = document.create_element("button").unwrap();
 		let button_gather_element = document.create_element("button").unwrap();
+		let button_search_element = document.create_element("button").unwrap();
 		let button_ligtsout_element = document.create_element("button").unwrap();
 
-		button_examine_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_examine").unwrap_or("TAB_LIGHTHOUSE_BUTTON_EXAMINE"));
-		button_gather_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_gather").unwrap_or("TAB_LIGHTHOUSE_BUTTON_GATHER"));
-		button_ligtsout_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_lightsout").unwrap_or("TAB_LIGHTHOUSE_BUTTON_LIGHTSOUT"));
+		button_examine_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_examine").unwrap_or("UI_TAB_LIGHTHOUSE_BUTTON_EXAMINE"));
+		button_gather_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_gather").unwrap_or("UI_TAB_LIGHTHOUSE_BUTTON_GATHER"));
+		button_search_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_search").unwrap_or("UI_TAB_LIGHTHOUSE_BUTTON_SEARCH"));
+		button_ligtsout_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse_button_lightsout").unwrap_or("UI_TAB_LIGHTHOUSE_BUTTON_LIGHTSOUT"));
 
 		button_examine_element.set_class_name("button");
 		button_gather_element.set_class_name("button");
+		button_search_element.set_class_name("button");
 		button_ligtsout_element.set_class_name("button");
 
 		button_examine_element.set_attribute("onclick", "window.Game.lighthouse_examine()").unwrap();
 		button_gather_element.set_attribute("onclick", "window.Game.lighthouse_gather()").unwrap();
+		button_search_element.set_attribute("onclick", "window.Game.lighthouse_search()").unwrap();
 		button_ligtsout_element.set_attribute("onclick", "window.Game.lighthouse_lightsout()").unwrap();
 
 		buttons_element.append_with_node_1(&button_examine_element).unwrap();
 		buttons_element.append_with_node_1(&button_gather_element).unwrap();
+		buttons_element.append_with_node_1(&button_search_element).unwrap();
 		buttons_element.append_with_node_1(&button_ligtsout_element).unwrap();
 
 		Self {
@@ -70,6 +76,7 @@ impl LighthouseTab {
 			tab_button_element,
 			button_examine_element,
 			button_gather_element,
+			button_search_element,
 			button_ligtsout_element,
 			is_selected: false,
 
@@ -110,6 +117,7 @@ impl Tab for LighthouseTab {
 
 		self.button_examine_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_examine") { "button" } else { "button locked" });
 		self.button_gather_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_gather") { "button" } else { "button locked" });
+		self.button_search_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_search") { "button" } else { "button locked" });
 		self.button_ligtsout_element.set_class_name(if stuff_manager.is_feature_unlocked("feature_lighthouse_lightsout") { "button" } else { "button locked" });
 
 	}

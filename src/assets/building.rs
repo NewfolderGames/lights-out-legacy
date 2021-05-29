@@ -44,7 +44,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	// Housing.
 
 	stuff_manager.load_building(BuildingAsset::new(
-		"building_hut",
+		"building_tent",
 		"housing",
 		Box::new(|_, _| {
 			vec![

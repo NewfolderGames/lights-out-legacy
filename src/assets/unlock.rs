@@ -36,6 +36,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Building("building_researchBench"),
 			Unlockable::Building("building_stockpile"),
 			Unlockable::Technology("technology_agriculture"),
+			Unlockable::Technology("technology_housing_basic"),
 		]
 	));
 
@@ -47,6 +48,14 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Technology("technology_workbench"),
 			Unlockable::Technology("technology_woodworking"),
 			Unlockable::Technology("technology_mining"),
+		]
+	));
+
+	stuff_manager.load_unlock(UnlockAsset::new(
+		"unlock_technology_housing_basic",
+		vec![
+			Unlockable::Building("building_tent"),
+			Unlockable::Feature("feature_lighthouse_search"),
 		]
 	));
 
@@ -64,6 +73,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_unlock(UnlockAsset::new(
 		"unlock_technology_mining",
 		vec![
+			Unlockable::Resource("resource_ore"),
 			Unlockable::Technology("technology_smelting"),
 			Unlockable::Technology("technology_stoneCutting"),
 		]
@@ -75,6 +85,18 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			Unlockable::Technology("technology_carpentry"),
 			Unlockable::Upgrade("upgrade_tool_pickaxe_wood"),
 			Unlockable::Upgrade("upgrade_tool_axe_wood"),
+			Unlockable::Upgrade("upgrade_tool_hoe_wood"),
+		]
+	));
+
+	stuff_manager.load_unlock(UnlockAsset::new(
+		"unlock_technology_smelting",
+		vec![
+			Unlockable::Building("resource_smelter"),
+			Unlockable::Resource("resource_copper"),
+			Unlockable::Upgrade("upgrade_tool_pickaxe_copper"),
+			Unlockable::Upgrade("upgrade_tool_axe_copper"),
+			Unlockable::Upgrade("upgrade_tool_hoe_copper"),
 		]
 	));
 

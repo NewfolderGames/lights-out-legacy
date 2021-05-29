@@ -4,6 +4,33 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Building - All
 	
+	// Jobs.
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_capacity_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_production_multiplier"));
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_capacity_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_miner_production_multiplier"));
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_capacity_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_woodcutter_production_multiplier"));
+
+	// Misc.
+
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_housing_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_housing_mutiplier"));
 
 	// Resource - Categories.
 
