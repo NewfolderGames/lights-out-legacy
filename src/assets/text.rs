@@ -46,12 +46,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("log_game_save", "Game saved."));
 	stuff_manager.load_text(TextAsset::new("log_game_save_loaded", "Game save loaded."));
 
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_0", "You have examined the lighthouse."));
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_1", "You can feel the warmth surrounding you"));
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_2", "You have noticed some scraps on the ground."));
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine_3", "You have studied the lighthouse."));
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_gather_0", "You have gathered scraps lying around."));
-	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_gather_1", "You should build something with it."));
+	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_examine", "You can feel the warmth surrounding you"));
+	stuff_manager.load_text(TextAsset::new("log_tab_lighthouse_gather", "You should build something with it."));
 	
 	// Modifiers.
 

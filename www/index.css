@@ -277,6 +277,7 @@ button {
 }
 
 #tab-building .building-title {
+	color: var(--font-color-light);
 	margin-bottom: 4px;
 	font-weight: bold;
 }
@@ -436,6 +437,7 @@ button {
 }
 
 #tab-technology .technology-title {
+	color: var(--font-color-light);
 	margin-bottom: 4px;
 	font-weight: bold;
 }
@@ -506,6 +508,7 @@ button {
 }
 
 #tab-upgrade .upgrade-title {
+	color: var(--font-color-light);
 	margin-bottom: 4px;
 	font-weight: bold;
 }

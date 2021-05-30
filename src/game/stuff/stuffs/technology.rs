@@ -21,9 +21,9 @@ impl Technology {
 		self.calculated_price.clear();
 		self.asset
 			.price
-			.as_ref()(modifier_storage)
-			.iter()
-			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), *r_price)));
+			.to_owned()
+			.into_iter()
+			.for_each(|(name, value)| self.calculated_price.push((String::from(name), value)));
 
 	}
 
@@ -102,14 +102,14 @@ pub struct TechnologyAsset {
 
 	pub name: &'static str,
 
-	pub price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
+	pub price: Vec<(&'static str, f64)>,
 
 }
 
 impl TechnologyAsset {
 
 	/// Creates a new technology asset.
-	pub fn new(name: &'static str, price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>) -> Self {
+	pub fn new(name: &'static str, price: Vec<(&'static str, f64)>) -> Self {
 
 		Self {
 

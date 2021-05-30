@@ -386,13 +386,17 @@ impl StuffManager {
 	/// Game tick.
 	pub fn tick(&mut self) {
 
+		// Calculate resource.
+
+		self.resource_storage.calculate(&self.modifier_storage);
+
 		// Calculate modifiers.
 
 		let mut modifiers: HashMap<String, f64> = HashMap::new();
 
 		self.upgrade_storage.calculate(&self.modifier_storage);
 		self.technology_storage.calculate(&self.modifier_storage);
-		self.building_storage.calculate(&self.modifier_storage, &self.resource_storage);
+		self.building_storage.calculate(&self.modifier_storage);
 
 		self.upgrade_storage
 			.get_modifiers()
@@ -403,19 +407,11 @@ impl StuffManager {
 			.get_modifiers()
 			.iter()
 			.for_each(|(m_name, m_value)| {
-
 				if let Some(modifier) = modifiers.get_mut(m_name) { *modifier += m_value; }
 				else { modifiers.insert(String::from(m_name), *m_value); }
-
 			});
 
-		// Set modifiers.
-
 		modifiers.iter().for_each(|(name, value)| self.modifier_storage.set_value(name, *value));
-
-		// Calculate resource.
-
-		self.resource_storage.calculate(&self.modifier_storage);
 
 		// Stats.
 

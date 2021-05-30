@@ -279,11 +279,7 @@ impl Game {
 			if self.stuff_manager.get_stat("stat_lighthouse_examined").unwrap().get_value() >= 5f64 {
 
 				self.unlock("unlock_quest_exmaine");
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_1").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
-
-			} else {
-
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_0").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_0"), None);
+				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_1"), None);
 
 			}
 			
@@ -298,12 +294,6 @@ impl Game {
 					self.stuff_manager.add_resource("resource_knowledge", self.stuff_manager.get_modifier_value("modifier_lighthouse_examine_base").unwrap_or(0f64));
 
 				}
-
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_3").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_3"), None);
-			
-			} else {
-
-				self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_examine_2").unwrap_or("LOG_TAB_LIGHTHOUSE_EXAMINE_2"), None);
 
 			}
 
@@ -320,13 +310,10 @@ impl Game {
 		self.stuff_manager.add_resource("resource_stone", 1f64 + self.stuff_manager.get_modifier_value("modifier_lighthouse_gather_base").unwrap_or(0f64));
 		self.stuff_manager.add_resource("resource_wood", 1f64 + self.stuff_manager.get_modifier_value("modifier_lighthouse_gather_base").unwrap_or(0f64));
 
-		self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_0").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None);
-
-
 		if !self.stuff_manager.is_unlocked("unlock_quest_gather") && gathered >= 10f64 {
 
 			self.unlock("unlock_quest_gather");
-			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather_1").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None)
+			self.rendering_manager.push_log(self.stuff_manager.get_text("log_tab_lighthouse_gather").unwrap_or("LOG_TAB_LIGHTHOUSE_GATHER"), None)
 			
 		}
 	}

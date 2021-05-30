@@ -27,12 +27,13 @@ impl Building {
 	}
 
 	/// Calculates the building's modifiers.
-	pub fn calculate_modifiers(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
+	pub fn calculate_modifiers(&mut self, modifier_storage: &ModifierStorage) {
 
+		self.base_modifier.clear();
 		self.calculated_modifiers.clear();
 		self.asset
 			.modifiers
-			.as_ref()(modifier_storage, resource_storage)
+			.as_ref()(modifier_storage)
 			.iter()
 			.for_each(|(m_name, m_value)| { 
 				self.base_modifier.push((String::from(*m_name), *m_value));
@@ -42,14 +43,24 @@ impl Building {
 	}
 
 	/// Calculates the building's price.
-	pub fn calculate_price(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
+	pub fn calculate_price(&mut self, modifier_storage: &ModifierStorage) {
 
 		self.calculated_price.clear();
 		self.asset
 			.price
-			.as_ref()(modifier_storage, resource_storage)
+			.to_owned()
 			.iter()
 			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), r_price * self.asset.price_multiplier.powi(self.count))))
+
+	}
+
+	/// Checks resource deficit and activates / deactives the building.
+	pub fn check_deficit(&mut self, resource_storage: &ResourceStorage) {
+
+		self.is_active = !self
+			.asset
+			.deficit
+			.as_ref()(resource_storage);
 
 	}
 
@@ -161,8 +172,9 @@ pub struct BuildingAsset {
 	pub name: &'static str,
 
 	pub category: &'static str,
-	pub modifiers: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
-	pub price: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
+	pub modifiers: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
+	pub deficit: Box<dyn Fn(&ResourceStorage) -> bool>,
+	pub price: Vec<(&'static str, f64)>,
 	pub price_multiplier: f64,
 
 }
@@ -173,8 +185,9 @@ impl BuildingAsset {
 	pub fn new(
 		name: &'static str,
 		category: &'static str,
-		modifiers: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
-		price: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
+		modifiers: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
+		deficit: Box<dyn Fn(&ResourceStorage) -> bool>,
+		price: Vec<(&'static str, f64)>,
 		price_multiplier: f64
 	) -> Self {
 
@@ -183,6 +196,7 @@ impl BuildingAsset {
 			name,
 			category,
 			modifiers,
+			deficit,
 			price,
 			price_multiplier
 
@@ -219,7 +233,7 @@ impl BuildingStorage {
 	}
 
 	/// Calculates building modifiers.
-	pub fn calculate(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
+	pub fn calculate(&mut self, modifier_storage: &ModifierStorage) {
 
 		self.calculated_modifiers.clear();
 
@@ -227,8 +241,8 @@ impl BuildingStorage {
 
 			// Calculate.
 
-			building.calculate_modifiers(modifier_storage, resource_storage);
-			building.calculate_price(modifier_storage, resource_storage);
+			building.calculate_modifiers(modifier_storage);
+			building.calculate_price(modifier_storage);
 
 			if !building.is_unlocked() || !building.is_active() || building.count == 0 { continue; }
 
@@ -250,6 +264,17 @@ impl BuildingStorage {
 
 		}
 			
+	}
+
+	/// Checks resource deficit and activates / deactivates buildings.
+	pub fn check_deficit(&mut self, resource_storage: &ResourceStorage) {
+
+		for (_, building) in self.buildings.iter_mut() {
+
+			building.check_deficit(resource_storage);
+
+		}
+
 	}
 
 	/// Returns calculated modifiers.

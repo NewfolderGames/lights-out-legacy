@@ -10,34 +10,32 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_researchBench",
 		"mana",
-		Box::new(|_, _| {
+		Box::new(|_| {
 			vec![
 				("modifier_resource_science_capacity_base", 10f64),
 			]
 		}),
-		Box::new(|_, _| {
-			vec![
-				("resource_stone", 25f64),
-				("resource_wood", 25f64),
-			]
-		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 25f64),
+			("resource_wood", 25f64),
+		],
 		1.15f64
 	));
 
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_workbench",
 		"mana",
-		Box::new(|_, _| {
+		Box::new(|_| {
 			vec![
 				("modifier_resource_knowledge_capacity_base", 10f64),
 			]
 		}),
-		Box::new(|_, _| {
-			vec![
-				("resource_stone", 25f64),
-				("resource_wood", 25f64),
-			]
-		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 25f64),
+			("resource_wood", 25f64),
+		],
 		1.15f64
 	));
 
@@ -46,17 +44,16 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_tent",
 		"housing",
-		Box::new(|_, _| {
+		Box::new(|_| {
 			vec![
 				("modifier_housing_base", 1f64),
 			]
 		}),
-		Box::new(|_, _| {
-			vec![
-				("resource_stone", 25f64),
-				("resource_wood", 25f64),
-			]
-		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 25f64),
+			("resource_wood", 25f64),
+		],
 		1.20f64
 	));
 
@@ -65,17 +62,16 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_garden",
 		"production",
-		Box::new(|_, _| {
+		Box::new(|_| {
 			vec![
 				("modifier_resource_food_production_base", 0.2f64),
 			]
 		}),
-		Box::new(|_, _| {
-			vec![
-				("resource_stone", 15f64),
-				("resource_wood", 15f64),
-			]
-		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 15f64),
+			("resource_wood", 15f64),
+		],
 		1.125f64
 	));
 
@@ -84,18 +80,17 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_stockpile",
 		"storage",
-		Box::new(|_, _| {
+		Box::new(|_| {
 			vec![
 				("modifier_resource_stone_capacity_base", 10f64),
 				("modifier_resource_wood_capacity_base", 10f64),
 			]
 		}),
-		Box::new(|_, _| {
-			vec![
-				("resource_stone", 10f64),
-				("resource_wood", 10f64),
-			]
-		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 10f64),
+			("resource_wood", 10f64),
+		],
 		1.15f64
 	));
 

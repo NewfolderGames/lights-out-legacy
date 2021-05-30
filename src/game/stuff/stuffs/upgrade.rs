@@ -22,9 +22,9 @@ impl Upgrade {
 		self.calculated_modifiers.clear();
 		self.asset
 			.modifiers
-			.as_ref()(modifier_storage)
-			.iter()
-			.for_each(|(m_name, m_value)| { self.calculated_modifiers.push((String::from(*m_name), *m_value)); });
+			.to_owned()
+			.into_iter()
+			.for_each(|(m_name, m_value)| self.calculated_modifiers.push((String::from(m_name), m_value)));
 
 	}
 
@@ -34,9 +34,9 @@ impl Upgrade {
 		self.calculated_price.clear();
 		self.asset
 			.price
-			.as_ref()(modifier_storage)
-			.iter()
-			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(*r_name), *r_price)));
+			.to_owned()
+			.into_iter()
+			.for_each(|(r_name, r_price)| self.calculated_price.push((String::from(r_name), r_price)));
 
 	}
 
@@ -123,19 +123,15 @@ pub struct UpgradeAsset {
 
 	pub name: &'static str,
 
-	pub modifiers: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
-	pub price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
+	pub modifiers:  Vec<(&'static str, f64)>,
+	pub price: Vec<(&'static str, f64)>,
 
 }
 
 impl UpgradeAsset {
 
 	/// Creates a new upgrade asset.
-	pub fn new(
-		name: &'static str,
-		modifiers: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>,
-		price: Box<dyn Fn(&ModifierStorage) -> Vec<(&'static str, f64)>>
-	) -> Self {
+	pub fn new(name: &'static str, modifiers: Vec<(&'static str, f64)>,price: Vec<(&'static str, f64)>) -> Self {
 
 		Self {
 

@@ -11,7 +11,8 @@ pub struct Resource {
 	count: f64,
 	production: f64,
 
-	is_unlocked: bool
+	is_deficit: bool,
+	is_unlocked: bool,
 
 }
 
@@ -20,10 +21,19 @@ impl Resource {
 	/// Adds resource count.
 	pub fn add_count(&mut self, amount: f64) {
 
+		let count = self.count + amount;
+		if count > self.capacity && count > self.count { return }
+
 		self.count += amount;
+		self.is_deficit = false;
 
 		if self.count > self.capacity { self.count = self.capacity; }
-		if self.count < 0f64 { self.count = 0f64; }
+		if self.count < 0f64 {
+			
+			self.count = 0f64;
+			self.is_deficit = true;
+		
+		}
 
 	}
 
@@ -94,6 +104,13 @@ impl Resource {
 
 	}
 
+	/// Returns `true` if the resource is in deficit.
+	pub fn is_deficit(&self) -> bool {
+
+		self.is_deficit
+
+	}
+
 	/// Returns `true` if the resource's count equals its capacity.
 	pub fn is_full(&self) -> bool {
 
@@ -144,6 +161,7 @@ impl Stuff for Resource {
 			consumption: 0f64,
 			count: 0f64,
 			production: 0f64,
+			is_deficit: false,
 			is_unlocked: false,
 			asset,
 
