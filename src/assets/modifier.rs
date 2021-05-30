@@ -4,6 +4,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	// Building - All
 	
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_building_stockpile_ore_capacity_base"));
+
 	// Jobs.
 
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_job_farmer_capacity_base"));
@@ -66,6 +68,12 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_knowledge_consumption_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_knowledge_capacity_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_knowledge_capacity_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_production_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_production_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_consumption_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_consumption_multiplier"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_capacity_base"));
+	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_ore_capacity_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_production_base"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_production_multiplier"));
 	stuff_manager.load_modifier(ModifierAsset::new("modifier_resource_science_consumption_base"));

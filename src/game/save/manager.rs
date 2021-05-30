@@ -71,7 +71,10 @@ impl SaveManager {
 
 		if let Ok(save) = serde_json::from_str::<Save>(&save) {
 
-			save.stuff.buildings.iter().for_each(|(b_name, b_count)| stuff_manager.set_building(b_name, *b_count));
+			save.stuff.buildings.iter().for_each(|(b_name, (b_count, b_active))| {
+				stuff_manager.set_building(b_name, *b_count);
+				if !b_active { stuff_manager.toggle_building(b_name); }
+			});
 			save.stuff.resources.iter().for_each(|(r_name, r_count)| stuff_manager.set_resource(r_name, *r_count));
 			save.stuff.stats.iter().for_each(|(s_name, s_value)| stuff_manager.set_stat(s_name, *s_value));
 			save.stuff.unlocks.iter().for_each(|u| stuff_manager.unlock(u));

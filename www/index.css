@@ -268,18 +268,38 @@ button {
 	flex-basis: calc(50% - 8px);
 	margin: 8px 0;
 	padding: 8px;
-}
-#tab-building .building:hover {
-	cursor: pointer;
+	position: relative;
 }
 #tab-building .building.locked {
 	display: none;
 }
 
+#tab-building .building-toggle {
+	background: none;
+	border: none;
+	color: var(--font-color-light);
+	padding: 0;
+	position: absolute;
+	right: 8px;
+}
+#tab-building .building-toggle:hover {
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#tab-building .building-toggle.disabled {
+	color: var(--font-color-danger);
+}
+
 #tab-building .building-title {
 	color: var(--font-color-light);
 	margin-bottom: 4px;
+	padding-right: 64px;
 	font-weight: bold;
+}
+#tab-building .building-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 #tab-building .building-description {
@@ -297,6 +317,9 @@ button {
 }
 #tab-building .building-modifier:hover {
 	background: var(--background-color-hover);
+}
+#tab-building .building-modifier.locked {
+	display: none;
 }
 
 #tab-building .building-modifier .building-modifier-name {
@@ -331,7 +354,6 @@ button {
 #tab-building .building-price .building-resource-count.needs_more {
 	color: var(--font-color-danger);
 }
-
 
 /* Game container - Tabs - Lighthouse */
 
@@ -419,10 +441,6 @@ button {
 	display: none;
 }
 
-#tab-technology #tab-technology-researchable .technology:hover {
-	cursor: pointer;
-}
-
 #tab-technology #tab-technology-researched .technology {
 	color: var(--font-color-dark);
 	border-color: var(--border-color-dark);
@@ -440,6 +458,10 @@ button {
 	color: var(--font-color-light);
 	margin-bottom: 4px;
 	font-weight: bold;
+}
+#tab-technology .technology-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 #tab-technology .technology-description {
@@ -490,10 +512,6 @@ button {
 	display: none;
 }
 
-#tab-upgrade #tab-upgrade-researchable .upgrade:hover {
-	cursor: pointer;
-}
-
 #tab-upgrade #tab-upgrade-researched .upgrade {
 	color: var(--font-color-dark);
 	border-color: var(--border-color-dark);
@@ -511,6 +529,10 @@ button {
 	color: var(--font-color-light);
 	margin-bottom: 4px;
 	font-weight: bold;
+}
+#tab-upgrade .upgrade-title:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 #tab-upgrade .upgrade-description {

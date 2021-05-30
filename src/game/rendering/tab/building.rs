@@ -27,6 +27,7 @@ struct BuildingElement {
 	is_unlocked: bool,
 
 	root_element: Element,
+	toggle_element: Element,
 	title_element: Element,
 	description_element: Element,
 	modifier_container_element: Element,
@@ -117,6 +118,7 @@ impl BuildingTab {
 
 				is_active: building.is_active(),
 				is_unlocked: building.is_unlocked(),
+				toggle_element: document.create_element("button").unwrap(),
 				root_element: document.create_element("div").unwrap(),
 				title_element: document.create_element("div").unwrap(),
 				description_element: document.create_element("div").unwrap(),
@@ -128,11 +130,13 @@ impl BuildingTab {
 			};
 
 			building_element.root_element.set_class_name("building locked");
+			building_element.toggle_element.set_class_name("building-toggle");
 			building_element.title_element.set_class_name("building-title");
 			building_element.description_element.set_class_name("building-description");
 			building_element.modifier_container_element.set_class_name("building-modifier-container");
 			building_element.price_container_element.set_class_name("building-price-container");
 
+			building_element.root_element.append_with_node_1(&building_element.toggle_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.title_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.description_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.modifier_container_element).unwrap();
@@ -141,7 +145,8 @@ impl BuildingTab {
 			building_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			building_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
-			building_element.root_element.set_attribute("onclick", &format!("window.Game.purchase_building('{}')", name)).unwrap();
+			building_element.title_element.set_attribute("onclick", &format!("window.Game.purchase_building('{}')", name)).unwrap();
+			building_element.toggle_element.set_attribute("onclick", &format!("window.Game.toggle_building('{}')", name)).unwrap();
 
 			// Modifiers.
 
@@ -265,6 +270,8 @@ impl Tab for BuildingTab {
 
 		}
 
+		if !self.is_selected { return }
+
 		// Buildings.
 
 		for (name, building) in stuff_manager.iter_building() {
@@ -282,6 +289,8 @@ impl Tab for BuildingTab {
 					.map(|c| c.root_element.set_class_name("building-category"));
 				
 				building_element.root_element.set_class_name("building");
+				building_element.toggle_element.set_class_name(if building.is_active() { "building-toggle enabled" } else { "building-toggle disabled" });
+				building_element.toggle_element.set_inner_html(if building.is_active() { "Enabled" } else { "Disabled" });
 				building_element.title_element.set_inner_html(&format!("{} ({})", stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())), building.get_count()));
 
 				// Modifiers.
@@ -290,8 +299,17 @@ impl Tab for BuildingTab {
 
 					let modifier_element = building_element.modifier_elements.get(modifier_name).unwrap();
 
-					modifier_element.value_element.set_inner_html(&format_number_scientific(*modifier_value));
+					if *modifier_value == 0f64 {
+
+						modifier_element.root_element.set_class_name("building-modifier locked");
+
+					} else {
+
+						modifier_element.root_element.set_class_name("building-modifier");
+						modifier_element.value_element.set_inner_html(&format_number_scientific(*modifier_value));
 	
+					}
+
 				}
 
 				// Price.

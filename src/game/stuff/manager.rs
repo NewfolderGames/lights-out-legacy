@@ -420,6 +420,15 @@ impl StuffManager {
 
 	}
 
+	/// Toggles a building.
+	pub fn toggle_building(&mut self, name: &str) {
+
+		self.building_storage
+			.get_mut(name)
+			.map(|b| b.toggle());
+
+	}
+
 	/// Unlocks unlock.
 	pub fn unlock(&mut self, name: &str) {
 

@@ -11,6 +11,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_text(TextAsset::new("building_garden_title", "Garden"));
 	stuff_manager.load_text(TextAsset::new("building_researchBench_title", "Research Bench"));
+	stuff_manager.load_text(TextAsset::new("building_researchBench_title", "Research Bench"));
 	stuff_manager.load_text(TextAsset::new("building_stockpile_title", "Stockpile"));
 	stuff_manager.load_text(TextAsset::new("building_tent_title", "Tent"));
 	stuff_manager.load_text(TextAsset::new("building_workbench_title", "Workbench"));
@@ -25,6 +26,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_text(TextAsset::new("feature_lighthouse_examine", "Exmaine lighthouse"));
 	stuff_manager.load_text(TextAsset::new("feature_lighthouse_gather", "Gather scraps"));
+	stuff_manager.load_text(TextAsset::new("feature_lighthouse_search", "Search for survivors"));
 	stuff_manager.load_text(TextAsset::new("feature_lighthouse_lightsout", "Lights out"));
 
 	stuff_manager.load_text(TextAsset::new("feature_tab_building", "Building tab"));
@@ -51,6 +53,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	
 	// Modifiers.
 
+	stuff_manager.load_text(TextAsset::new("modifier_building_stockpile_ore_capacity_base", "Stockpile ore capacity base"));
+	
 	stuff_manager.load_text(TextAsset::new("modifier_housing_base", "Housing base"));
 	stuff_manager.load_text(TextAsset::new("modifier_housing_multiplier", "Housing multiplier"));
 
@@ -66,6 +70,12 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("modifier_job_miner_consumption_multiplier", "Miner job consumption multiplier"));
 	stuff_manager.load_text(TextAsset::new("modifier_job_miner_production_base", "Miner job production base"));
 	stuff_manager.load_text(TextAsset::new("modifier_job_miner_production_multiplier", "Miner job production multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_capacity_base", "Woodcutter job capacity base"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_capacity_multiplier", "Woodcutter job capacity multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_consumption_base", "Woodcutter job consumption base"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_consumption_multiplier", "Woodcutter job consumption multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_production_base", "Woodcutter job production base"));
+	stuff_manager.load_text(TextAsset::new("modifier_job_woodcutter_production_multiplier", "Woodcutter job production multiplier"));
 
 	stuff_manager.load_text(TextAsset::new("modifier_lighthouse_examine_base", "Lighthouse examining base"));
 	stuff_manager.load_text(TextAsset::new("modifier_lighthouse_gather_base", "Lighthouse scrap gathering base"));
@@ -98,6 +108,12 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("modifier_resource_knowledge_consumption_multiplier", "Knowledge consumption multiplier"));
 	stuff_manager.load_text(TextAsset::new("modifier_resource_knowledge_production_base", "Knowledge production base"));
 	stuff_manager.load_text(TextAsset::new("modifier_resource_knowledge_production_multiplier", "Knowledge production multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_capacity_base", "Ore capacity base"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_capacity_multiplier", "Ore capacity multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_consumption_base", "Ore consumption base"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_consumption_multiplier", "Ore consumption multiplier"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_production_base", "Ore production base"));
+	stuff_manager.load_text(TextAsset::new("modifier_resource_ore_production_multiplier", "Ore production multiplier"));
 	stuff_manager.load_text(TextAsset::new("modifier_resource_science_capacity_base", "Science capacity base"));
 	stuff_manager.load_text(TextAsset::new("modifier_resource_science_capacity_multiplier", "Science capacity multiplier"));
 	stuff_manager.load_text(TextAsset::new("modifier_resource_science_consumption_base", "Science consumption base"));
@@ -127,6 +143,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("resource_food", "Food"));
 	stuff_manager.load_text(TextAsset::new("resource_iron", "Iron"));
 	stuff_manager.load_text(TextAsset::new("resource_knowledge", "Knowledge"));
+	stuff_manager.load_text(TextAsset::new("resource_ore", "Ore"));
 	stuff_manager.load_text(TextAsset::new("resource_science", "Science"));
 	stuff_manager.load_text(TextAsset::new("resource_stone", "Stone"));
 	stuff_manager.load_text(TextAsset::new("resource_wood", "Wood"));
@@ -150,31 +167,59 @@ pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_text(TextAsset::new("technology_agriculture_title", "Agriculture"));
 	stuff_manager.load_text(TextAsset::new("technology_housing_basic_title", "Housing"));
+	stuff_manager.load_text(TextAsset::new("technology_ironWorking_title", "Iron Working"));
 	stuff_manager.load_text(TextAsset::new("technology_lighthouse_title", "Lighthouse"));
 	stuff_manager.load_text(TextAsset::new("technology_mining_title", "Mining"));
+	stuff_manager.load_text(TextAsset::new("technology_smelting_title", "Smelting"));
+	stuff_manager.load_text(TextAsset::new("technology_stoneCutting_title", "Stone Cutting"));
 	stuff_manager.load_text(TextAsset::new("technology_woodworking_title", "Woodworking"));
 	stuff_manager.load_text(TextAsset::new("technology_workbench_title", "Workbench"));
 	
 	stuff_manager.load_text(TextAsset::new("technology_agriculture_description", "Develops a way to grow platns using the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("technology_housing_basic_description", "Allows constuction of tent to shelter people."));
+	stuff_manager.load_text(TextAsset::new("technology_ironWorking_description", "Develops a way to extract iron from ores."));
 	stuff_manager.load_text(TextAsset::new("technology_lighthouse_description", "A structure that keeps the void away."));
 	stuff_manager.load_text(TextAsset::new("technology_mining_description", "Extracts minerals from the earth."));
+	stuff_manager.load_text(TextAsset::new("technology_smelting_description", "Smelting allows extracting metals from ores."));
+	stuff_manager.load_text(TextAsset::new("technology_stoneCutting_description", "Learn how to sharpen stones to make better tools."));
 	stuff_manager.load_text(TextAsset::new("technology_woodworking_description", "Crafts various tools from wood."));
 	stuff_manager.load_text(TextAsset::new("technology_workbench_description", "Enables upgrades."));
 
 	// Upgrades.
 
+	stuff_manager.load_text(TextAsset::new("upgrade_building_stockpile_ore_capacity_base_title", "Ore stockpile"));
+	stuff_manager.load_text(TextAsset::new("upgrade_building_furnace_iron_production_base_title", "Iron extraction"));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_examine_title", "Knowledge gathering"));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_gather_title", "Efficient gathering"));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_wood_title", "Wooden axe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_stone_title", "Stone axe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_copper_title", "Copper axe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_iron_title", "Iron axe"));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_wood_title", "Wooden hoe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_stone_title", "Stone hoe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_copper_title", "Copper hoe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_iron_title", "Iron hoe"));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_wood_title", "Wooden pickaxe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_stone_title", "Stone pickaxe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_copper_title", "Copper pickaxe"));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_iron_title", "Iron pickaxe"));
 
+	stuff_manager.load_text(TextAsset::new("upgrade_building_stockpile_ore_capacity_base_description", "Expends stockpiles to store ores."));
+	stuff_manager.load_text(TextAsset::new("upgrade_building_furnace_iron_production_base_description", "Smelters can produce iron."));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_examine_description", "Gains knowledge and extra science from examining the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_gather_description", "Gains more stuffs from gathering scraps."));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_wood_description", "Increases woodcutter production by +10%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_stone_description", "Increases woodcutter production by +20%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_copper_description", "Increases woodcutter production by +30%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_iron_description", "Increases woodcutter production by +40%."));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_wood_description", "Increases farmer production by +10%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_stone_description", "Increases farmer production by +20%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_copper_description", "Increases farmer production by +30%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_hoe_iron_description", "Increases farmer production by +40%."));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_wood_description", "Increases miner production by +10%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_stone_description", "Increases miner production by +20%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_copper_description", "Increases miner production by +30%."));
+	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_iron_description", "Increases miner production by +40%."));
 
 	// UIs.
 

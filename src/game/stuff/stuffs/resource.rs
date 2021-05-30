@@ -21,18 +21,25 @@ impl Resource {
 	/// Adds resource count.
 	pub fn add_count(&mut self, amount: f64) {
 
-		let count = self.count + amount;
-		if count > self.capacity && count > self.count { return }
-
-		self.count += amount;
 		self.is_deficit = false;
 
-		if self.count > self.capacity { self.count = self.capacity; }
-		if self.count < 0f64 {
+		if amount > 0f64 {
+
+			if self.count >= self.capacity { return }
+
+			self.count += amount;
+			if self.count >= self.capacity { self.count = self.capacity }
+
+		} else {
+
+			self.count += amount;
+			if self.count < 0f64 {
 			
-			self.count = 0f64;
-			self.is_deficit = true;
-		
+				self.count = 0f64;
+				self.is_deficit = true;
+			
+			}
+
 		}
 
 	}

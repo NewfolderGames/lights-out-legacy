@@ -80,8 +80,11 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_building(BuildingAsset::new(
 		"building_stockpile",
 		"storage",
-		Box::new(|_| {
+		Box::new(|ms| {
 			vec![
+				("modifier_resource_copper_capacity_base", ms.get_value("modifier_building_stockpile_capacity_copper_base").unwrap_or(0f64)),
+				("modifier_resource_iron_capacity_base", ms.get_value("modifier_building_stockpile_capacity_iron_base").unwrap_or(0f64)),
+				("modifier_resource_ore_capacity_base", ms.get_value("modifier_building_stockpile_ore_capacity_base").unwrap_or(0f64)),
 				("modifier_resource_stone_capacity_base", 10f64),
 				("modifier_resource_wood_capacity_base", 10f64),
 			]

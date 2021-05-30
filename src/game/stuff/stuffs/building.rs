@@ -121,6 +121,13 @@ impl Building {
 
 	}
 
+	/// Togles the building.
+	pub fn toggle(&mut self) {
+
+		self.is_active = !self.is_active;
+
+	}
+
 	/// Unlocks the building.
 	pub fn unlock(&mut self) {
 
@@ -160,6 +167,7 @@ impl Stuff for Building {
 	fn reset(&mut self) {
 		
 		self.is_unlocked = false;
+		self.is_active = true;
 		self.count = 0;
 
 	}
@@ -244,11 +252,13 @@ impl BuildingStorage {
 			building.calculate_modifiers(modifier_storage);
 			building.calculate_price(modifier_storage);
 
-			if !building.is_unlocked() || !building.is_active() || building.count == 0 { continue; }
+			if !building.is_unlocked() || building.count == 0 { continue; }
 
 			// Set modifiers.
 
 			for (name, value) in building.get_modifiers() {
+
+				let value = if building.is_active() { *value } else { 0f64 };
 
 				if let Some(modifiers) = self.calculated_modifiers.get_mut(name) {
 
@@ -256,7 +266,7 @@ impl BuildingStorage {
 
 				} else {
 
-					self.calculated_modifiers.insert(String::from(name), *value);
+					self.calculated_modifiers.insert(String::from(name), value);
 
 				}
 

@@ -26,7 +26,7 @@ impl Save {
 #[derive(Serialize, Deserialize)]
 pub struct SaveStuff {
 
-	pub buildings: HashMap<String, i32>,
+	pub buildings: HashMap<String, (i32, bool)>,
 	pub resources: HashMap<String, f64>,
 	pub stats: HashMap<String, f64>,
 	pub technologies: HashSet<String>,
@@ -70,7 +70,7 @@ impl SaveStuff {
 			.for_each(|(b_name, b)| {
 
 				if !b.is_unlocked() || b.get_count() == 0 { return }
-				self.buildings.insert(String::from(b_name), b.get_count());
+				self.buildings.insert(String::from(b_name), (b.get_count(), b.is_active()));
 
 			});
 
@@ -134,7 +134,7 @@ impl SaveStuff {
 			.iter_upgrade()
 			.for_each(|(u_name, u)| {
 				
-				if !u.is_unlocked() || !u.is_unlocked() { return }
+				if !u.is_unlocked() || !u.is_researched() { return }
 				self.upgrades.insert(String::from(u_name));
 			
 			});

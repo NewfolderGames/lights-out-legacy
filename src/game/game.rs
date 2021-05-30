@@ -218,6 +218,14 @@ impl Game {
 
 	}
 
+	#[wasm_bindgen]
+	pub fn toggle_building(&mut self, name: &str) {
+
+		self.stuff_manager.toggle_building(name);
+		self.rendering_manager.render(&self.stuff_manager);
+
+	}
+
 	fn unlock(&mut self, name: &str) {
 
 		self.stuff_manager.unlock(name);

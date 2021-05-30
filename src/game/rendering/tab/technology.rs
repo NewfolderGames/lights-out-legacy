@@ -92,7 +92,7 @@ impl TechnologyTab {
 			technology_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			technology_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
-			technology_element.root_element.set_attribute("onclick", &format!("window.Game.purchase_technology('{}')", name)).unwrap();
+			technology_element.title_element.set_attribute("onclick", &format!("window.Game.purchase_technology('{}')", name)).unwrap();
 
 			// Price.
 

@@ -50,4 +50,29 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		]
 	));
 
+	stuff_manager.load_technology(TechnologyAsset::new(
+		"technology_stoneCutting",
+		vec![
+			("resource_science", 65f64),
+			("resource_stone", 40f64),
+		]
+	));
+
+	stuff_manager.load_technology(TechnologyAsset::new(
+		"technology_smelting",
+		vec![
+			("resource_science", 65f64),
+			("resource_ore", 30f64),
+		]
+	));
+
+	stuff_manager.load_technology(TechnologyAsset::new(
+		"technology_ironWorking",
+		vec![
+			("resource_science", 100f64),
+			("resource_ore", 30f64),
+			("resource_copper", 30f64),
+		]
+	));
+
 }
