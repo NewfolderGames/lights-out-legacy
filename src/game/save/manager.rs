@@ -1,7 +1,7 @@
 use std::rc::Rc;
 use web_sys::{ Storage, Window };
 use crate::game::stuff::StuffManager;
-use super::Save;
+use super::*;
 
 /// A save manager.
 pub struct SaveManager {
@@ -9,7 +9,7 @@ pub struct SaveManager {
 	web_window: Rc<Window>,
 	web_storage: Rc<Storage>,
 
-	save: Save
+	save_file: SaveFile
 
 }
 
@@ -23,7 +23,7 @@ impl SaveManager {
 
 			web_window: window.clone(),
 			web_storage: Rc::new(web_storage),
-			save: Save::new()
+			save_file: SaveFile::new()
 
 		}
 
@@ -33,21 +33,15 @@ impl SaveManager {
 
 		// Set data.
 
-		self.save.stuff.clear();
-		
-		self.save.stuff.set_buildings(stuff_manager);
-		self.save.stuff.set_resources(stuff_manager);
-		self.save.stuff.set_stats(stuff_manager);
-		self.save.stuff.set_technologies(stuff_manager);
-		self.save.stuff.set_unlocks(stuff_manager);
-		self.save.stuff.set_upgrades(stuff_manager);
+		self.save_file.clear();
+		self.save_file.save(stuff_manager);
 
 		// Serialize.
 
-		let save = serde_json::to_string(&self.save).unwrap();
-		let save = self.web_window.btoa(&save).unwrap();
+		let save_file = serde_json::to_string(&self.save_file).unwrap();
+		let save_file = self.web_window.btoa(&save_file).unwrap();
 
-		self.web_storage.set_item("save", &save).unwrap();
+		self.web_storage.set_item("save", &save_file).unwrap();
 
 	}
 
@@ -69,18 +63,9 @@ impl SaveManager {
 
 		// Deserialize.
 
-		if let Ok(save) = serde_json::from_str::<Save>(&save) {
+		if let Ok(mut save) = serde_json::from_str::<SaveFile>(&save) {
 
-			save.stuff.buildings.iter().for_each(|(b_name, (b_count, b_active))| {
-				stuff_manager.set_building(b_name, *b_count);
-				if !b_active { stuff_manager.toggle_building(b_name); }
-			});
-			save.stuff.resources.iter().for_each(|(r_name, r_count)| stuff_manager.set_resource(r_name, *r_count));
-			save.stuff.stats.iter().for_each(|(s_name, s_value)| stuff_manager.set_stat(s_name, *s_value));
-			save.stuff.unlocks.iter().for_each(|u| stuff_manager.unlock(u));
-			save.stuff.technologies.iter().for_each(|t| stuff_manager.research_technology(t));
-			save.stuff.upgrades.iter().for_each(|u| stuff_manager.research_upgrade(u));
-
+			save.load(stuff_manager);
 			return true;
 
 		} else { return false }

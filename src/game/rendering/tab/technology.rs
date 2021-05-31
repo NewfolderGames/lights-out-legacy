@@ -56,7 +56,7 @@ impl TechnologyTab {
 		let tab_element = document.get_element_by_id("tab-technology").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "window.Game.change_tab('Technology')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.change_tab('Technology')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_technology").unwrap_or("TAB_TECHNOLOGY"));
 		tab_button_element.set_class_name("button");
 
@@ -92,7 +92,7 @@ impl TechnologyTab {
 			technology_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			technology_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
-			technology_element.title_element.set_attribute("onclick", &format!("window.Game.purchase_technology('{}')", name)).unwrap();
+			technology_element.title_element.set_attribute("onclick", &format!("Game.purchase_technology('{}')", name)).unwrap();
 
 			// Price.
 

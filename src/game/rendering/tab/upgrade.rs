@@ -66,7 +66,7 @@ impl UpgradeTab {
 		let tab_element = document.get_element_by_id("tab-upgrade").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "window.Game.change_tab('Upgrade')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.change_tab('Upgrade')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_upgrade").unwrap_or("TAB_UPGRADE"));
 		tab_button_element.set_class_name("button");
 
@@ -105,7 +105,7 @@ impl UpgradeTab {
 			upgrade_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			upgrade_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
-			upgrade_element.title_element.set_attribute("onclick", &format!("window.Game.purchase_upgrade('{}')", name)).unwrap();
+			upgrade_element.title_element.set_attribute("onclick", &format!("Game.purchase_upgrade('{}')", name)).unwrap();
 
 			// Modifiers.
 

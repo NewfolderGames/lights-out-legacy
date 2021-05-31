@@ -21,18 +21,24 @@ pub struct JobAsset {
 	pub name: &'static str,
 
 	pub modifiers: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
+	pub deficit: Box<dyn Fn(&ResourceStorage) -> bool>,
 
 }
 
 impl JobAsset {
 
 	/// Creates a new job asset.
-	pub fn new(name: &'static str, modifiers: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>) -> Self {
+	pub fn new(
+		name: &'static str,
+		modifiers: Box<dyn Fn(&ModifierStorage, &ResourceStorage) -> Vec<(&'static str, f64)>>,
+		deficit: Box<dyn Fn(&ResourceStorage) -> bool>
+	) -> Self {
 
 		Self {
 
 			name,
-			modifiers
+			modifiers,
+			deficit
 
 		}
 

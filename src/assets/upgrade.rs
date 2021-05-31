@@ -11,7 +11,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			("modifier_lighthouse_examine_base", 1f64)
 		],
 		vec![
-			("resource_science", 30f64),
+			("resource_science", 10f64),
 		]
 	));
 
@@ -21,8 +21,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 			("modifier_lighthouse_gather_base", 1f64)
 		],
 		vec![
-			("resource_knowledge", 30f64),
-			("resource_wood", 30f64),
+			("resource_knowledge", 20f64),
+			("resource_wood", 20f64),
 		]
 	));
 

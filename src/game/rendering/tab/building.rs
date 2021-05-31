@@ -74,7 +74,7 @@ impl BuildingTab {
 		let tab_element = document.get_element_by_id("tab-building").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "window.Game.change_tab('Building')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.change_tab('Building')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_building").unwrap_or("TAB_BUILDING"));
 		tab_button_element.set_class_name("button");
 
@@ -145,8 +145,8 @@ impl BuildingTab {
 			building_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			building_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
 
-			building_element.title_element.set_attribute("onclick", &format!("window.Game.purchase_building('{}')", name)).unwrap();
-			building_element.toggle_element.set_attribute("onclick", &format!("window.Game.toggle_building('{}')", name)).unwrap();
+			building_element.title_element.set_attribute("onclick", &format!("Game.purchase_building('{}')", name)).unwrap();
+			building_element.toggle_element.set_attribute("onclick", &format!("Game.toggle_building('{}')", name)).unwrap();
 
 			// Modifiers.
 

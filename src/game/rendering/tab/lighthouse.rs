@@ -33,7 +33,7 @@ impl LighthouseTab {
 		let tab_element = document.get_element_by_id("tab-lighthouse").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "window.Game.change_tab('Lighthouse')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.change_tab('Lighthouse')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse").unwrap_or("TAB_LIGHTHOUSE"));
 		tab_button_element.set_class_name("button");
 
@@ -58,10 +58,10 @@ impl LighthouseTab {
 		button_search_element.set_class_name("button");
 		button_ligtsout_element.set_class_name("button");
 
-		button_examine_element.set_attribute("onclick", "window.Game.lighthouse_examine()").unwrap();
-		button_gather_element.set_attribute("onclick", "window.Game.lighthouse_gather()").unwrap();
-		button_search_element.set_attribute("onclick", "window.Game.lighthouse_search()").unwrap();
-		button_ligtsout_element.set_attribute("onclick", "window.Game.lighthouse_lightsout()").unwrap();
+		button_examine_element.set_attribute("onclick", "Game.lighthouse_examine()").unwrap();
+		button_gather_element.set_attribute("onclick", "Game.lighthouse_gather()").unwrap();
+		button_search_element.set_attribute("onclick", "Game.lighthouse_search()").unwrap();
+		button_ligtsout_element.set_attribute("onclick", "Game.lighthouse_lightsout()").unwrap();
 
 		buttons_element.append_with_node_1(&button_examine_element).unwrap();
 		buttons_element.append_with_node_1(&button_gather_element).unwrap();

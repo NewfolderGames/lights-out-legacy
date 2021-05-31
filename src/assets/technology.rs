@@ -12,21 +12,21 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_technology(TechnologyAsset::new(
 		"technology_agriculture",
 		vec![
-			("resource_science", 25f64),
+			("resource_science", 20f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
 		"technology_housing_basic",
 		vec![
-			("resource_science", 25f64),
+			("resource_science", 20f64),
 			("resource_stone", 15f64),
 			("resource_wood", 15f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_workbench",
+		"technology_tools_simple",
 		vec![
 			("resource_science", 30f64),
 			("resource_stone", 20f64),

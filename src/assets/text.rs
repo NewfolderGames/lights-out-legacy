@@ -172,8 +172,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("technology_mining_title", "Mining"));
 	stuff_manager.load_text(TextAsset::new("technology_smelting_title", "Smelting"));
 	stuff_manager.load_text(TextAsset::new("technology_stoneCutting_title", "Stone Cutting"));
+	stuff_manager.load_text(TextAsset::new("technology_tools_simple_title", "Simple tools"));
 	stuff_manager.load_text(TextAsset::new("technology_woodworking_title", "Woodworking"));
-	stuff_manager.load_text(TextAsset::new("technology_workbench_title", "Workbench"));
 	
 	stuff_manager.load_text(TextAsset::new("technology_agriculture_description", "Develops a way to grow platns using the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("technology_housing_basic_description", "Allows constuction of tent to shelter people."));
@@ -182,8 +182,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("technology_mining_description", "Extracts minerals from the earth."));
 	stuff_manager.load_text(TextAsset::new("technology_smelting_description", "Smelting allows extracting metals from ores."));
 	stuff_manager.load_text(TextAsset::new("technology_stoneCutting_description", "Learn how to sharpen stones to make better tools."));
-	stuff_manager.load_text(TextAsset::new("technology_woodworking_description", "Crafts various tools from wood."));
-	stuff_manager.load_text(TextAsset::new("technology_workbench_description", "Enables upgrades."));
+	stuff_manager.load_text(TextAsset::new("technology_tools_simple_description", "Simple tools allows you to increase production."));
+	stuff_manager.load_text(TextAsset::new("technology_woodworking_description", "Allows crafting of various tools from wood."));
 
 	// Upgrades.
 

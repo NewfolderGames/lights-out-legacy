@@ -51,7 +51,7 @@ impl StatTab {
 		let tab_element = document.get_element_by_id("tab-stats").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "window.Game.change_tab('Stats')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.change_tab('Stats')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_stats").unwrap_or("TAB_STATS"));
 		tab_button_element.set_class_name("button");
 

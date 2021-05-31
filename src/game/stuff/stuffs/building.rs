@@ -241,7 +241,7 @@ impl BuildingStorage {
 	}
 
 	/// Calculates building modifiers.
-	pub fn calculate(&mut self, modifier_storage: &ModifierStorage) {
+	pub fn calculate(&mut self, modifier_storage: &ModifierStorage, resource_storage: &ResourceStorage) {
 
 		self.calculated_modifiers.clear();
 
@@ -251,6 +251,7 @@ impl BuildingStorage {
 
 			building.calculate_modifiers(modifier_storage);
 			building.calculate_price(modifier_storage);
+			building.check_deficit(resource_storage);
 
 			if !building.is_unlocked() || building.count == 0 { continue; }
 

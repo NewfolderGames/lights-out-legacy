@@ -396,7 +396,7 @@ impl StuffManager {
 
 		self.upgrade_storage.calculate(&self.modifier_storage);
 		self.technology_storage.calculate(&self.modifier_storage);
-		self.building_storage.calculate(&self.modifier_storage);
+		self.building_storage.calculate(&self.modifier_storage, &self.resource_storage);
 
 		self.upgrade_storage
 			.get_modifiers()

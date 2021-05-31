@@ -75,6 +75,23 @@ pub fn load(stuff_manager: &mut StuffManager) {
 		1.125f64
 	));
 
+	stuff_manager.load_building(BuildingAsset::new(
+		"building_mine",
+		"production",
+		Box::new(|_| {
+			vec![
+				("modifier_job_miner_capacity_base", 1f64),
+				("modifier_job_miner_production_base", 0.2f64),
+			]
+		}),
+		Box::new(|_| false),
+		vec![
+			("resource_stone", 15f64),
+			("resource_wood", 15f64),
+		],
+		1.125f64
+	));
+
 	// Storage.
 
 	stuff_manager.load_building(BuildingAsset::new(
