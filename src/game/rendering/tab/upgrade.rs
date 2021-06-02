@@ -1,38 +1,48 @@
 use std::collections::HashMap;
 use std::rc::Rc;
-use web_sys::{ Document, Element, Window };
-use crate::game::stuff::{ Stuff, StuffManager };
+use wasm_bindgen::{ closure::Closure, JsCast };
+use web_sys::{ Document, Element, HtmlElement, Window };
+use crate::game::stuff::StuffManager;
 use crate::utils::number::format_number_scientific;
 use super::Tab;
 
 struct UpgradeModifierElement {
 
-	root_element: Element,
-	name_element: Element,
-	value_element: Element
+	pub root_element: Element,
+	pub name_element: Element,
+	pub value_element: Element
 
 }
 
 struct UpgradePriceElement {
 
-	root_element: Element,
-	name_element: Element,
-	count_element: Element
+	pub root_element: Element,
+	pub name_element: Element,
+	pub count_element: Element
 
 }
 
 struct UpgradeElement {
 
-	is_researched: bool,
-	is_unlocked: bool,
+	pub is_researched: bool,
+	pub is_unlocked: bool,
 
-	root_element: Element,
-	title_element: Element,
-	description_element: Element,
-	modifier_container_element: Element,
-	modifier_elements: HashMap<String, UpgradeModifierElement>,
-	price_container_element: Element,
-	price_elements: HashMap<String, UpgradePriceElement>,
+	pub root_element: Element,
+	pub title_element: Element,
+	pub description_element: Element,
+	pub modifier_container_element: Element,
+	pub modifier_elements: HashMap<String, UpgradeModifierElement>,
+	pub price_container_element: Element,
+	pub price_elements: HashMap<String, UpgradePriceElement>,
+
+}
+
+struct UpgradeCategoryElement {
+
+	pub root_element: Element,
+	pub button_element: Element,
+	pub title_element: Element,
+	pub list_element: Element
 
 }
 
@@ -45,9 +55,9 @@ pub struct UpgradeTab {
 	tab_element: Element,
 	tab_button_element: Element,
 
-	locked_element: Element,
-	researchable_element: Element,
-	researched_element: Element,
+	locked_element: UpgradeCategoryElement,
+	researchable_element: UpgradeCategoryElement,
+	researched_element: UpgradeCategoryElement,
 	upgrade_elements: HashMap<String, UpgradeElement>,
 
 	is_selected: bool,
@@ -72,11 +82,114 @@ impl UpgradeTab {
 
 		tab_list_element.append_with_node_1(&tab_button_element).unwrap();
 
-		// Upgrades.
+		// Categories.
 
-		let locked_element = document.get_element_by_id("tab-upgrade-locked").unwrap();
-		let researchable_element = document.get_element_by_id("tab-upgrade-researchable").unwrap();
-		let researched_element = document.get_element_by_id("tab-upgrade-researched").unwrap();
+		let locked_element = UpgradeCategoryElement {
+
+			root_element: document.get_element_by_id("tab-upgrade-locked").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+		let researchable_element = UpgradeCategoryElement {
+
+			root_element: document.get_element_by_id("tab-upgrade-researchable").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+		let researched_element = UpgradeCategoryElement {
+
+			root_element: document.get_element_by_id("tab-upgrade-researched").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+
+		// Set class name.
+
+		locked_element.root_element.set_class_name("upgrade-category");
+		locked_element.button_element.set_class_name("upgrade-category-button");
+		locked_element.title_element.set_class_name("upgrade-category-title");
+		locked_element.list_element.set_class_name("upgrade-category-list");
+
+		researchable_element.root_element.set_class_name("upgrade-category");
+		researchable_element.button_element.set_class_name("upgrade-category-button");
+		researchable_element.title_element.set_class_name("upgrade-category-title");
+		researchable_element.list_element.set_class_name("upgrade-category-list");
+
+		researched_element.root_element.set_class_name("upgrade-category");
+		researched_element.button_element.set_class_name("upgrade-category-button");
+		researched_element.title_element.set_class_name("upgrade-category-title");
+		researched_element.list_element.set_class_name("upgrade-category-list");
+
+		// Append
+
+		locked_element.root_element.append_with_node_1(&locked_element.button_element).unwrap();
+		locked_element.root_element.append_with_node_1(&locked_element.title_element).unwrap();
+		locked_element.root_element.append_with_node_1(&locked_element.list_element).unwrap();
+
+		researchable_element.root_element.append_with_node_1(&researchable_element.button_element).unwrap();
+		researchable_element.root_element.append_with_node_1(&researchable_element.title_element).unwrap();
+		researchable_element.root_element.append_with_node_1(&researchable_element.list_element).unwrap();
+
+		researched_element.root_element.append_with_node_1(&researched_element.button_element).unwrap();
+		researched_element.root_element.append_with_node_1(&researched_element.title_element).unwrap();
+		researched_element.root_element.append_with_node_1(&researched_element.list_element).unwrap();
+
+		// Set inner html.
+
+		locked_element.button_element.set_inner_html("Collapse");
+		locked_element.title_element.set_inner_html("Locked technologies");
+
+		researchable_element.button_element.set_inner_html("Collapse");
+		researchable_element.title_element.set_inner_html("Researchable technologies");
+
+		researched_element.button_element.set_inner_html("Collapse");
+		researched_element.title_element.set_inner_html("Researched technologies");
+
+		// Set click event.
+
+		let closure_root_element = locked_element.root_element.clone();
+		let closure_button_element = locked_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		locked_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
+		let closure_root_element = researchable_element.root_element.clone();
+		let closure_button_element = researchable_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		researchable_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
+		let closure_root_element = researched_element.root_element.clone();
+		let closure_button_element = researched_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		researched_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
+		// Upgrades.
 
 		let mut upgrade_elements = HashMap::new();
 
@@ -161,9 +274,9 @@ impl UpgradeTab {
 
 			}
 
-			if upgrade.is_researched() { researched_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
-			else if upgrade.is_unlocked() { researchable_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
-			else { locked_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
+			if upgrade.is_researched() { researched_element.list_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
+			else if upgrade.is_unlocked() { researchable_element.list_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
+			else { locked_element.list_element.append_with_node_1(&upgrade_element.root_element).unwrap() }
 
 			upgrade_element.root_element.append_with_node_1(&upgrade_element.title_element).unwrap();
 			upgrade_element.root_element.append_with_node_1(&upgrade_element.description_element).unwrap();
@@ -231,14 +344,14 @@ impl Tab for UpgradeTab {
 			if upgrade.is_unlocked() && !upgrade_element.is_unlocked {
 
 				upgrade_element.is_unlocked = true;
-				self.researchable_element.append_with_node_1(&upgrade_element.root_element).unwrap();
+				self.researchable_element.list_element.append_with_node_1(&upgrade_element.root_element).unwrap();
 
 			}
 
 			if upgrade.is_researched() && !upgrade_element.is_researched {
 
 				upgrade_element.is_researched = true;
-				self.researched_element.append_with_node_1(&upgrade_element.root_element).unwrap();
+				self.researched_element.list_element.append_with_node_1(&upgrade_element.root_element).unwrap();
 
 			}
 			

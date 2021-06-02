@@ -8,31 +8,31 @@ use super::Tab;
 
 struct TechnologyPriceElement {
 
-	root_element: Element,
-	resource_element: Element,
-	count_element: Element
+	pub root_element: Element,
+	pub resource_element: Element,
+	pub count_element: Element
 
 }
 
 struct TechnologyElement {
 
-	is_researched: bool,
-	is_unlocked: bool,
+	pub is_researched: bool,
+	pub is_unlocked: bool,
 
-	root_element: Element,
-	title_element: Element,
-	description_element: Element,
-	price_container_element: Element,
-	price_elements: HashMap<String, TechnologyPriceElement>,
+	pub root_element: Element,
+	pub title_element: Element,
+	pub description_element: Element,
+	pub price_container_element: Element,
+	pub price_elements: HashMap<String, TechnologyPriceElement>,
 
 }
 
 struct TechnologyCategoryElement {
 
-	root_element: Element,
-	button_element: Element,
-	title_element: Element,
-	list_element: Element
+	pub root_element: Element,
+	pub button_element: Element,
+	pub title_element: Element,
+	pub list_element: Element
 
 }
 
