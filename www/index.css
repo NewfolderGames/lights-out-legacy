@@ -168,10 +168,28 @@ button {
 	animation-fill-mode: forwards;
 	display: block;
 	opacity: 1;
+	position: relative;
+	margin-bottom: 16px;
 }
 #resource-container .resource-category.locked {
 	display: none;
 	opacity: 0;
+}
+#resource-container .resource-category.collapsed .resource-category-list {
+	display: none;
+}
+
+#resource-container .resource-category-button {
+	background: none;
+	border: none;
+	color: var(--font-color-light);
+	position: absolute;
+	right: 0;
+}
+#resource-container .resource-category-button:hover {
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 #resource-container .resource-category-title {
@@ -241,7 +259,7 @@ button {
 /* Game container - Tabs - Building */
 
 #tab-building .building-category {
-	margin: 16px 0;
+	margin-bottom: 16px;
 }
 
 #tab-building .building-category.locked {
@@ -261,6 +279,7 @@ button {
 }
 #tab-building .building-category-button:hover {
 	cursor: pointer;
+	font-weight: bold;
 	text-decoration: underline;
 }
 
@@ -272,6 +291,7 @@ button {
 
 #tab-building .building-category-list {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	list-style-type: none;
 	margin: 0;
@@ -439,18 +459,41 @@ button {
 
 /* Game container - Tabs - Technology */
 
-#tab-technology > div {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin: 16px 0;
+#tab-technology .technology-category {
+	margin-bottom: 16px;
 }
 
-#tab-technology > div > .title {
+#tab-technology .technology-category.collapsed .technology-category-list {
+	display: none;
+}
+
+#tab-technology .technology-category-button {
+	background: none;
+	border: none;
+	color: var(--font-color-light);
+	position: absolute;
+	right: 0;
+}
+#tab-technology .technology-category-button:hover {
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#tab-technology .technology-category-title {
 	color: #ffffff;
 	flex-basis: 100%;
 	font-weight: bold;
 	margin-bottom: 16px;
+}
+
+#tab-technology .technology-category-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 }
 
 #tab-technology #tab-technology-locked {
@@ -514,7 +557,7 @@ button {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin: 16px 0;
+	margin-bottom: 16px;
 }
 
 #tab-upgrade > div > .title {

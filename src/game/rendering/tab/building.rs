@@ -97,8 +97,8 @@ impl BuildingTab {
 
 					root_element: document.create_element("div").unwrap(),
 					button_element: document.create_element("button").unwrap(),
-					list_element: document.create_element("ul").unwrap(),
 					title_element: document.create_element("div").unwrap(),
+					list_element: document.create_element("ul").unwrap(),
 					is_unlocked: false
 
 				};
@@ -107,8 +107,8 @@ impl BuildingTab {
 
 				category_element.root_element.set_class_name("building-category locked");
 				category_element.button_element.set_class_name("building-category-button");
-				category_element.list_element.set_class_name("building-category-list");
 				category_element.title_element.set_class_name("building-category-title");
+				category_element.list_element.set_class_name("building-category-list");
 
 				// Append.
 
@@ -253,7 +253,7 @@ impl BuildingTab {
 
 		}
 
-		// Sort and append building.
+		// Sort and append.
 
 		let mut sorted_building_elements: Vec<(&String, &BuildingElement)> = building_elements.iter().collect();
 		let mut sorted_building_category_elements: Vec<(&String, &BuildingCategoryElement)> = building_category_elements.iter().collect();

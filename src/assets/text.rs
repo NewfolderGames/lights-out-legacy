@@ -180,7 +180,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("technology_ironWorking_description", "Develops a way to extract iron from ores."));
 	stuff_manager.load_text(TextAsset::new("technology_lighthouse_description", "A structure that keeps the void away."));
 	stuff_manager.load_text(TextAsset::new("technology_mining_description", "Extracts minerals from the earth."));
-	stuff_manager.load_text(TextAsset::new("technology_smelting_description", "Smelting allows extracting metals from ores."));
+	stuff_manager.load_text(TextAsset::new("technology_smelting_description", "Smelting allows extracting useful metals from ores."));
 	stuff_manager.load_text(TextAsset::new("technology_stoneCutting_description", "Learn how to sharpen stones to make better tools."));
 	stuff_manager.load_text(TextAsset::new("technology_tools_simple_description", "Simple tools allows you to increase production."));
 	stuff_manager.load_text(TextAsset::new("technology_woodworking_description", "Allows crafting of various tools from wood."));
@@ -205,7 +205,7 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_pickaxe_iron_title", "Iron pickaxe"));
 
 	stuff_manager.load_text(TextAsset::new("upgrade_building_stockpile_ore_capacity_base_description", "Expends stockpiles to store ores."));
-	stuff_manager.load_text(TextAsset::new("upgrade_building_furnace_iron_production_base_description", "Smelters can produce iron."));
+	stuff_manager.load_text(TextAsset::new("upgrade_building_furnace_iron_production_base_description", "Smelters can now extract iron from ores."));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_examine_description", "Gains knowledge and extra science from examining the lighthouse."));
 	stuff_manager.load_text(TextAsset::new("upgrade_lighthouse_gather_description", "Gains more stuffs from gathering scraps."));
 	stuff_manager.load_text(TextAsset::new("upgrade_tool_axe_wood_description", "Increases woodcutter production by +10%."));

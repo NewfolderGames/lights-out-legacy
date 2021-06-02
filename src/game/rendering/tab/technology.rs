@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::rc::Rc;
-use web_sys::{ Document, Element, Window };
+use wasm_bindgen::{ closure::Closure, JsCast };
+use web_sys::{ Document, Element, HtmlElement, Window };
 use crate::game::stuff::StuffManager;
 use crate::utils::number::format_number_scientific;
 use super::Tab;
@@ -26,6 +27,16 @@ struct TechnologyElement {
 
 }
 
+struct TechnologyCategoryElement {
+
+	root_element: Element,
+	button_element: Element,
+	title_element: Element,
+	list_element: Element
+
+}
+
+
 /// A technology tab.
 pub struct TechnologyTab {
 
@@ -35,9 +46,9 @@ pub struct TechnologyTab {
 	tab_element: Element,
 	tab_button_element: Element,
 
-	locked_element: Element,
-	researchable_element: Element,
-	researched_element: Element,
+	locked_element: TechnologyCategoryElement,
+	researchable_element: TechnologyCategoryElement,
+	researched_element: TechnologyCategoryElement,
 	technology_elements: HashMap<String, TechnologyElement>,
 
 	is_selected: bool,
@@ -62,12 +73,115 @@ impl TechnologyTab {
 
 		tab_list_element.append_with_node_1(&tab_button_element).unwrap();
 
+		// Categories.
+
+		let locked_element = TechnologyCategoryElement {
+
+			root_element: document.get_element_by_id("tab-technology-locked").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+		let researchable_element = TechnologyCategoryElement {
+
+			root_element: document.get_element_by_id("tab-technology-researchable").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+		let researched_element = TechnologyCategoryElement {
+
+			root_element: document.get_element_by_id("tab-technology-researched").unwrap(),
+			button_element: document.create_element("button").unwrap(),
+			title_element: document.create_element("div").unwrap(),
+			list_element: document.create_element("ul").unwrap(),
+
+		};
+
+		// Set class name.
+
+		locked_element.root_element.set_class_name("technology-category");
+		locked_element.button_element.set_class_name("technology-category-button");
+		locked_element.title_element.set_class_name("technology-category-title");
+		locked_element.list_element.set_class_name("technology-category-list");
+
+		researchable_element.root_element.set_class_name("technology-category");
+		researchable_element.button_element.set_class_name("technology-category-button");
+		researchable_element.title_element.set_class_name("technology-category-title");
+		researchable_element.list_element.set_class_name("technology-category-list");
+
+		researched_element.root_element.set_class_name("technology-category");
+		researched_element.button_element.set_class_name("technology-category-button");
+		researched_element.title_element.set_class_name("technology-category-title");
+		researched_element.list_element.set_class_name("technology-category-list");
+
+		// Append
+
+		locked_element.root_element.append_with_node_1(&locked_element.button_element).unwrap();
+		locked_element.root_element.append_with_node_1(&locked_element.title_element).unwrap();
+		locked_element.root_element.append_with_node_1(&locked_element.list_element).unwrap();
+
+		researchable_element.root_element.append_with_node_1(&researchable_element.button_element).unwrap();
+		researchable_element.root_element.append_with_node_1(&researchable_element.title_element).unwrap();
+		researchable_element.root_element.append_with_node_1(&researchable_element.list_element).unwrap();
+
+		researched_element.root_element.append_with_node_1(&researched_element.button_element).unwrap();
+		researched_element.root_element.append_with_node_1(&researched_element.title_element).unwrap();
+		researched_element.root_element.append_with_node_1(&researched_element.list_element).unwrap();
+
+		// Set inner html.
+
+		locked_element.button_element.set_inner_html("Collapse");
+		locked_element.title_element.set_inner_html("Locked technologies");
+
+		researchable_element.button_element.set_inner_html("Collapse");
+		researchable_element.title_element.set_inner_html("Researchable technologies");
+
+		researched_element.button_element.set_inner_html("Collapse");
+		researched_element.title_element.set_inner_html("Researched technologies");
+
+		// Set click event.
+
+		let closure_root_element = locked_element.root_element.clone();
+		let closure_button_element = locked_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		locked_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
+		let closure_root_element = researchable_element.root_element.clone();
+		let closure_button_element = researchable_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		researchable_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
+		let closure_root_element = researched_element.root_element.clone();
+		let closure_button_element = researched_element.button_element.clone();
+		let closure = Closure::wrap(Box::new(move || {
+
+			let root_element_class_list = closure_root_element.class_list();
+			root_element_class_list.toggle("collapsed").unwrap();
+			closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+		}) as Box<dyn Fn()>);
+		researched_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+		closure.forget();
+
 		// Technologies.
-
-		let locked_element = document.get_element_by_id("tab-technology-locked").unwrap();
-		let researchable_element = document.get_element_by_id("tab-technology-researchable").unwrap();
-		let researched_element = document.get_element_by_id("tab-technology-researched").unwrap();
-
+		
 		let mut technology_elements = HashMap::new();
 
 		for (name, technology) in stuff_manager.iter_technology() {
@@ -76,7 +190,7 @@ impl TechnologyTab {
 
 				is_researched: technology.is_researched(),
 				is_unlocked: technology.is_unlocked(),
-				root_element: document.create_element("div").unwrap(),
+				root_element: document.create_element("li").unwrap(),
 				title_element: document.create_element("div").unwrap(),
 				description_element: document.create_element("div").unwrap(),
 				price_container_element: document.create_element("div").unwrap(),
@@ -123,9 +237,9 @@ impl TechnologyTab {
 			
 			// Append.
 
-			if technology.is_researched() { researched_element.append_with_node_1(&technology_element.root_element).unwrap() }
-			else if technology.is_unlocked() { researchable_element.append_with_node_1(&technology_element.root_element).unwrap() }
-			else { locked_element.append_with_node_1(&technology_element.root_element).unwrap() }
+			if technology.is_researched() { researched_element.list_element.append_with_node_1(&technology_element.root_element).unwrap() }
+			else if technology.is_unlocked() { researchable_element.list_element.append_with_node_1(&technology_element.root_element).unwrap() }
+			else { locked_element.list_element.append_with_node_1(&technology_element.root_element).unwrap() }
 
 			technology_element.root_element.append_with_node_1(&technology_element.title_element).unwrap();
 			technology_element.root_element.append_with_node_1(&technology_element.description_element).unwrap();
@@ -191,14 +305,14 @@ impl Tab for TechnologyTab {
 			if technology.is_unlocked() && !technology_element.is_unlocked {
 
 				technology_element.is_unlocked = true;
-				self.researchable_element.append_with_node_1(&technology_element.root_element).unwrap();
+				self.researchable_element.list_element.append_with_node_1(&technology_element.root_element).unwrap();
 
 			}
 
 			if technology.is_researched() && !technology_element.is_researched {
 
 				technology_element.is_researched = true;
-				self.researched_element.append_with_node_1(&technology_element.root_element).unwrap();
+				self.researched_element.list_element.append_with_node_1(&technology_element.root_element).unwrap();
 
 			}
 
