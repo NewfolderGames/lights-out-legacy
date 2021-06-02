@@ -57,10 +57,14 @@ impl Building {
 	/// Checks resource deficit and activates / deactives the building.
 	pub fn check_deficit(&mut self, resource_storage: &ResourceStorage) {
 
-		self.is_active = !self
-			.asset
-			.deficit
-			.as_ref()(resource_storage);
+		if self.is_active {
+
+			self.is_active = !self
+				.asset
+				.deficit
+				.as_ref()(resource_storage);
+
+		}
 
 	}
 

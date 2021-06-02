@@ -1,3 +1,4 @@
+use std::any::Any;
 use std::collections::HashMap;
 use std::rc::Rc;
 use web_sys::{ Document, Window };

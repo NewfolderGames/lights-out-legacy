@@ -1,6 +1,7 @@
+use std::any::Any;
 use crate::game::stuff::StuffManager;
 
-pub trait Tab {
+pub trait Tab : Any {
 
 	/// Returns `true` if the tab is selected.
 	fn is_selected(&self) -> bool;

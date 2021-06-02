@@ -264,7 +264,7 @@ impl Game {
 impl Game {
 
 	#[wasm_bindgen]
-	pub fn change_tab(&mut self, name: &str) {
+	pub fn ui_change_tab(&mut self, name: &str) {
 
 		self.rendering_manager.change_tab(name, &self.stuff_manager);
 

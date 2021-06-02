@@ -1,48 +1,50 @@
 use std::collections::HashMap;
 use std::rc::Rc;
-use web_sys::{ Document, Element, Window };
+use wasm_bindgen::{ closure::Closure, JsCast };
+use web_sys::{ Document, Element, HtmlElement, Window };
 use crate::game::stuff::{ Stuff, StuffManager };
 use crate::utils::number::format_number_scientific;
 use super::Tab;
 
 struct BuildingModifierElement {
 
-	root_element: Element,
-	name_element: Element,
-	value_element: Element
+	pub root_element: Element,
+	pub name_element: Element,
+	pub value_element: Element
 
 }
 
 struct BuildingPriceElement {
 
-	root_element: Element,
-	name_element: Element,
-	count_element: Element
+	pub root_element: Element,
+	pub name_element: Element,
+	pub count_element: Element
 
 }
 
 struct BuildingElement {
 
-	is_active: bool,
-	is_unlocked: bool,
+	pub is_active: bool,
+	pub is_unlocked: bool,
 
-	root_element: Element,
-	toggle_element: Element,
-	title_element: Element,
-	description_element: Element,
-	modifier_container_element: Element,
-	modifier_elements: HashMap<String, BuildingModifierElement>,
-	price_container_element: Element,
-	price_elements: HashMap<String, BuildingPriceElement>,
+	pub root_element: Element,
+	pub toggle_element: Element,
+	pub title_element: Element,
+	pub description_element: Element,
+	pub modifier_container_element: Element,
+	pub modifier_elements: HashMap<String, BuildingModifierElement>,
+	pub price_container_element: Element,
+	pub price_elements: HashMap<String, BuildingPriceElement>,
 
 }
 
 struct BuildingCategoryElement {
 
 	pub root_element: Element, 
-
+	pub button_element: Element,
 	pub list_element: Element,
 	pub title_element: Element,
+	pub is_unlocked: bool,
 
 }
 
@@ -74,9 +76,9 @@ impl BuildingTab {
 		let tab_element = document.get_element_by_id("tab-building").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "Game.change_tab('Building')").unwrap();
-		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_building").unwrap_or("TAB_BUILDING"));
 		tab_button_element.set_class_name("button");
+		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_building").unwrap_or("TAB_BUILDING"));
+		tab_button_element.set_attribute("onclick", "Game.ui_change_tab('Building')").unwrap();
 
 		tab_list_element.append_with_node_1(&tab_button_element).unwrap();
 
@@ -93,20 +95,45 @@ impl BuildingTab {
 
 				let category_element = BuildingCategoryElement {
 
+					root_element: document.create_element("div").unwrap(),
+					button_element: document.create_element("button").unwrap(),
 					list_element: document.create_element("ul").unwrap(),
 					title_element: document.create_element("div").unwrap(),
-					root_element: document.create_element("div").unwrap(),
+					is_unlocked: false
 
 				};
 
+				// Set class name.
+
 				category_element.root_element.set_class_name("building-category locked");
+				category_element.button_element.set_class_name("building-category-button");
 				category_element.list_element.set_class_name("building-category-list");
 				category_element.title_element.set_class_name("building-category-title");
 
+				// Append.
+
+				category_element.root_element.append_with_node_1(&category_element.button_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.title_element).unwrap();
 				category_element.root_element.append_with_node_1(&category_element.list_element).unwrap();
 
+				// Set inner html.
+
+				category_element.button_element.set_inner_html("Collapse");
 				category_element.title_element.set_inner_html(stuff_manager.get_text(&format!("building_category_{}", building.get_asset().category)).unwrap_or(&format!("BUILDING_CATEGORY_{}", building.get_asset().category.to_uppercase())));
+
+				// Set click event.
+
+				let closure_root_element = category_element.root_element.clone();
+				let closure_button_element = category_element.button_element.clone();
+				let closure = Closure::wrap(Box::new(move || {
+
+					let root_element_class_list = closure_root_element.class_list();
+					root_element_class_list.toggle("collapsed").unwrap();
+					closure_button_element.set_inner_html(if root_element_class_list.contains("collapsed") { "Open" } else { "Collapse" });
+
+				}) as Box<dyn Fn()>);
+				category_element.button_element.dyn_ref::<HtmlElement>().unwrap().set_onclick(Some(closure.as_ref().unchecked_ref()));
+				closure.forget();
 
 				building_category_elements.insert(String::from(building.get_asset().category), category_element);
 
@@ -129,6 +156,8 @@ impl BuildingTab {
 
 			};
 
+			// Set class name.
+
 			building_element.root_element.set_class_name("building locked");
 			building_element.toggle_element.set_class_name("building-toggle");
 			building_element.title_element.set_class_name("building-title");
@@ -136,14 +165,20 @@ impl BuildingTab {
 			building_element.modifier_container_element.set_class_name("building-modifier-container");
 			building_element.price_container_element.set_class_name("building-price-container");
 
+			// Append.
+
 			building_element.root_element.append_with_node_1(&building_element.toggle_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.title_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.description_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.modifier_container_element).unwrap();
 			building_element.root_element.append_with_node_1(&building_element.price_container_element).unwrap();
 
+			// Set inner html.
+
 			building_element.title_element.set_inner_html(stuff_manager.get_text(&format!("{}_title", name)).unwrap_or(&format!("{}_TITLE", name.to_uppercase())));
 			building_element.description_element.set_inner_html(stuff_manager.get_text(&format!("{}_description", name)).unwrap_or(&format!("{}_DESCRIPTION", name.to_uppercase())));
+
+			// Set click event.
 
 			building_element.title_element.set_attribute("onclick", &format!("Game.purchase_building('{}')", name)).unwrap();
 			building_element.toggle_element.set_attribute("onclick", &format!("Game.toggle_building('{}')", name)).unwrap();
@@ -160,12 +195,18 @@ impl BuildingTab {
 
 				};
 
+				// Set class name.
+
 				modifier_element.root_element.set_class_name("building-modifier");
 				modifier_element.name_element.set_class_name("building-modifier-name");
 				modifier_element.value_element.set_class_name("building-modifier-value");
 
+				// Set inner html.
+
 				modifier_element.name_element.set_inner_html(stuff_manager.get_text(&format!("{}", modifier_name)).unwrap_or(&format!("{}", modifier_name.to_uppercase())));
 				modifier_element.value_element.set_inner_html(&format_number_scientific(*modifier_value));
+
+				// Append.
 
 				building_element.modifier_container_element.append_with_node_1(&modifier_element.root_element).unwrap();
 				modifier_element.root_element.append_with_node_1(&modifier_element.name_element).unwrap();
@@ -187,12 +228,18 @@ impl BuildingTab {
 
 				};
 
+				// Set class.
+
 				price_element.root_element.set_class_name("building-price");
 				price_element.name_element.set_class_name("building-resource-name");
 				price_element.count_element.set_class_name("building-resource-count");
 
+				// Set inner html.
+
 				price_element.name_element.set_inner_html(stuff_manager.get_text(&format!("{}", resource_name)).unwrap_or(&format!("{}", resource_name.to_uppercase())));
 				price_element.count_element.set_inner_html(&format_number_scientific(*resource_count));
+
+				// Append.
 
 				building_element.price_container_element.append_with_node_1(&price_element.root_element).unwrap();
 				price_element.root_element.append_with_node_1(&price_element.name_element).unwrap();
@@ -206,7 +253,7 @@ impl BuildingTab {
 
 		}
 
-		// Append building.
+		// Sort and append building.
 
 		let mut sorted_building_elements: Vec<(&String, &BuildingElement)> = building_elements.iter().collect();
 		let mut sorted_building_category_elements: Vec<(&String, &BuildingCategoryElement)> = building_category_elements.iter().collect();
@@ -284,10 +331,23 @@ impl Tab for BuildingTab {
 
 			} else {
 
+				// Category.
+
 				self.building_category_elements
-					.get(building.get_asset().category)
-					.map(|c| c.root_element.set_class_name("building-category"));
+					.get_mut(building.get_asset().category)
+					.map(|c| {
+
+						if !c.is_unlocked {
+
+							c.is_unlocked = true;
+							c.root_element.set_class_name("building-category");
+
+						}
+
+					});
 				
+				// Building.
+
 				building_element.root_element.set_class_name("building");
 				building_element.toggle_element.set_class_name(if building.is_active() { "building-toggle enabled" } else { "building-toggle disabled" });
 				building_element.toggle_element.set_inner_html(if building.is_active() { "Enabled" } else { "Disabled" });

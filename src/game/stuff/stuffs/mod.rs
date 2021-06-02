@@ -5,7 +5,6 @@ mod modifier;
 mod resource;
 mod stat;
 mod technology;
-mod text;
 mod unlock;
 mod upgrade;
 
@@ -16,6 +15,5 @@ pub use modifier::*;
 pub use resource::*;
 pub use stat::*;
 pub use technology::*;
-pub use text::*;
 pub use unlock::*;
 pub use upgrade::*;

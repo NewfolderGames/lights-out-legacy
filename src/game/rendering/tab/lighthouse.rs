@@ -33,7 +33,7 @@ impl LighthouseTab {
 		let tab_element = document.get_element_by_id("tab-lighthouse").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "Game.change_tab('Lighthouse')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.ui_change_tab('Lighthouse')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_lighthouse").unwrap_or("TAB_LIGHTHOUSE"));
 		tab_button_element.set_class_name("button");
 

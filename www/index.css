@@ -248,6 +248,22 @@ button {
 	display: none;
 }
 
+#tab-building .building-category.collapsed .building-category-list {
+	display: none;
+}
+
+#tab-building .building-category-button {
+	background: none;
+	border: none;
+	color: var(--font-color-light);
+	position: absolute;
+	right: 0;
+}
+#tab-building .building-category-button:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 #tab-building .building-category-title {
 	color: #ffffff;
 	font-weight: bold;

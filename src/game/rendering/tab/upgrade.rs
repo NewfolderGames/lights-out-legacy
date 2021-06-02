@@ -66,7 +66,7 @@ impl UpgradeTab {
 		let tab_element = document.get_element_by_id("tab-upgrade").unwrap();
 		let tab_button_element = document.create_element("div").unwrap();
 
-		tab_button_element.set_attribute("onclick", "Game.change_tab('Upgrade')").unwrap();
+		tab_button_element.set_attribute("onclick", "Game.ui_change_tab('Upgrade')").unwrap();
 		tab_button_element.set_inner_html(stuff_manager.get_text("ui_tab_upgrade").unwrap_or("TAB_UPGRADE"));
 		tab_button_element.set_class_name("button");
 
