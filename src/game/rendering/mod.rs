@@ -2,7 +2,8 @@ mod loading;
 mod log;
 mod manager;
 mod resource;
-mod tab;
+
+pub mod tab;
 
 pub use loading::LoadingManager;
 pub use log::LogManager;

@@ -664,7 +664,7 @@ button {
 #log-list .log {
 	animation: fadeInBlock 1s;
 	animation-fill-mode: forwards;
-	margin: 4px 0;
+	margin-bottom: 4px;
 	opacity: 0;
 }
 

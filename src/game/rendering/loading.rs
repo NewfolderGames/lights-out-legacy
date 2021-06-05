@@ -1,10 +1,7 @@
 use std::rc::Rc;
-use web_sys::{ Document, Element, Window };
+use web_sys::{ Document, Element };
 
 pub struct LoadingManager {
-
-	web_window: Rc<Window>,
-	web_document: Rc<Document>,
 
 	root_element: Element,
 	title_element: Element,
@@ -15,12 +12,10 @@ pub struct LoadingManager {
 impl LoadingManager {
 
 	/// Create a new loading manager.
-	pub fn new(window: Rc<Window>, document: Rc<Document>) -> Self {
+	pub fn new(document: Rc<Document>) -> Self {
 	
 		Self {
 	
-			web_window: window.clone(), 
-			web_document: document.clone(),
 			root_element: document.get_element_by_id("loading").unwrap(),
 			title_element: document.get_element_by_id("loading-title").unwrap(),
 			description_element: document.get_element_by_id("loading-description").unwrap()
@@ -32,7 +27,15 @@ impl LoadingManager {
 	/// Sets loading state.
 	pub fn set_loading(&self, loading: bool) {
 
-		self.root_element.set_class_name(if loading { "active" } else { "" });
+		if loading {
+
+			self.root_element.class_list().add_1("active").unwrap();
+
+		} else {
+
+			self.root_element.class_list().remove_1("active").unwrap();
+
+		}
 
 	}
 

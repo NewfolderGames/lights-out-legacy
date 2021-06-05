@@ -85,6 +85,7 @@ impl Stuffs {
 		
 	}
 
+	/// Saves data into the save file.
 	pub fn save(&mut self, stuff_manager: &StuffManager) {
 
 		stuff_manager

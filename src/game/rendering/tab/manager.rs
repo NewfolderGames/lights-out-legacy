@@ -1,48 +1,39 @@
-use std::any::Any;
 use std::collections::HashMap;
 use std::rc::Rc;
-use web_sys::{ Document, Window };
+use web_sys::Document;
 use crate::game::stuff::StuffManager;
 use super::*;
 
 /// A tab manager.
 pub struct TabManager {
 
-	web_window: Rc<Window>,
-	web_document: Rc<Document>,
-
 	selected: String,
-	tabs: HashMap<&'static str, Box<dyn Tab>>
+	tabs: HashMap<String, Box<dyn Tab>>
 
 }
 
 impl TabManager {
 
 	/// Creates a new tab manager.
-	pub fn new(window: Rc<Window>, document: Rc<Document>) -> Self {
+	pub fn new(document: Rc<Document>, stuff_manager: &StuffManager) -> Self {
+
+		let mut tabs: HashMap<String, Box<dyn Tab>> = HashMap::new();
+
+		let mut lighthouse = Box::new(LighthouseTab::new(document.clone(), stuff_manager));
+		lighthouse.set_selected(true);
+
+		tabs.insert(String::from("Lighthouse"), lighthouse);
+		tabs.insert(String::from("Building"), Box::new(BuildingTab::new(document.clone(), stuff_manager)));
+		tabs.insert(String::from("Technology"), Box::new(TechnologyTab::new(document.clone(), stuff_manager)));
+		tabs.insert(String::from("Upgrade"), Box::new(UpgradeTab::new(document.clone(), stuff_manager)));
+		tabs.insert(String::from("Stats"), Box::new(StatTab::new(document.clone(), stuff_manager)));
 
 		Self {
 
-			web_window: window.clone(),
-			web_document: document.clone(),
 			selected: String::from("Lighthouse"),
-			tabs: HashMap::new(),
+			tabs,
 
 		}
-
-	}
-
-	/// Initialize the tab manager.
-	pub fn init(&mut self, stuff_manager: &StuffManager) {
-
-		let mut lighthouse = Box::new(LighthouseTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager));
-		lighthouse.set_selected(true);
-
-		self.tabs.insert("Lighthouse", lighthouse);
-		self.tabs.insert("Building", Box::new(BuildingTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
-		self.tabs.insert("Technology", Box::new(TechnologyTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
-		self.tabs.insert("Upgrade", Box::new(UpgradeTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
-		self.tabs.insert("Stats", Box::new(StatTab::new(self.web_window.clone(), self.web_document.clone(), stuff_manager)));
 
 	}
 

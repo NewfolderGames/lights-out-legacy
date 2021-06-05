@@ -1,13 +1,12 @@
 use std::rc::Rc;
-use web_sys::{ Document, Element, Window };
+use web_sys::{ Document, Element };
 
 pub const MAX_LOGS: u32 = 64;
 
 pub struct LogManager {
 
-	web_window: Rc<Window>,
 	web_document: Rc<Document>,
-
+	
 	root_element: Element
 
 }
@@ -15,11 +14,10 @@ pub struct LogManager {
 impl LogManager {
 
 	/// Create a new loading manager.
-	pub fn new(window: Rc<Window>, document: Rc<Document>) -> Self {
+	pub fn new(document: Rc<Document>) -> Self {
 	
 		Self {
 	
-			web_window: window.clone(), 
 			web_document: document.clone(),
 			root_element: document.get_element_by_id("log-list").unwrap(),
 	
@@ -27,7 +25,7 @@ impl LogManager {
 	
 	}
 
-	pub fn push(&self, log: &str, class: Option<&str>) {
+	pub fn push(&self, log: &str, class: &str) {
 
 		// Remove old log.
 
@@ -44,7 +42,7 @@ impl LogManager {
 
 		let log_element = self.web_document.create_element("li").unwrap();
 
-		log_element.set_class_name(&format!("log {}", class.unwrap_or("")));
+		log_element.set_class_name(&format!("log {}", class));
 		log_element.set_inner_html(log);
 
 		self.root_element.prepend_with_node_1(&log_element).unwrap();

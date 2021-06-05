@@ -1,77 +1,78 @@
-use crate::game::stuff::{ StuffManager, TechnologyAsset };
+use crate::game::stuff::StuffManager;
+use crate::game::stuff::technology::TechnologyAsset;
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_lighthouse",
+		"lighthouse",
 		vec![
-			("resource_science", 10f64),
+			("science", 10f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_agriculture",
+		"agriculture",
 		vec![
-			("resource_science", 20f64),
+			("science", 20f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_housing_basic",
+		"housing_basic",
 		vec![
-			("resource_science", 20f64),
-			("resource_stone", 15f64),
-			("resource_wood", 15f64),
+			("science", 20f64),
+			("stone", 15f64),
+			("wood", 15f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_tools_simple",
+		"tools_simple",
 		vec![
-			("resource_science", 30f64),
-			("resource_stone", 20f64),
-			("resource_wood", 20f64),
+			("science", 30f64),
+			("stone", 20f64),
+			("wood", 20f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_woodworking",
+		"woodworking",
 		vec![
-			("resource_science", 50f64),
-			("resource_wood", 25f64),
+			("science", 50f64),
+			("wood", 25f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_mining",
+		"mining",
 		vec![
-			("resource_science", 50f64),
-			("resource_stone", 25f64),
+			("science", 50f64),
+			("stone", 25f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_stoneCutting",
+		"stoneCutting",
 		vec![
-			("resource_science", 65f64),
-			("resource_stone", 40f64),
+			("science", 65f64),
+			("stone", 40f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_smelting",
+		"smelting",
 		vec![
-			("resource_science", 65f64),
-			("resource_ore", 30f64),
+			("science", 65f64),
+			("ore", 30f64),
 		]
 	));
 
 	stuff_manager.load_technology(TechnologyAsset::new(
-		"technology_ironWorking",
+		"ironWorking",
 		vec![
-			("resource_science", 100f64),
-			("resource_ore", 30f64),
-			("resource_copper", 30f64),
+			("science", 100f64),
+			("ore", 30f64),
+			("copper", 30f64),
 		]
 	));
 

@@ -5,7 +5,7 @@ use super::{ Options, Stuffs };
 /// A save file.
 #[derive(Serialize, Deserialize)]
 pub struct SaveFile {
-	
+
 	pub options: Option<Options>,
 	pub stuffs: Option<Stuffs>,
 

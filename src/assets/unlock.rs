@@ -1,125 +1,126 @@
-use crate::game::stuff::{ StuffManager, UnlockAsset, Unlockable };
+use crate::game::stuff::StuffManager;
+use crate::game::stuff::unlock::{ UnlockAsset, Unlockable };
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_default",
+		"default",
 		vec![
-			Unlockable::Feature("feature_tab_lighthouse"),
-			Unlockable::Feature("feature_lighthouse_examine"),
+			Unlockable::Feature("tab_lighthouse"),
+			Unlockable::Feature("tab_lighthouse_examine"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_quest_exmaine",
+		"quest_exmaine",
 		vec![
-			Unlockable::Feature("feature_lighthouse_gather"),
-			Unlockable::Feature("feature_tab_stats"),
-			Unlockable::Resource("resource_wood"),
-			Unlockable::Resource("resource_stone"),
+			Unlockable::Feature("tab_lighthouse_gather"),
+			Unlockable::Feature("tab_stats"),
+			Unlockable::Resource("wood"),
+			Unlockable::Resource("stone"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_quest_gather",
+		"quest_gather",
 		vec![
-			Unlockable::Feature("feature_tab_technology"),
-			Unlockable::Resource("resource_science"),
-			Unlockable::Technology("technology_lighthouse"),
+			Unlockable::Feature("tab_technology"),
+			Unlockable::Resource("science"),
+			Unlockable::Technology("lighthouse"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_lighthouse",
+		"technology_lighthouse",
 		vec![
-			Unlockable::Feature("feature_tab_building"),
-			Unlockable::Building("building_researchBench"),
-			Unlockable::Building("building_stockpile"),
-			Unlockable::Technology("technology_agriculture"),
-			Unlockable::Technology("technology_housing_basic"),
+			Unlockable::Feature("tab_building"),
+			Unlockable::Building("researchBench"),
+			Unlockable::Building("stockpile"),
+			Unlockable::Technology("agriculture"),
+			Unlockable::Technology("housing_basic"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_agriculture",
+		"technology_agriculture",
 		vec![
-			Unlockable::Building("building_garden"),
-			Unlockable::Resource("resource_food"),
-			Unlockable::Technology("technology_tools_simple"),
+			Unlockable::Building("garden"),
+			Unlockable::Resource("food"),
+			Unlockable::Technology("tools_simple"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_housing_basic",
+		"technology_housing_basic",
 		vec![
-			Unlockable::Building("building_tent"),
-			Unlockable::Feature("feature_lighthouse_search"),
+			Unlockable::Building("tent"),
+			Unlockable::Feature("tab_lighthouse_search"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_tools_simple",
+		"technology_tools_simple",
 		vec![
-			Unlockable::Building("building_workbench"),
-			Unlockable::Feature("feature_tab_upgrade"),
-			Unlockable::Resource("resource_knowledge"),
-			Unlockable::Technology("technology_woodworking"),
-			Unlockable::Technology("technology_mining"),
-			Unlockable::Upgrade("upgrade_lighthouse_examine"),
-			Unlockable::Upgrade("upgrade_lighthouse_gather"),
+			Unlockable::Building("workbench"),
+			Unlockable::Feature("tab_upgrade"),
+			Unlockable::Resource("knowledge"),
+			Unlockable::Technology("woodworking"),
+			Unlockable::Technology("mining"),
+			Unlockable::Upgrade("lighthouse_examine"),
+			Unlockable::Upgrade("lighthouse_gather"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_mining",
+		"technology_mining",
 		vec![
-			Unlockable::Resource("resource_ore"),
-			Unlockable::Technology("technology_smelting"),
-			Unlockable::Technology("technology_stoneCutting"),
-			Unlockable::Upgrade("upgrade_building_stockpile_ore_capacity_base"),
+			Unlockable::Resource("ore"),
+			Unlockable::Technology("smelting"),
+			Unlockable::Technology("stoneCutting"),
+			Unlockable::Upgrade("stockpile_ore_capacity_base"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_woodworking",
+		"technology_woodworking",
 		vec![
-			Unlockable::Technology("technology_carpentry"),
-			Unlockable::Upgrade("upgrade_tool_axe_wood"),
-			Unlockable::Upgrade("upgrade_tool_hoe_wood"),
-			Unlockable::Upgrade("upgrade_tool_pickaxe_wood"),
+			Unlockable::Technology("carpentry"),
+			Unlockable::Upgrade("tool_axe_wood"),
+			Unlockable::Upgrade("tool_hoe_wood"),
+			Unlockable::Upgrade("tool_pickaxe_wood"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_smelting",
+		"technology_smelting",
 		vec![
-			Unlockable::Building("building_furnace"),
-			Unlockable::Resource("resource_copper"),
-			Unlockable::Technology("unlock_technology_ironWorking"),
-			Unlockable::Upgrade("upgrade_building_stockpile_capacity_copper"),
-			Unlockable::Upgrade("upgrade_tool_axe_copper"),
-			Unlockable::Upgrade("upgrade_tool_hoe_copper"),
-			Unlockable::Upgrade("upgrade_tool_pickaxe_copper"),
+			Unlockable::Building("furnace"),
+			Unlockable::Resource("copper"),
+			Unlockable::Technology("ironWorking"),
+			Unlockable::Upgrade("stockpile_capacity_copper"),
+			Unlockable::Upgrade("tool_axe_copper"),
+			Unlockable::Upgrade("tool_hoe_copper"),
+			Unlockable::Upgrade("tool_pickaxe_copper"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_stoneCutting",
+		"technology_stoneCutting",
 		vec![
-			Unlockable::Upgrade("upgrade_tool_axe_stone"),
-			Unlockable::Upgrade("upgrade_tool_hoe_stone"),
-			Unlockable::Upgrade("upgrade_tool_pickaxe_stone"),
+			Unlockable::Upgrade("tool_axe_stone"),
+			Unlockable::Upgrade("tool_hoe_stone"),
+			Unlockable::Upgrade("tool_pickaxe_stone"),
 		]
 	));
 
 	stuff_manager.load_unlock(UnlockAsset::new(
-		"unlock_technology_ironWorking",
+		"technology_ironWorking",
 		vec![
-			Unlockable::Resource("resource_iron"),
-			Unlockable::Upgrade("upgrade_building_smelter_production_iron"),
-			Unlockable::Upgrade("upgrade_tool_axe_iron"),
-			Unlockable::Upgrade("upgrade_tool_hoe_iron"),
-			Unlockable::Upgrade("upgrade_tool_pickaxe_iron"),
+			Unlockable::Resource("iron"),
+			Unlockable::Upgrade("smelter_production_iron"),
+			Unlockable::Upgrade("tool_axe_iron"),
+			Unlockable::Upgrade("tool_hoe_iron"),
+			Unlockable::Upgrade("tool_pickaxe_iron"),
 		]
 	));
 

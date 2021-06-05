@@ -1,180 +1,178 @@
-use crate::game::stuff::{ UpgradeAsset, StuffManager };
+use crate::game::stuff::{ StuffManager };
+use crate::game::stuff::upgrade::UpgradeAsset;
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
-	// DO NOT CHANGE OUTPUT MODIFIER LIST OR PRICE LIST ON RUNTIME.
-	// ONLY VALUES SHOULD BE CHANGED.
-
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_lighthouse_examine",
+		"lighthouse_examine",
 		vec![
-			("modifier_lighthouse_examine_base", 1f64)
+			("lighthouse_examine_base", 1f64)
 		],
 		vec![
-			("resource_science", 10f64),
+			("science", 10f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_lighthouse_gather",
+		"lighthouse_gather",
 		vec![
-			("modifier_lighthouse_gather_base", 1f64)
+			("lighthouse_gather_base", 1f64)
 		],
 		vec![
-			("resource_knowledge", 20f64),
-			("resource_wood", 20f64),
+			("knowledge", 20f64),
+			("wood", 20f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_building_stockpile_ore_capacity_base",
+		"building_stockpile_ore_capacity_base",
 		vec![
-			("modifier_building_stockpile_ore_capacity_base", 10f64)
+			("building_stockpile_ore_capacity_base", 10f64)
 		],
 		vec![
-			("resource_knowledge", 15f64),
-			("resource_wood", 40f64),
+			("knowledge", 15f64),
+			("wood", 40f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_pickaxe_wood",
+		"tool_pickaxe_wood",
 		vec![
-			("modifier_job_miner_production_multiplier", 0.1)
+			("job_miner_production_multiplier", 0.1)
 		],
 		vec![
-			("resource_knowledge", 30f64),
-			("resource_wood", 30f64),
+			("knowledge", 30f64),
+			("wood", 30f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_axe_wood",
+		"tool_axe_wood",
 		vec![
-			("modifier_job_woodcutter_production_multiplier", 0.1)
+			("job_woodcutter_production_multiplier", 0.1)
 		],
 		vec![
-			("resource_knowledge", 30f64),
-			("resource_wood", 30f64),
+			("knowledge", 30f64),
+			("wood", 30f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_hoe_wood",
+		"tool_hoe_wood",
 		vec![
-			("modifier_job_farmer_production_multiplier", 0.1)
+			("job_farmer_production_multiplier", 0.1)
 		],
 		vec![
-			("resource_knowledge", 30f64),
-			("resource_wood", 30f64),
+			("knowledge", 30f64),
+			("wood", 30f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_pickaxe_stone",
+		"tool_pickaxe_stone",
 		vec![
-			("modifier_job_miner_production_multiplier", 0.2)
+			("job_miner_production_multiplier", 0.2)
 		],
 		vec![
-			("resource_knowledge", 50f64),
-			("resource_stone", 50f64),
-			("resource_wood", 50f64),
+			("knowledge", 50f64),
+			("stone", 50f64),
+			("wood", 50f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_axe_stone",
+		"tool_axe_stone",
 		vec![
-			("modifier_job_woodcutter_production_multiplier", 0.2)
+			("job_woodcutter_production_multiplier", 0.2)
 		],
 		vec![
-			("resource_knowledge", 50f64),
-			("resource_stone", 50f64),
-			("resource_wood", 50f64),
+			("knowledge", 50f64),
+			("stone", 50f64),
+			("wood", 50f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_hoe_stone",
+		"tool_hoe_stone",
 		vec![
-			("modifier_job_farmer_production_multiplier", 0.2)
+			("job_farmer_production_multiplier", 0.2)
 		],
 		vec![
-			("resource_knowledge", 50f64),
-			("resource_stone", 50f64),
-			("resource_wood", 50f64),
+			("knowledge", 50f64),
+			("stone", 50f64),
+			("wood", 50f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_pickaxe_copper",
+		"tool_pickaxe_copper",
 		vec![
-			("modifier_job_miner_production_multiplier", 0.3)
+			("job_miner_production_multiplier", 0.3)
 		],
 		vec![
-			("resource_copper", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("copper", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_axe_copper",
+		"tool_axe_copper",
 		vec![
-			("modifier_job_woodcutter_production_multiplier", 0.3)
+			("job_woodcutter_production_multiplier", 0.3)
 		],
 		vec![
-			("resource_copper", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("copper", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_hoe_copper",
+		"tool_hoe_copper",
 		vec![
-			("modifier_job_farmer_production_multiplier", 0.3)
+			("job_farmer_production_multiplier", 0.3)
 		],
 		vec![
-			("resource_copper", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("copper", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_pickaxe_iron",
+		"tool_pickaxe_iron",
 		vec![
-			("modifier_job_miner_production_multiplier", 0.4)
+			("job_miner_production_multiplier", 0.4)
 		],
 		vec![
-			("resource_iron", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("iron", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_axe_iron",
+		"tool_axe_iron",
 		vec![
-			("modifier_job_woodcutter_production_multiplier", 0.4)
+			("job_woodcutter_production_multiplier", 0.4)
 		],
 		vec![
-			("resource_iron", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("iron", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 
 	stuff_manager.load_upgrade(UpgradeAsset::new(
-		"upgrade_tool_hoe_iron",
+		"tool_hoe_iron",
 		vec![
-			("modifier_job_farmer_production_multiplier", 0.4)
+			("job_farmer_production_multiplier", 0.4)
 		],
 		vec![
-			("resource_iron", 50f64),
-			("resource_knowledge", 65f64),
-			("resource_wood", 75f64),
+			("iron", 50f64),
+			("knowledge", 65f64),
+			("wood", 75f64),
 		]
 	));
 

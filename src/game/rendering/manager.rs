@@ -1,17 +1,10 @@
 use std::rc::Rc;
-use web_sys::{ Document, Window };
+use web_sys::Document;
 use crate::game::stuff::StuffManager;
 use super::{ LoadingManager, LogManager, ResourceManager, TabManager };
 
 /// A rendering manager.
 pub struct RenderingManager {
-
-	// Web stuffs.
-
-	web_window: Rc<Window>,
-	web_document: Rc<Document>,
-
-	// Managers.
 
 	loading_manager: LoadingManager,
 	log_manager: LogManager,
@@ -23,16 +16,14 @@ pub struct RenderingManager {
 impl RenderingManager {
 
 	/// Creates a new rendering manager.
-	pub fn new(window: Rc<Window>, document: Rc<Document>) -> Self {
+	pub fn new(document: Rc<Document>, stuff_manager: &StuffManager) -> Self {
 
 		Self {
 
-			web_window: window.clone(), 
-			web_document: document.clone(),
-			loading_manager: LoadingManager::new(window.clone(), document.clone()),
-			log_manager: LogManager::new(window.clone(), document.clone()),
-			resource_manager: ResourceManager::new(window.clone(), document.clone()),
-			tab_manager: TabManager::new(window.clone(), document.clone()),
+			loading_manager: LoadingManager::new(document.clone()),
+			log_manager: LogManager::new(document.clone()),
+			resource_manager: ResourceManager::new(document.clone(), stuff_manager),
+			tab_manager: TabManager::new(document.clone(), stuff_manager),
 
 		}
 
@@ -46,18 +37,10 @@ impl RenderingManager {
 
 	}
 
-	/// Initialize managers.
-	pub fn init(&mut self, stuff_manager: &StuffManager) {
-
-		self.resource_manager.init(stuff_manager);
-		self.tab_manager.init(stuff_manager);
-
-	}
-
 	/// Pushs a log to log-container.
-	pub fn push_log(&self, log: &str, color: Option<&str>) {
+	pub fn push_log(&self, log: &str, class: &str) {
 
-		self.log_manager.push(log, color);
+		self.log_manager.push(log, class);
 
 	}
 

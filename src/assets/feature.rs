@@ -1,16 +1,15 @@
-use crate::game::stuff::{ StuffManager, FeatureAsset };
+use crate::game::stuff::StuffManager;
 
 pub fn load(stuff_manager: &mut StuffManager) {
 
-	stuff_manager.load_feature(FeatureAsset::new("feature_tab_building"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_tab_lighthouse"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_tab_stats"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_tab_technology"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_tab_upgrade"));
-
-	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_examine"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_gather"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_lightsout"));
-	stuff_manager.load_feature(FeatureAsset::new("feature_lighthouse_search"));
+	stuff_manager.load_feature("tab_building");
+	stuff_manager.load_feature("tab_lighthouse");
+	stuff_manager.load_feature("tab_lighthouse_examine");
+	stuff_manager.load_feature("tab_lighthouse_gather");
+	stuff_manager.load_feature("tab_lighthouse_lightsout");
+	stuff_manager.load_feature("tab_lighthouse_search");
+	stuff_manager.load_feature("tab_stats");
+	stuff_manager.load_feature("tab_technology");
+	stuff_manager.load_feature("tab_upgrade");
 	
 }
