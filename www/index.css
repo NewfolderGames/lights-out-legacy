@@ -405,8 +405,9 @@ button {
 	border: none;
 	border-radius: 4px;
 	display: block;
-	padding: 8px;
 	margin: 8px auto;
+	padding: 24px;
+	touch-action: manipulation;
 	width: 256px;
 }
 #tab-lighthouse #tab-lighthouse-buttons .button:hover {

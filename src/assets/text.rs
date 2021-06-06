@@ -48,8 +48,8 @@ pub fn load(stuff_manager: &mut StuffManager) {
 	stuff_manager.load_text_string("log_game_save", "Game saved.");
 	stuff_manager.load_text_string("log_game_save_loaded", "Game save loaded.");
 
-	stuff_manager.load_text_string("log_tab_lighthouse_examine", "You can feel the warmth surrounding you");
-	stuff_manager.load_text_string("log_tab_lighthouse_gather", "You should build something with it.");
+	stuff_manager.load_text_string("log_tab_lighthouse_examine", "You can feel the warmth surrounding you.");
+	stuff_manager.load_text_string("log_tab_lighthouse_gather", "You just realised what happened.");
 	
 	// Modifiers.
 
