@@ -33,6 +33,7 @@ struct BuildingElement {
 	pub price_container_element: Element,
 	pub price_elements: HashMap<String, BuildingPriceElement>,
 	
+	pub count: i32,
 	pub is_active: bool,
 	pub is_unlocked: bool,
 
@@ -151,6 +152,7 @@ impl BuildingTab {
 				modifier_elements: HashMap::new(),
 				price_container_element: document.create_element("div").unwrap(),
 				price_elements: HashMap::new(),
+				count: 0,
 				is_active: false,
 				is_unlocked: false,
 				
@@ -357,9 +359,14 @@ impl Tab for BuildingTab {
 
 			if building_element.is_unlocked {
 				
-				// Building.
+				// Title.
 
-				building_element.title_element.set_inner_html(&format!("{} ({})", stuff_manager.get_text_string(&format!("building_{}_title", name)).unwrap_or(&format!("BUILDING_{}_TITLE", name.to_uppercase())), building.get_count()));
+				if building.get_count() != building_element.count {
+
+					building_element.count = building.get_count();
+					building_element.title_element.set_inner_html(&format!("{} ({})", stuff_manager.get_text_string(&format!("building_{}_title", name)).unwrap_or(&format!("BUILDING_{}_TITLE", name.to_uppercase())), building.get_count()));
+
+				}
 
 				// Active.
 
@@ -420,8 +427,6 @@ impl Tab for BuildingTab {
 				}
 
 			}
-
-			
 
 		}
 
